@@ -1,0 +1,23 @@
+name: Python
+on:
+  workflow_dispatch:
+jobs:
+  download:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python:
+          - "3.9"
+          - "3.12"
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: |
+          touch "👍.txt"
+          touch requirements.txt
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "${{ matrix.python }}"
+          cache: pip
