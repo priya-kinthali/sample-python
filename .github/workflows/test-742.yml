@@ -36,4 +36,8 @@ jobs:
       - name: Download more tests from friend projects
         if: matrix.python-version == '3.12' && matrix.os == 'ubuntu-latest'
         run: sh download-more-tests.sh
+      - name: upgrade pypy
+        - run: pypy3 -m pip install --upgrade pip
+        - run: pypy3 -m pip install -r requirements.txt
+        # - run: pypy3 script.py
       
