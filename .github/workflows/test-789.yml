@@ -1,0 +1,27 @@
+name: test
+
+on: 
+  push:
+    branches:
+      - poc-789issue
+  # pull_request:
+  #   branches:
+  #     - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up python
+        uses: actions/setup-python@v5
+        # with:
+        #   cache: "pip"
+        #   python-version: 3.9
+        #   cache-dependency-path: requirements*.txt
+
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: mypy
+        run: mypy
