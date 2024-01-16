@@ -25,4 +25,4 @@ jobs:
       - name: Install mypy
         run: pip install mypy
       - name: mypy
-        run: mypy app.py
+        run: mypy 
