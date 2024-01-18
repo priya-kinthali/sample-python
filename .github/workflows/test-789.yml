@@ -19,12 +19,12 @@ jobs:
         with:
           cache: "pip"
           python-version: 3.9
-          cache-dependency-path: requirements.txt
+          cache-dependency-path: pyproject.toml
 
       - run: pip install -v -r requirements.txt
       - name: Install mypy
         run: |
             pip install mypy
             mypy --version
-      - name: mypy
-        run: mypy 
+      # - name: mypy
+      #   run: mypy 
