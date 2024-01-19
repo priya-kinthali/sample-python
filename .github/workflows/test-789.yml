@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - run: echo $HOME
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
