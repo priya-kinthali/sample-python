@@ -1,15 +1,25 @@
-name: Python workflow
+name: Checkout and Setup Workflow
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, macos]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - run: echo $HOME
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.6'
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11.6'
+
+    - name: Check directory
+      run: |
+        if [ -d "$HOME/actions-runner/_work/hostedtoolcache" ]; then
+          echo "Python hostedtoolcache folder exists."
+        else
+          echo "Creating Python hostedtoolcache folder..."
+          mkdir -p "$HOME/actions-runner/_work/hostedtoolcache"
+          echo "Python hostedtoolcache folder created."
+        fi
