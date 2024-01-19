@@ -1,30 +1,14 @@
-name: test
+name: Python workflow
 
-on: 
-  push:
-    branches:
-      - poc-789issue
-  # pull_request:
-  #   branches:
-  #     - main
+on: [push]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
-
-      - name: set up python
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          cache: "pip"
-          python-version: 3.9
-          cache-dependency-path: requirements.txt
-
-      - run: pip install -r requirements.txt
-      - name: Install mypy
-        run: |
-            pip install mypy
-            mypy --version
-      - name: mypy
-        run: mypy 
+          python-version: '3.11.6'
