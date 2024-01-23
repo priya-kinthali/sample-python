@@ -12,14 +12,6 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11.6'
+        python-version: '3.9'
 
-    - name: Check directory
-      run: |
-        if [ -d "Users/lakshmipriya/actions-runner/_work/hostedtoolcache" ]; then
-          echo "Python hostedtoolcache folder exists."
-        else
-          echo "Creating Python hostedtoolcache folder..."
-          mkdir -p "Users/lakshmipriya/actions-runner/_work/hostedtoolcache"
-          echo "Python hostedtoolcache folder created."
-        fi
+   
