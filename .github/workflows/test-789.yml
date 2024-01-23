@@ -1,4 +1,4 @@
-name: Checkout and Setup Workflow
+name: Checkout and Setup of Workflow
 
 on: [push, pull_request]
 
