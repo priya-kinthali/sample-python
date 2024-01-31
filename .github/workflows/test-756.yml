@@ -1,8 +1,8 @@
 name: Rate Limit Test
 
 on:
-  push:
-    branches: [ main ]
+  push
+    
 
 jobs:
   test:
