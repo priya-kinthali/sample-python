@@ -1,21 +1,24 @@
-name: Python Rate Limit Test
+name: Rate Limit Test
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-      
-    - name: Test rate limit
-      run: |
-        for run in {1..61}
-        do
-          echo "Run number $run"
-          echo "Setting up Python"
-          uses: actions/setup-python@v5
-          with:
-            python-version: '3.8'
-        done
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install requests library
+        run: pip install requests
+
+      - name: Run script
+        run: python .github/scripts/rate_limit_test.py
