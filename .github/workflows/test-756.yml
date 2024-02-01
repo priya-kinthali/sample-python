@@ -1,24 +1,22 @@
-name: Rate Limit Test
+name: CI
 
 on:
   push
     
-
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
+  sample_build:
+    runs-on: [ self-hosted ]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: "rate limit"
+        run: |
+          curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/rate_limit
 
-      - name: Set up Python
+      - name: Set up Python 3.9
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          # token: ${{ secrets.GH_CLOUD_TOKEN }}
+          python-version: 3.9
 
-      - name: Install requests library
-        run: pip install requests
-
-      - name: Run script
-        run: python .github/scripts/rate_limit_test.py
+      - name: "rate limit"
+        run: |
+          curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/rate_limit
