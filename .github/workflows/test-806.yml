@@ -3,7 +3,7 @@ on:
   push:
   schedule:
     # Run workflow every 5 minutes
-    - cron:  '*/3 * * * *'
+    - cron:  '*/1 * * * *'
 jobs:
   build:
     runs-on:  [self-hosted, macos] 
