@@ -1,5 +1,8 @@
 name: Python application
-on: [push]
+on: 
+  schedule:
+    # Run workflow every 5 minutes
+    - cron:  '*/3 * * * *'
 jobs:
   build:
     runs-on:  [self-hosted, macos] 
