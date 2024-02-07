@@ -1,5 +1,6 @@
 name: Python application
 on: 
+  push:
   schedule:
     # Run workflow every 5 minutes
     - cron:  '*/3 * * * *'
