@@ -15,7 +15,7 @@ jobs:
           curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/rate_limit
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@testRawApi-756-fr
         with:
           # token: ${{ secrets.GH_CLOUD_TOKEN }} -
           python-version: 3.11
