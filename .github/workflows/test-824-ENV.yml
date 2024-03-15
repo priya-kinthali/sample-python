@@ -6,11 +6,14 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
+    
     - name: Print AGENT_TOOLSDIRECTORY and RUNNER_TOOL_CACHE
       run: |
         echo "AGENT_TOOLSDIRECTORY = ${{ env.AGENT_TOOLSDIRECTORY }}"
         echo "RUNNER_TOOL_CACHE = ${{ env.RUNNER_TOOL_CACHE }}"
         
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
