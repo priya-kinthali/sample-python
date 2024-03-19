@@ -6,4 +6,4 @@ greeting(b'Alice')  # Argument 1 to "greeting" has incompatible type "bytes"; ex
 greeting("World!")  # No error
 
 def bad_greeting(name: str) -> str:
-    return 'Hello ' * name  # Unsupported operand types for * ("str" and "str")
+    return 'Hello ' * name  # Unsupported operand types for * ("str" and "str") testing for bad_greeting

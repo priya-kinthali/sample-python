@@ -1,6 +1,6 @@
 name: Python arm64 workflow
 
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   build:
