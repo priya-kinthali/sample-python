@@ -15,10 +15,7 @@ jobs:
       run:
         shell: bash
     runs-on: ${{ matrix.target.os }}
-    env:
-      ACTIONS_RUNNER_DEBUG: true
-      ACTIONS_STEP_DEBUG: true
-
+    
 
     steps:
       - uses: actions/checkout@v4
