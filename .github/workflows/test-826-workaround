@@ -28,4 +28,14 @@ jobs:
           architecture: ${{ matrix.target.architecture }}
           cache: "poetry"
           cache-dependency-path: '**/poetry.lock'
-          cache-prefix: "${{ runner.os }}-python-3.11-${{ matrix.target.architecture }}-poetry"
+          # cache-prefix: "${{ runner.os }}-python-3.11-${{ matrix.target.architecture }}-poetry"
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ matrix.architecture }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ matrix.architecture }}-
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
