@@ -1,4 +1,4 @@
-name: test cachekey conflict with workaround
+name: test cachekey conflict with workaround for 826
 on: [push]
 
 jobs:
