@@ -49,8 +49,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Install poetry
-        run: pipx install poetry
       - name: Setup Python
         uses: actions/setup-python@v5
         id: setup-python
@@ -58,6 +56,8 @@ jobs:
           python-version: "3.11"
           architecture: ${{ matrix.target.architecture }}
           # cache-prefix: "${{ runner.os }}-python-3.11-${{ matrix.target.architecture }}-poetry"
+      - name: Install Poetry
+        run: pipx install poetry
       - name: Cache poetry
         uses: actions/cache@v3
         with:
