@@ -64,7 +64,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-${{ hashFiles('**/requirements.txt') }}-pip
           restore-keys: |
             ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-
             ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-
