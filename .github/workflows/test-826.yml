@@ -57,17 +57,17 @@ jobs:
         with:
           python-version: "3.11"
           architecture: ${{ matrix.target.architecture }}
-          cache: "poetry"
+          cache: 'none'
           cache-dependency-path: '**/poetry.lock'
           # cache-prefix: "${{ runner.os }}-python-3.11-${{ matrix.target.architecture }}-poetry"
-      - name: Cache pip
+      - name: Cache poetry
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-${{ hashFiles('**/requirements.txt') }}-pip
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-
-            ${{ runner.os }}-pip-${{ steps.setup-python.outputs.python-version }}-
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-poetry-${{ steps.setup-python.outputs.python-version }}-${{ matrix.target.architecture }}-
+            ${{ runner.os }}-poetry-${{ steps.setup-python.outputs.python-version }}-
+            ${{ runner.os }}-poetry-
             ${{ runner.os }}-
 
