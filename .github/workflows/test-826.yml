@@ -57,8 +57,6 @@ jobs:
         with:
           python-version: "3.11"
           architecture: ${{ matrix.target.architecture }}
-          cache: 'none'
-          cache-dependency-path: '**/poetry.lock'
           # cache-prefix: "${{ runner.os }}-python-3.11-${{ matrix.target.architecture }}-poetry"
       - name: Cache poetry
         uses: actions/cache@v3
