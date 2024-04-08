@@ -16,8 +16,8 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: 3.8
-        channels: conda-forge,defaults
-        channel-priority: true
+        # channels: conda-forge,defaults
+        # channel-priority: true
     - name: Install Poetry
       run: |
            python --version
@@ -32,6 +32,9 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
         python --version
   
+    - name: Update Conda
+      run: |
+        $CONDA/bin/conda update -n base -c defaults conda
     - name: Install dependencies
       run: |
         python --version
