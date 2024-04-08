@@ -3,7 +3,7 @@ channels:
   - defaults
 dependencies:
   - python=3.11   # or other version
-  - numpy
-  - pandas
-  - scikit-learn
-  - flake8
+  # - numpy
+  # - pandas
+  # - scikit-learn
+  # - flake8
