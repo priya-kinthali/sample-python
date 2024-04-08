@@ -24,6 +24,13 @@ jobs:
            pipx install poetry
            echo "POETRY_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
            python --version
+
+    - name: Install dependencies
+      run: |
+        python --version
+        conda install -y python=3.11
+        python --version
+        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Add conda to system path
       run: |
         python --version
@@ -31,14 +38,6 @@ jobs:
         echo "Conda path: $CONDA"
         echo $CONDA/bin >> $GITHUB_PATH
         python --version
-    - name: Check Python version in specific Conda directory
-      run: /usr/share/miniconda/lib/python3.11/bin/python --version
-    - name: Install dependencies
-      run: |
-        python --version
-        conda install -y python=3.11
-        python --version
-        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Lint with flake8
       run: |
         python --version
