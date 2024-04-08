@@ -35,10 +35,10 @@ jobs:
     - name: Install dependencies
       run: |
         python --version
-        # conda install -y python=3.11
+        # conda install -y python=3.8
         python --version
         $CONDA/bin/conda env update --file environment.yml --name base
-        $CONDA/bin/conda activate base
+        python --version
     - name: Lint with flake8
       run: |
         python --version
