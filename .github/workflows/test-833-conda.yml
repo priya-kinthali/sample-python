@@ -34,7 +34,6 @@ jobs:
     - name: Install dependencies
       run: |
         python --version
-        which python
         # conda install -y python=3.8
         $CONDA/bin/conda env update --file environment.yml --name base
         python --version
