@@ -1,4 +1,4 @@
-name: myenv
+name: base
 channels:
   - defaults
 dependencies:
@@ -6,3 +6,4 @@ dependencies:
   - numpy
   - pandas
   - scikit-learn
+  - flake8
