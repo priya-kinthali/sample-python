@@ -2,7 +2,7 @@ name: base
 channels:
   - defaults
 dependencies:
-  - python=3.11   # or other version
+  - python=3.8   # or other version
   # - numpy
   # - pandas
   # - scikit-learn
