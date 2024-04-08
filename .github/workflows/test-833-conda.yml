@@ -38,6 +38,7 @@ jobs:
         # conda install -y python=3.11
         python --version
         $CONDA/bin/conda env update --file environment.yml --name base
+        $CONDA/bin/conda activate base
     - name: Lint with flake8
       run: |
         python --version
