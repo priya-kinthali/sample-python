@@ -18,18 +18,18 @@ jobs:
         python-version: 3.11
         channels: conda-forge,defaults
         channel-priority: true
-    - name: Add conda to system path
-      run: |
-        python --version
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
-        python --version
     - name: Install Poetry
       run: |
            python --version
            pipx install poetry
            echo "POETRY_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
            python --version
+    - name: Add conda to system path
+      run: |
+        python --version
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+        python --version
     - name: Install dependencies
       run: |
         python --version
