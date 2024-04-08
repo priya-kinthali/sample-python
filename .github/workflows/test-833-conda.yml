@@ -31,7 +31,7 @@ jobs:
         # conda install -y python=3.11
         conda install -y
         python --version
-        # $CONDA/bin/conda env update --file environment.yml --name base
+        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Add conda to system path
       run: |
         python --version
