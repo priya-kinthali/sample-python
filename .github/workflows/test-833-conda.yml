@@ -25,20 +25,19 @@ jobs:
            echo "POETRY_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
            python --version
 
-    - name: Install dependencies
-      run: |
-        python --version
-        # conda install -y python=3.11
-        conda install -y
-        python --version
-        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Add conda to system path
       run: |
         python --version
         # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo "Conda path: $CONDA"
         echo $CONDA/bin >> $GITHUB_PATH
         python --version
+  
+    - name: Install dependencies
+      run: |
+        python --version
+        conda install -y python=3.11
+        python --version
+        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Lint with flake8
       run: |
         python --version
