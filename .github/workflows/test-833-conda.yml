@@ -12,16 +12,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.8
+    - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: 3.11
         # channels: conda-forge,defaults
         # channel-priority: true
     - name: Install dependencies
       run: |
         python --version
-        # conda install -y python=3.8
+        # conda install -y python=3.11
         $CONDA/bin/conda env update --file environment.yml --name base
         python --version
     - name: Check Python version
