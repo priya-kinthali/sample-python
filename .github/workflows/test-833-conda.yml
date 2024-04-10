@@ -18,6 +18,12 @@ jobs:
         python-version: 3.8
         channels: conda-forge,defaults
         channel-priority: true
+    - name: Install dependencies
+      run: |
+        python --version
+        conda install -y python=3.8
+        $CONDA/bin/conda env update --file environment.yml --name base
+        python --version
     - name: Install Poetry
       run: |
            python --version
@@ -31,19 +37,8 @@ jobs:
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
         python --version
-    # - name: Install dependencies
-    #   run: |
-    #     python --version
-    #     conda install -y python=3.8
-    #     # $CONDA/bin/conda env update --file environment.yml --name base
-    #     python --version
-    #     which python
-    - name: Install dependencies
-      run: |
-        python --version
-        conda install -y
-        conda env create -f environment.yml
-        python --version
+
+
     - name: Lint with flake8
       run: |
         python --version
