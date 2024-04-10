@@ -21,9 +21,9 @@ jobs:
         python --version
         # conda install -y python='3.10'
         # $CONDA/bin/conda env update --file environment.yml --name base
-        conda create -n myenv python=3.10
-        conda init
-        conda activate myenv
+        conda create -y -n myenv python=3.10
+        echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
+        source ~/.bashrc
         python --version
     
     - name: Add conda to system path
