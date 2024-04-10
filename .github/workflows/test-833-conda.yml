@@ -22,6 +22,7 @@ jobs:
         # conda install -y python='3.10'
         # $CONDA/bin/conda env update --file environment.yml --name base
         conda create -n myenv python=3.10
+        conda init
         conda activate myenv
         python --version
     
