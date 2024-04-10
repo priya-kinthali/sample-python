@@ -18,12 +18,12 @@ jobs:
         python-version: 3.8
         # channels: conda-forge,defaults
         # channel-priority: true
-    # - name: Install dependencies
-    #   run: |
-    #     python --version
-    #     # conda install -y python=3.8
-    #     $CONDA/bin/conda env update --file environment.yml --name base
-    #     python --version
+    - name: Install dependencies
+      run: |
+        python --version
+        # conda install -y python=3.8
+        $CONDA/bin/conda env update --file environment.yml --name base
+        python --version
     - name: Check Python version
       run: |
         echo 'Python Version:'
