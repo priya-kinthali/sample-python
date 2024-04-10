@@ -1,0 +1,33 @@
+name: Python Package using Conda with new environment
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Add conda to system path
+      run: |
+        python --version
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+        python --version
+    - name: Install dependencies
+      run: |
+        python --version
+        conda create -y -n myenv python=3.10
+        echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
+        source ~/.bashrc
+        python --version
+    
+   
