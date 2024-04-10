@@ -32,8 +32,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install <your-dependencies-here>
-
+        pip install -r requirements.txt
     - name: Check Python version after installation
       run: |
         echo 'Python Version:'
