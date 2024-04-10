@@ -28,6 +28,7 @@ jobs:
         conda create -y -n newenviron python=3.11
         echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
         source ~/.bashrc
+        conda activate newenviron
         python --version
     
    
