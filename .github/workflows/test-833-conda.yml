@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
-        python-version: 3.8
+        python-version: 3.11
     - name: Add conda to system path
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python --version
-        conda install -y python=3.8
+        conda install -y python=3.11
         python --version
         $CONDA/bin/conda env update --file environment.yml --name base
     - name: Lint with flake8

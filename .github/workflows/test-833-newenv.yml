@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python --version
-        conda create -y -n myenviron python=3.11
+        conda create -y -n newenviron python=3.11
         echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
         source ~/.bashrc
         python --version
