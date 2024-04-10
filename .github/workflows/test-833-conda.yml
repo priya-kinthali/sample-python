@@ -20,7 +20,9 @@ jobs:
       run: |
         python --version
         # conda install -y python='3.10'
-        $CONDA/bin/conda env update --file environment.yml --name base
+        # $CONDA/bin/conda env update --file environment.yml --name base
+        conda create -n myenv python=3.10
+        conda activate myenv
         python --version
     
     - name: Add conda to system path
