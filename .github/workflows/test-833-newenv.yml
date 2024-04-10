@@ -32,5 +32,5 @@ jobs:
         conda init bash
         echo "conda activate newenviron" >> ~/.bashrc
         source ~/.bashrc
-        python --version
+        conda activate newenviron && python --version
       
