@@ -16,27 +16,41 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: 3.8
-        channels: conda-forge,defaults
-        channel-priority: true
+        # channels: conda-forge,defaults
+        # channel-priority: true
+    # - name: Install dependencies
+    #   run: |
+    #     python --version
+    #     # conda install -y python=3.8
+    #     $CONDA/bin/conda env update --file environment.yml --name base
+    #     python --version
+    - name: Check Python version
+      run: |
+        echo 'Python Version:'
+        python --version
+
     - name: Install dependencies
       run: |
-        python3 --version
-        # conda install -y python3=3.8
-        $CONDA/bin/conda env update --file environment.yml --name base
-        python3 --version
+        python -m pip install --upgrade pip
+        pip install <your-dependencies-here>
+
+    - name: Check Python version after installation
+      run: |
+        echo 'Python Version:'
+        python --version
     - name: Install Poetry
       run: |
-           python3 --version
+           python --version
            pipx install poetry
            echo "POETRY_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
            python --version
 
-    - name: Add conda to system path
-      run: |
-        python3 --version
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
-        python3 --version
+    # - name: Add conda to system path
+    #   run: |
+    #     python --version
+    #     # $CONDA is an environment variable pointing to the root of the miniconda directory
+    #     echo $CONDA/bin >> $GITHUB_PATH
+    #     python --version
 
 
     - name: Lint with flake8
