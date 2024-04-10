@@ -29,8 +29,8 @@ jobs:
         # echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
         # source ~/.bashrc
      
-        echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> $GITHUB_ENV
-        echo "conda activate newenviron" >> $GITHUB_ENV
+        conda init bash
+        echo "conda activate newenviron" >> ~/.bashrc
+        source ~/.bashrc
         python --version
-    
-   
+      
