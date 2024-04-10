@@ -20,23 +20,23 @@ jobs:
         channel-priority: true
     - name: Install dependencies
       run: |
-        python --version
-        # conda install -y python=3.8
+        python3 --version
+        # conda install -y python3=3.8
         $CONDA/bin/conda env update --file environment.yml --name base
-        python --version
+        python3 --version
     - name: Install Poetry
       run: |
-           python --version
+           python3 --version
            pipx install poetry
            echo "POETRY_CACHE_DIR=$(pip cache dir)" >> $GITHUB_ENV
            python --version
 
     - name: Add conda to system path
       run: |
-        python --version
+        python3 --version
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
-        python --version
+        python3 --version
 
 
     - name: Lint with flake8
