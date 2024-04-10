@@ -26,9 +26,11 @@ jobs:
       run: |
         python --version
         conda create -y -n newenviron python=3.11
-        echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
-        source ~/.bashrc
-        conda activate newenviron
+        # echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
+        # source ~/.bashrc
+     
+        echo "source /usr/share/miniconda/etc/profile.d/conda.sh" >> $GITHUB_ENV
+        echo "conda activate newenviron" >> $GITHUB_ENV
         python --version
     
    
