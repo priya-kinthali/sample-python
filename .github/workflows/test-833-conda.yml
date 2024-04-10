@@ -21,8 +21,8 @@ jobs:
       run: |
         python --version
         # $CONDA is an environment variable pointing to the root of the miniconda directory
-        conda create -n $CONDA/bin >> $GITHUB_PATH python=3.10
-        echo $CONDA/bin >> $GITHUB_PATH
+        conda create -n /usr/share/miniconda >> $GITHUB_PATH python=3.10
+        # echo $CONDA/bin >> $GITHUB_PATH
         python --version
         
     - name: Install dependencies
