@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python --version
-        conda install -y python=3.11
+        conda install -y 
         python --version
         $CONDA/bin/conda env update --file environment.yml --name base
    
