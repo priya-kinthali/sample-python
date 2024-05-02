@@ -11,21 +11,33 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    - name: Check python version
+      run: |
+        python --version
     - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
         python-version: 3.11
+    - name: Check python version
+      run: |
+        python --version
     - name: Add conda to system path
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
+    - name: Check python version
+      run: |
+        python --version
     - name: Install dependencies
       run: |
         python --version
         conda install -y python=3.11
         python --version
         $CONDA/bin/conda env update --file environment.yml --name base
+    - name: Check python version
+      run: |
+        python --version
     - name: Lint with flake8
       run: |
         # conda install flake8
