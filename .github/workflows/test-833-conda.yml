@@ -37,19 +37,32 @@ jobs:
       run: |
         conda list --show-channel-urls
    
+    # - name: Install dependencies
+    #   run: |
+    #     python --version
+    #     conda install -y python=3.11
+    #     python --version
+    #     $CONDA/bin/conda env update --file environment.yml --name base
+   
+    # - name: Check python version
+    #   run: |
+    #     python --version
+  
+   
+
+    - name: Conda info
+      run: conda info
+    - name: Conda list
+      run: conda list
+    - name: Create conda environment with specific Python version
+      run: |
+        conda create -n myenv python=3.11
+        conda activate myenv
     - name: Install dependencies
       run: |
         python --version
         conda install -y python=3.11
         python --version
-        $CONDA/bin/conda env update --file environment.yml --name base
-   
-    - name: Check python version
-      run: |
-        python --version
-  
-   
-
     - name: Lint with flake8
       run: |
         # conda install flake8
