@@ -56,6 +56,7 @@ jobs:
       run: conda list
     - name: Create conda environment with specific Python version
       run: |
+        python --version
         conda create -n myenv python=3.11
         conda activate myenv
     - name: Install dependencies
