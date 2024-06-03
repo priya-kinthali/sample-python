@@ -18,10 +18,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install missing library
-      run: |
-        arch -arm64 brew install gettext
-        ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/lib/
+    # - name: Install missing library
+    #   run: |
+    #     arch -arm64 brew install gettext
+    #     ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/lib/
 
     - name: Set up Python 3.5
       uses: actions/setup-python@v5
