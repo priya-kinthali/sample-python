@@ -18,7 +18,7 @@ jobs:
 
     - name: Install missing library
       run: |
-        brew install gettext
+        arch -arm64 brew install gettext
         ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/lib/
 
     - name: Set up Python 3.5
