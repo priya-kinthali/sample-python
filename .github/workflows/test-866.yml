@@ -23,11 +23,11 @@ jobs:
     #     arch -arm64 brew install gettext
     #     ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/lib/
 
-    - name: Set up Python 3.5
+    - name: Set up Python 3.4
       uses: priya-kinthali/setup-python@868-test-urllib3
       # uses: actions/setup-python@v5
       with:
-        python-version: 3.6
+        python-version: 3.4
       # env:
       #   PIP_TRUSTED_HOST: "pypi.python.org pypi.org files.pythonhosted.org"
 
