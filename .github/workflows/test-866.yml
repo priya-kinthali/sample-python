@@ -27,7 +27,7 @@ jobs:
       uses: priya-kinthali/setup-python@868-test-urllib3
       # uses: actions/setup-python@v5
       with:
-        python-version: 3.5
+        python-version: 3.6
       # env:
       #   PIP_TRUSTED_HOST: "pypi.python.org pypi.org files.pythonhosted.org"
 
