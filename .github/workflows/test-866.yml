@@ -10,8 +10,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        # os: [ubuntu-latest, macos-latest, windows-latest]
           # os: [ubuntu-20.04, macos-12]
+        os: [ macos-latest-large, windows-latest, ubuntu-20.04, ubuntu-22.04]
 
 
     # runs-on: self-hosted
