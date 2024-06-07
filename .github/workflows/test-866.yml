@@ -13,9 +13,10 @@ jobs:
         # os: [ubuntu-latest, macos-latest, windows-latest, macos-latest-large, ]
           # os: [ubuntu-20.04, macos-12]
         os: [ windows-latest, ubuntu-20.04]
-
+        python-version: [3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10, 3.11, 3.12] # Add the Python versions here
 
     # runs-on: self-hosted
+    
     steps:
     - uses: actions/checkout@v4
 
@@ -24,11 +25,11 @@ jobs:
     #     arch -arm64 brew install gettext
     #     ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/lib/
 
-    - name: Set up Python 3.5
+    - name: Set up Python ${{ matrix.python-version }} # Use the matrix version here
       # uses: priya-kinthali/setup-python@868-test-urllib3
       uses: actions/setup-python@v5
       with:
-        python-version: 3.5
+        python-version: ${{ matrix.python-version }} # Use the matrix version here
       env:
         PIP_TRUSTED_HOST: "pypi.python.org pypi.org files.pythonhosted.org"
 
