@@ -17,17 +17,13 @@ jobs:
       with:
         python-version: 3.11.5
 
-    - name: Set up virtual environment
+    - name: Set up virtual environment and Install Dependencies
       run: |
-        python -m venv env
-        source env/bin/activate
-    - name: Install Dependencies
-      run: |
-        python -m pip install setuptools==69.5.1
-        python -m pip install django-allauth==0.44.0
+         python -m venv env
+         source env/bin/activate
+         python -m pip install setuptools==69.5.1
+         python -m pip install django-allauth==0.44.0
 
-
-       
     - name: Check setuptools version
       run: pip show setuptools
 
