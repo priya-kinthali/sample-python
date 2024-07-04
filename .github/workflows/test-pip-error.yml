@@ -16,7 +16,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-        cache: pip
+        # cache: pip
 
     - name: Check Python version
       run: python --version
