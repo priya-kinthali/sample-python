@@ -1,12 +1,8 @@
-name: test Python 3.13 fails to install on windows
-
 on:
   push:
     branches: [ test-888-artifacts ]
-
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -18,14 +14,9 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
-        python-version: "${{ matrix.python-version }}"
+        python-version: ${{ matrix.python-version }}
         allow-prereleases: true
         cache: pip
-   
 
     - name: Check Python version
       run: python --version
-   
-       
-   
-   
