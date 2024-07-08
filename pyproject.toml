@@ -23,7 +23,7 @@ tag-branch = "test-897-parse-version"
 folders = [{ path = "." }]
 patterns = [
   "(^__version__\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])",
-  "(^release\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\\")",
+  "(^release\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])",
   { value = "(^__version_tuple__\\s*(?::.*?)?=\\s*\\()[^)]*(\\))", mode = "tuple" },
 ]
 
