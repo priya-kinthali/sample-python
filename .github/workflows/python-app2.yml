@@ -1,31 +1,24 @@
-name: test Python 3.13 fails to install on windows
+name: Test Python Setup
 
 on:
   push:
-    branches: [ test-888-artifacts ]
+    branches:
+      - test-897-parse-version
 
 jobs:
-  build:
+  test-python-setup:
+    runs-on: ubuntu-latest
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-14, macos-12, ubuntu-24.04, ubuntu-22.04, windows-2022, windows-2019, macos-13]
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.12"
-        allow-prereleases: true
-        cache: poetry
-   
-
-   
-    - name: Check Python version
-      run: python --version
-   
-       
+      - name: Set up Python from pyproject.toml
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version-file: pyproject.toml   
+         
+      - name: Check Python version
+        run: python --version
    
    
