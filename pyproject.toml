@@ -22,11 +22,10 @@ tag-branch = "test-897-parse-version"
 [tool.poetry-dynamic-versioning.substitution]
 folders = [{ path = "." }]
 patterns = [
-  { value = "(^__version__\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])", mode = "regex" },
-  { value = "(^release\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])", mode = "regex" },
-  { value = "(^__version_tuple__\\s*(?::.*?)?=\\s*\\()[^)]*(\\))", mode = "tuple" }
+  "(^__version__\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])",
+  "(^release\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])",
+  { value = "(^__version_tuple__\\s*(?::.*?)?=\\s*\\()[^)]*(\\))", mode = "tuple" },
 ]
-
 
 [tool.poetry.dependencies]
 python = "^3.12"
