@@ -19,7 +19,7 @@ jobs:
       - name: Unset LD_LIBRARY_PATH and check Python version without sudo
         run: |
           unset LD_LIBRARY_PATH
-          LD_LIBRARY_PATH=/home/azureuser/actions-runner/_work/_tool/Python/3.12.4/x64/lib 
+          LD_PRELOAD=/home/azureuser/actions-runner/_work/_tool/Python/3.12.4/x64/lib 
           python --version
       # - name: Unset LD_LIBRARY_PATH and check Python version without sudo
       #   run: |
