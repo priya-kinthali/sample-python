@@ -28,14 +28,26 @@ jobs:
       #   run: |
       #     export LD_LIBRARY_PATH=$(dirname $(which python))/../lib
       #     python --version
-      - name: Create Python Wrapper Script
+      #------------------------
+      # - name: Create Python Wrapper Script
+      #   run: |
+      #     PYTHON_PATH=$(which python3)
+      #     PYTHON_DIR=$(dirname $PYTHON_PATH)
+      #     echo '#!/bin/bash' > python_wrapper.sh
+      #     echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> python_wrapper.sh
+      #     echo "$PYTHON_PATH \"\$@\"" >> python_wrapper.sh
+      #     chmod +x python_wrapper.sh
+
+      # - name: Check Python Version with Sudo
+      #   run: sudo ./python_wrapper.sh --version
+
+      - name: Create Python temp_script.sh
         run: |
           PYTHON_PATH=$(which python3)
           PYTHON_DIR=$(dirname $PYTHON_PATH)
-          echo '#!/bin/bash' > python_wrapper.sh
-          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> python_wrapper.sh
-          echo "$PYTHON_PATH \"\$@\"" >> python_wrapper.sh
-          chmod +x python_wrapper.sh
+          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
+          echo "python --version" >> temp_script.sh
+          chmod +x temp_script.sh
 
       - name: Check Python Version with Sudo
-        run: sudo ./python_wrapper.sh --version
+        run: sudo ./temp_script.sh
