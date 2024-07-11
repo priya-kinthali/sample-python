@@ -30,9 +30,11 @@ jobs:
       #     python --version
       - name: Create Python Wrapper Script
         run: |
+          PYTHON_PATH=$(which python3)
+          PYTHON_DIR=$(dirname $PYTHON_PATH)
           echo '#!/bin/bash' > python_wrapper.sh
-          echo 'export LD_LIBRARY_PATH=/home/runner/_work/_tool/Python/3.12.4/x64/lib' >> python_wrapper.sh
-          echo '/home/runner/_work/_tool/Python/3.12.4/x64/bin/python3 "$@"' >> python_wrapper.sh
+          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> python_wrapper.sh
+          echo "$PYTHON_PATH \"\$@\"" >> python_wrapper.sh
           chmod +x python_wrapper.sh
 
       - name: Check Python Version with Sudo
