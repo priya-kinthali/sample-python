@@ -15,8 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: |
-          sudo python --version
+
       - name: Print RUNNER_TOOL_CACHE
         run: echo "RUNNER_TOOL_CACHE is $RUNNER_TOOL_CACHE"
 
