@@ -3,19 +3,18 @@ name: Test Python Setup
 on:
   push:
     branches:
-      - test-897-parse-version
+      - test-871-portablebinary
 
 jobs:
   test-python-setup:
-    runs-on: ubuntu-latest
-
+    runs-on: selfhosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python from pyproject.toml
-        # uses: priya-kinthali/setup-python@pr-863-test
-        uses: actions/setup-python@v5.1.0
+        uses: priya-kinthali/setup-python@pr-863-test
+        # uses: actions/setup-python@v5.1.0
         with:
           python-version-file: pyproject.toml   
          
