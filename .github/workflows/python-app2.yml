@@ -15,8 +15,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: |
-          sudo python --version  
+     
+      - name: Unset LD_LIBRARY_PATH and check Python version without sudo
+        run: |
+          unset LD_LIBRARY_PATH
+          python --version
+      - name: Check Python version with sudo
+        run: |
+          sudo python --version
          
       - name: Check Python version
         run: python --version
