@@ -24,7 +24,16 @@ jobs:
 
       - name: Print Python path
         run: which python
-      - name: Set LD_LIBRARY_PATH and check python version
+      # - name: Set LD_LIBRARY_PATH and check python version
+      #   run: |
+      #     export LD_LIBRARY_PATH=$(dirname $(which python))/../lib
+      #     python --version
+      - name: Create Python Wrapper Script
         run: |
-          export LD_LIBRARY_PATH=$(dirname $(which python))/../lib
-          python --version
+          echo '#!/bin/bash' > python_wrapper.sh
+          echo 'export LD_LIBRARY_PATH=/home/runner/_work/_tool/Python/3.12.4/x64/lib' >> python_wrapper.sh
+          echo '/home/runner/_work/_tool/Python/3.12.4/x64/bin/python3 "$@"' >> python_wrapper.sh
+          chmod +x python_wrapper.sh
+
+      - name: Check Python Version with Sudo
+        run: sudo ./python_wrapper.sh --version
