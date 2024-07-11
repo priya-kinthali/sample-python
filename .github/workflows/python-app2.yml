@@ -23,10 +23,7 @@ jobs:
 
       - name: Print Python path
         run: which python
-      - name: Check python version with sudo
-        run: sudo /home/runner/_work/_tool/Python/3.12.3/x64/bin/python3 --version
-        env:
-          LD_LIBRARY_PATH: /home/runner/_work/_tool/Python/3.12.3/x64/lib
-     
-    
-   
+      - name: Set LD_LIBRARY_PATH and check python version
+        run: |
+          export LD_LIBRARY_PATH=/home/runner/_work/_tool/Python/3.12.3/x64/lib
+          /home/runner/_work/_tool/Python/3.12.3/x64/bin/python3 --version
