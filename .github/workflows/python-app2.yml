@@ -46,6 +46,7 @@ jobs:
           PYTHON_PATH=$(which python3)
           PYTHON_DIR=$(dirname $PYTHON_PATH)
           echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
+          echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
           echo "python --version" >> temp_script.sh
           chmod +x temp_script.sh
 
