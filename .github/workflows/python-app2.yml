@@ -24,6 +24,8 @@ jobs:
 
       - name: Print Python path
         run: which python
+      - name: Check Python version
+        run: python --version
       # - name: Set LD_LIBRARY_PATH and check python version
       #   run: |
       #     export LD_LIBRARY_PATH=$(dirname $(which python))/../lib
@@ -41,14 +43,15 @@ jobs:
       # - name: Check Python Version with Sudo
       #   run: sudo ./python_wrapper.sh --version
 
-      - name: Create Python temp_script.sh
-        run: |
-          PYTHON_PATH=$(which python3)
-          PYTHON_DIR=$(dirname $PYTHON_PATH)
-          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
-          echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
-          echo "python --version" >> temp_script.sh
-          chmod +x temp_script.sh
+      # ------------------------------
+      # - name: Create Python temp_script.sh
+      #   run: |
+      #     PYTHON_PATH=$(which python3)
+      #     PYTHON_DIR=$(dirname $PYTHON_PATH)
+      #     echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
+      #     echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
+      #     echo "python --version" >> temp_script.sh
+      #     chmod +x temp_script.sh
 
-      - name: Check Python Version with Sudo
-        run: sudo ./temp_script.sh
+      # - name: Check Python Version with Sudo
+      #   run: sudo ./temp_script.sh
