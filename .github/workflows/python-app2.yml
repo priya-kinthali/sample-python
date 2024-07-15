@@ -24,13 +24,14 @@ jobs:
 
       - name: Print Python path
         run: which python
+      - name: Check Shared Libraries
+        run: |
+            ldd $(which python)
       - name: Check Python version
         run: |
             unset LD_LIBRARY_PATH
             python --version
-      - name: Check Shared Libraries
-        run: |
-            ldd $(which python)
+      
       # - name: Set LD_LIBRARY_PATH and check python version
       #   run: |
       #     export LD_LIBRARY_PATH=$(dirname $(which python))/../lib
