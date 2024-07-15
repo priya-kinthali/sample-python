@@ -26,9 +26,8 @@ jobs:
         run: which python
       - name: Check Python version
         run: |
-            unset LD_LIBRARY_PATH
             ldd $(which python)
-            python --version
+            sudo python --version
       
       # - name: Set LD_LIBRARY_PATH and check python version
       #   run: |
