@@ -27,7 +27,7 @@ jobs:
       - name: Check Python version
         run: |
             ldd $(which python)
-            sudo python --version
+            sudo ${{ env.pythonLocation }}/bin/python --version
       
       # - name: Set LD_LIBRARY_PATH and check python version
       #   run: |
