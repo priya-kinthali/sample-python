@@ -28,7 +28,8 @@ jobs:
           PYTHON_DIR=$(dirname $PYTHON_PATH)
           export LD_LIBRARY_PATH=$PYTHON_DIR/../lib
           export PATH=$PYTHON_DIR:$PATH
-          sudo env "LD_LIBRARY_PATH=$LD_LIBRARY_PATH" "PATH=$PATH" python --version
+          sudo python --version
+      # sudo env "LD_LIBRARY_PATH=$LD_LIBRARY_PATH" "PATH=$PATH" python --version
       # - name: Print Python path
       #   run: which python
       # - name: Check Python version
