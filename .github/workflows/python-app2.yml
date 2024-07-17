@@ -22,12 +22,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Check Python Version with Sudo
+      - name: Create Python temp_script.sh
         run: |
           PYTHON_PATH=$(which python3)
-          export PYTHON_DIR=$(dirname $PYTHON_PATH)
-          export LD_LIBRARY_PATH=$PYTHON_DIR/../lib:$LD_LIBRARY_PATH
-          sudo -E $PYTHON_PATH --version
+          PYTHON_DIR=$(dirname $PYTHON_PATH)
+          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
+          echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
+          echo "python --version" >> temp_script.sh
+          chmod +x temp_script.sh
+
+      - name: Check Python Version with Sudo
+        run: sudo ./temp_script.sh
 
       - name: Print RUNNER_TOOL_CACHE
         run: echo "RUNNER_TOOL_CACHE is $RUNNER_TOOL_CACHE"
