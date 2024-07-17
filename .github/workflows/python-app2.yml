@@ -12,9 +12,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Ensure Sudo is Installed
+        run: |
+          if ! command -v sudo &> /dev/null; then
+            echo "sudo could not be found. Installing..."
+            sudo apt-get update && sudo apt-get install -y sudo
+          fi
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check Python Version with Sudo
+        run: sudo python --version
 
       - name: Print RUNNER_TOOL_CACHE
         run: echo "RUNNER_TOOL_CACHE is $RUNNER_TOOL_CACHE"
