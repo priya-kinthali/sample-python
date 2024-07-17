@@ -23,8 +23,9 @@ jobs:
         with:
           python-version: '3.9'
       - name: Check Python Version with Sudo
-        run: sudo python3 --version
-
+        run: |
+          PYTHON_PATH=$(which python3)
+          sudo $PYTHON_PATH --version
       - name: Print RUNNER_TOOL_CACHE
         run: echo "RUNNER_TOOL_CACHE is $RUNNER_TOOL_CACHE"
 
