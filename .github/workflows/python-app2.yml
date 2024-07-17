@@ -25,7 +25,7 @@ jobs:
       - name: Check Python Version with Sudo
         run: |
           PYTHON_PATH=$(which python3)
-          sudo env "LD_LIBRARY_PATH=$PYTHON_DIR/../lib" $PYTHON_PATH --version
+          sudo env "LD_LIBRARY_PATH=$PYTHON_DIR/../lib" "$PYTHON_PATH" --version
 
 
       - name: Print RUNNER_TOOL_CACHE
