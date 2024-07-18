@@ -26,6 +26,8 @@ jobs:
           sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
           # Export the environment variable
           echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
+          # Verify Python version
+          sudo python --version
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
