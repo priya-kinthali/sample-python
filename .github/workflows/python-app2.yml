@@ -43,9 +43,9 @@ jobs:
       #   run: |
       #     echo 'Defaults env_keep += "LD_LIBRARY_PATH"' | sudo tee /etc/sudoers.d/env_keep
 
-      - name: Verify Python Installation
-        run: |
-          sudo env "PATH=$PATH" python --version
+      # - name: Verify Python Installation
+      #   run: |
+      #     sudo env "PATH=$PATH" python --version
          
 
       # - uses: actions/setup-python@v5
@@ -107,14 +107,14 @@ jobs:
       #   run: sudo ./python_wrapper.sh --version
 
       # ------------------------------
-      # - name: Create Python temp_script.sh
-      #   run: |
-      #     PYTHON_PATH=$(which python3)
-      #     PYTHON_DIR=$(dirname $PYTHON_PATH)
-      #     echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
-      #     echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
-      #     echo "python --version" >> temp_script.sh
-      #     chmod +x temp_script.sh
+      - name: Create Python temp_script.sh
+        run: |
+          PYTHON_PATH=$(which python3)
+          PYTHON_DIR=$(dirname $PYTHON_PATH)
+          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
+          echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
+          echo "python --version" >> temp_script.sh
+          chmod +x temp_script.sh
 
-      # - name: Check Python Version with Sudo
-      #   run: sudo ./temp_script.sh
+      - name: Check Python Version with Sudo
+        run: sudo ./temp_script.sh
