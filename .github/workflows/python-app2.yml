@@ -29,13 +29,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Add Python Path to Sudo Environment
+      - name: Preserve LD_LIBRARY_PATH for Sudo
         run: |
-          PYTHON_PATH=$(dirname $(which python))
-          echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" | sudo tee /etc/sudoers.d/python-path
+          echo 'Defaults env_keep += "LD_LIBRARY_PATH"' | sudo tee /etc/sudoers.d/env_keep
 
-
-     
       - name: Verify Python Installation
         run: |
           sudo python --version
