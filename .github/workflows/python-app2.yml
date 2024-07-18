@@ -43,10 +43,12 @@ jobs:
       #   run: |
       #     echo 'Defaults env_keep += "LD_LIBRARY_PATH"' | sudo tee /etc/sudoers.d/env_keep
 
-      # - name: Verify Python Installation
-      #   run: |
-      #     sudo python --version
-      #     python --version
+      - name: Verify Python Installation
+        run: |
+          sudo env "PATH=$PATH" python --version
+          python --version
+          sudo python --version
+          
 
       # - uses: actions/setup-python@v5
       #   with:
