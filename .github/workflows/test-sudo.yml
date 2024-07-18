@@ -1,0 +1,26 @@
+name: Test Python Setup
+
+on:
+  push:
+    branches:
+      - test-871-portablebinary
+
+jobs:
+  test-python-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Ensure Sudo is Installed
+        run: |
+          if ! command -v sudo &> /dev/null; then
+            echo "sudo could not be found. Installing..."
+            sudo apt-get update && sudo apt-get install -y sudo
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      - name: Verify Python Installation
+        run: |
+          sudo python --version
+          python --version
