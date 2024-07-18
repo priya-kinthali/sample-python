@@ -33,6 +33,11 @@ jobs:
       - name: Create Symbolic Link for Python
         run: |
           sudo ln -s $(which python3) /usr/bin/python
+      - name: Add Python Library Path to Sudo Environment
+        run: |
+          echo "LD_LIBRARY_PATH=/opt/hostedtoolcache/Python/3.9.19/x64/lib:\$LD_LIBRARY_PATH" | sudo tee -a /etc/environment
+          source /etc/environment
+
       - name: Verify Python Installation
         run: |
           sudo python --version
