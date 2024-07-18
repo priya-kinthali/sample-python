@@ -33,10 +33,10 @@ jobs:
           python-version: '3.9'
  
       - name: Print tool directory path
-        run: "echo 'Tool directory: $RUNNER_TOOL_CACHE'"
+        run: echo $RUNNER_TOOL_CACHE
 
       - name: Print temp directory path
-        run: "echo 'Temp directory: $RUNNER_TEMP'"
+        run: echo $RUNNER_TEMP
 
       
       # - name: Preserve LD_LIBRARY_PATH for Sudo
