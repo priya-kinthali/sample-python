@@ -18,27 +18,35 @@ jobs:
             echo "sudo could not be found. Installing..."
             sudo apt-get update && sudo apt-get install -y sudo
           fi
-      - name: Set AGENT_TOOLSDIRECTORY
-        run: |
-          # Create the directory
-          sudo mkdir -p /opt/hostedtoolcache/Python
-          # Change ownership of the directory to the current user and group
-          sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
-          # Export the environment variable
-          echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
-          # Verify Python version
-          sudo python --version
+      # - name: Set AGENT_TOOLSDIRECTORY
+      #   run: |
+      #     # Create the directory
+      #     sudo mkdir -p /opt/hostedtoolcache/Python
+      #     # Change ownership of the directory to the current user and group
+      #     sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
+      #     # Export the environment variable
+      #     echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
+      #     # Verify Python version
+      #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Preserve LD_LIBRARY_PATH for Sudo
-        run: |
-          echo 'Defaults env_keep += "LD_LIBRARY_PATH"' | sudo tee /etc/sudoers.d/env_keep
+ 
+      - name: Print tool directory path
+        run: "echo 'Tool directory: $RUNNER_TOOL_CACHE'"
 
-      - name: Verify Python Installation
-        run: |
-          sudo python --version
-          python --version
+      - name: Print temp directory path
+        run: "echo 'Temp directory: $RUNNER_TEMP'"
+
+      
+      # - name: Preserve LD_LIBRARY_PATH for Sudo
+      #   run: |
+      #     echo 'Defaults env_keep += "LD_LIBRARY_PATH"' | sudo tee /etc/sudoers.d/env_keep
+
+      # - name: Verify Python Installation
+      #   run: |
+      #     sudo python --version
+      #     python --version
 
       # - uses: actions/setup-python@v5
       #   with:
