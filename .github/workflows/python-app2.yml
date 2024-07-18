@@ -30,6 +30,9 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Create Symbolic Link for Python
+        run: |
+          sudo ln -s $(which python3) /usr/bin/python
       - name: Verify Python Installation
         run: |
           sudo python --version
