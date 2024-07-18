@@ -18,16 +18,29 @@ jobs:
             echo "sudo could not be found. Installing..."
             sudo apt-get update && sudo apt-get install -y sudo
           fi
+      - name: Set AGENT_TOOLSDIRECTORY
+        run: |
+          export AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python
+          echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-      - name: Create Python temp_script.sh
-        run: |
-          PYTHON_PATH=$(which python3)
-          PYTHON_DIR=$(dirname $PYTHON_PATH)
-          sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib; export PATH=$PYTHON_DIR:\$PATH; python --version"
 
+      - name: Verify Python Installation
+        run: |
+          sudo python --version
+          python --version
+
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.9'
+      # - name: Create Python temp_script.sh
+      #   run: |
+      #     PYTHON_PATH=$(which python3)
+      #     PYTHON_DIR=$(dirname $PYTHON_PATH)
+      #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib; export PATH=$PYTHON_DIR:\$PATH; python --version"
+#--------------------------
       #     echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
       #     echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
       #     echo "python --version" >> temp_script.sh
