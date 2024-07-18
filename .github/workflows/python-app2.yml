@@ -46,9 +46,7 @@ jobs:
       - name: Verify Python Installation
         run: |
           sudo env "PATH=$PATH" python --version
-          python --version
-          sudo python --version
-          
+         
 
       # - uses: actions/setup-python@v5
       #   with:
