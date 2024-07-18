@@ -20,9 +20,12 @@ jobs:
           fi
       - name: Set AGENT_TOOLSDIRECTORY
         run: |
-          export AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python
+          # Create the directory
+          sudo mkdir -p /opt/hostedtoolcache/Python
+          # Change ownership of the directory to the current user and group
+          sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
+          # Export the environment variable
           echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
