@@ -107,14 +107,23 @@ jobs:
       #   run: sudo ./python_wrapper.sh --version
 
       # ------------------------------
-      - name: Create Python temp_script.sh
+      - name: Set LD_LIBRARY_PATH and Check Python Version
+        env:
+          LD_LIBRARY_PATH: /home/runner/_work/_tool/Python/3.9.*/x64/lib:$LD_LIBRARY_PATH
         run: |
-          PYTHON_PATH=$(which python3)
-          PYTHON_DIR=$(dirname $PYTHON_PATH)
-          echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
-          echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
-          echo "python --version" >> temp_script.sh
-          chmod +x temp_script.sh
+          echo "LD_LIBRARY_PATH is set to $LD_LIBRARY_PATH"
+          sudo python --version
+      #------------
 
-      - name: Check Python Version with Sudo
-        run: sudo ./temp_script.sh
+      # - name: Create Python temp_script.sh
+      #   run: |
+      #     PYTHON_PATH=$(which python3)
+      #     PYTHON_DIR=$(dirname $PYTHON_PATH)
+      #     echo "export LD_LIBRARY_PATH=$PYTHON_DIR/../lib" >> temp_script.sh
+      #     echo "export PATH=$PYTHON_DIR:\$PATH" >> temp_script.sh
+      #     echo "python --version" >> temp_script.sh
+      #     chmod +x temp_script.sh
+
+      # - name: Check Python Version with Sudo
+      #   run: sudo ./temp_script.sh
+      
