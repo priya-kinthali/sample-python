@@ -18,19 +18,21 @@ jobs:
             echo "sudo could not be found. Installing..."
             sudo apt-get update && sudo apt-get install -y sudo
           fi
-      - name: Set AGENT_TOOLSDIRECTORY
-        run: |
-          # Create the directory
-          sudo mkdir -p /opt/hostedtoolcache/Python
-          # Change ownership of the directory to the current user and group
-          sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
-          # Export the environment variable
-          echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
-          # Verify Python version
-          sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
+      # - name: Set AGENT_TOOLSDIRECTORY
+      #   run: |
+      #     # Create the directory
+      #     sudo mkdir -p /opt/hostedtoolcache/Python
+      #     # Change ownership of the directory to the current user and group
+      #     sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
+      #     # Export the environment variable
+      #     echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
+      #     # Verify Python version
+      #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
+        env:
+          AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache/Python
  
       # - name: Print tool directory path
       #   run: echo $RUNNER_TOOL_CACHE
