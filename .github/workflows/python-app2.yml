@@ -28,9 +28,9 @@ jobs:
       #     echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
       #     # Verify Python version
       #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
-      - uses: priya-kinthali/setup-python@test-871
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
         # env:
         #   AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
  
