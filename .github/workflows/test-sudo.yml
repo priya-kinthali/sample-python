@@ -23,8 +23,7 @@ jobs:
       - name: Add Python Path to Sudo Environment
         run: |
           PYTHON_PATH=$(dirname $(which python))
-          echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" | sudo tee /etc/sudoers.d/python-path
-
+          echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin\""
       - name: Verify Python Installation
         run: |
           sudo python --version
