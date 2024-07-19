@@ -18,22 +18,22 @@ jobs:
             echo "sudo could not be found. Installing..."
             sudo apt-get update && sudo apt-get install -y sudo
           fi
-      # - name: Set AGENT_TOOLSDIRECTORY
-      #   run: |
-      #     # Create the directory
-      #     sudo mkdir -p /opt/hostedtoolcache/Python
-      #     # Change ownership of the directory to the current user and group
-      #     sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
-      #     # Export the environment variable
-      #     echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
-      #     # Verify Python version
-      #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
+      - name: Set AGENT_TOOLSDIRECTORY
+        run: |
+          # Create the directory
+          sudo mkdir -p /opt/hostedtoolcache/Python
+          # Change ownership of the directory to the current user and group
+          sudo chown -R $(whoami):$(id -gn) /opt/hostedtoolcache
+          # Export the environment variable
+          echo "AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache/Python" >> $GITHUB_ENV
+          # Verify Python version
+          sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
  
-      - name: Print tool directory path
-        run: echo $RUNNER_TOOL_CACHE
+      # - name: Print tool directory path
+      #   run: echo $RUNNER_TOOL_CACHE
 
       - name: Print temp directory path
         run: echo $RUNNER_TEMP
@@ -71,8 +71,17 @@ jobs:
       - name: Print AGENT_TOOLSDIRECTORY
         run: echo "AGENT_TOOLSDIRECTORY is $AGENT_TOOLSDIRECTORY"
 
-      - name: Check Python version
-        run: python --version
+      - name: Add Python Path to Sudo Environment
+        run: |
+          PYTHON_PATH=$(dirname $(which python))
+          echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" | sudo tee /etc/sudoers.d/python-path
+
+      - name: Verify Python Installation
+        run: |
+          sudo python --version
+          python --version
+      # - name: Check Python version
+      #   run: python --version
 
       # - name: Set Environment Variables and Check Python Version with Sudo
       #   run: |
@@ -107,12 +116,7 @@ jobs:
       #   run: sudo ./python_wrapper.sh --version
 
       # ------------------------------
-      - name: Set LD_LIBRARY_PATH and Check Python Version
-        env:
-          LD_LIBRARY_PATH: /home/runner/_work/_tool/Python/3.9.*/x64/lib:$LD_LIBRARY_PATH
-        run: |
-          echo "LD_LIBRARY_PATH is set to $LD_LIBRARY_PATH"
-          sudo python --version
+
       #------------
 
       # - name: Create Python temp_script.sh
