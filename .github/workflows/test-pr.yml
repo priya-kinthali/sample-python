@@ -1,0 +1,34 @@
+name: Test Python Setup
+
+on:
+  push:
+    branches:
+      - test-871-portablebinary
+
+jobs:
+  test-python-setup:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download Python 3.12.3
+      run: |
+        wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
+        mkdir ${{ runner.temp }}/python-3.12.3-linux-22.04-x64
+        tar -xzvf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz -C ${{ runner.temp }}/python-3.12.3-linux-22.04-x64
+
+    - name: Run script
+      run: |
+        echo "run script"
+        bash setup.sh
+      working-directory: ${{ runner.temp }}/python-3.12.3-linux-22.04-x64
+
+    - name: Add Python to PATH
+      run: echo "/opt/hostedtoolcache/Python/3.12.3/x64/" >> $GITHUB_PATH
+
+    - name: Check Python version
+      run: python --version
+
+    - name: Check Python version with sudo
+      run: sudo python --version
