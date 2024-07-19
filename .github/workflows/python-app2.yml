@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: '3.9'
         env:
-          AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache/Python
+          AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
  
       # - name: Print tool directory path
       #   run: echo $RUNNER_TOOL_CACHE
