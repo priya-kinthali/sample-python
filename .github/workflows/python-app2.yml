@@ -73,8 +73,8 @@ jobs:
       - name: Print AGENT_TOOLSDIRECTORY
         run: |
           echo "AGENT_TOOLSDIRECTORY is $AGENT_TOOLSDIRECTORY"
-        env:
-          AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
+        # env:
+        #   AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
 
       # - name: Add Python Path to Sudo Environment
       #   run: |
