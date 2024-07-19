@@ -17,13 +17,13 @@ jobs:
             echo "sudo could not be found. Installing..."
             sudo apt-get update && sudo apt-get install -y sudo
           fi
-      - name: Clear Python Cache
-        run: |
-          sudo rm -rf /opt/hostedtoolcache/Python
+      # - name: Clear Python Cache
+      #   run: |
+      #     sudo rm -rf /opt/hostedtoolcache/Python
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
       # - name: Add Python Path to Sudo Environment
       #   run: |
       #     PYTHON_PATH=$(dirname $(which python))
