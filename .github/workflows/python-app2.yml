@@ -87,9 +87,9 @@ jobs:
         run: |
           sudo python --version
           python --version
-      # - name: Add Python Path to Sudo Environment
-      #   run: |
-      #      sudo env "PATH=$PATH" python --version
+      - name: Add Python Path to Sudo Environment
+        run: |
+           sudo env "PATH=$PATH" python --version
       - name: Check PATH environment variable
         run: echo $PATH
       # - name: Check Python version
