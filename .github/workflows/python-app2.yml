@@ -30,12 +30,15 @@ jobs:
       #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.10'
         # env:
         #   AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
  
       # - name: Print tool directory path
       #   run: echo $RUNNER_TOOL_CACHE
+      - name: Remove Python cache
+        run: |
+          sudo find /home/azureuser/actions-runner/_work/_tool/Python/3.9.19/x64 -type d -name "__pycache__" -exec rm -r {} +
 
       - name: Print temp directory path
         run: echo $RUNNER_TEMP
