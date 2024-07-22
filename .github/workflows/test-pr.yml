@@ -22,11 +22,14 @@ jobs:
         echo "export PATH=${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin:$PATH" >> $GITHUB_ENV
 
     - name: Check Python version
-      run: python --version
+      run: |
+        source $GITHUB_ENV
+        python --version
 
     - name: Check Python version with sudo
-      run: sudo python --version
-
+      run: |
+        source $GITHUB_ENV
+        sudo python --version
     # - name: Download Python 3.12.3
     #   run: |
     #     wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
