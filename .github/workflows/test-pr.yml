@@ -44,8 +44,7 @@ jobs:
 
     - name: List directory contents
       run: |
-        ls -l ${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin
-
+        ls -l ${{ runner.temp }}
     - name: Print PATH
       run: |
         echo $PATH
