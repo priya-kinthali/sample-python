@@ -35,21 +35,15 @@ jobs:
         wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
         tar -xzf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz -C ${{ runner.temp }}
 
-    - name: Set Python version
+    - name: Create symbolic link
       run: |
-        echo "export PATH=${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin:$PATH" > setenv.sh
-        chmod +x setenv.sh
-        source ./setenv.sh
+        sudo ln -sf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin/python /usr/bin/python
 
     - name: Check Python version
-      run: |
-        source ./setenv.sh
-        python --version
+      run: python --version
 
     - name: Check Python version with sudo
-      run: |
-        source ./setenv.sh
-        sudo python --version
+      run: sudo python --version
     # - name: Download Python 3.12.3
     #   run: |
     #     wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
