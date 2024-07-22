@@ -3,7 +3,7 @@ name: Test Python Setup
 on:
   push:
     branches:
-      - test-871-portablebinary
+      - test-871-port2
 
 jobs:
   test-python-setup:
