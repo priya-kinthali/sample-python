@@ -15,11 +15,11 @@ jobs:
     - name: Clear cache
       run: |
         sudo rm -rf "${{ runner.temp }}/*"
-    - name: Download Python artifact 3.12.3
+    - name: Download Python artifact
       run: |
         wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
         tar -xzf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz -C ${{ runner.temp }}
-        echo "${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin" >> $GITHUB_PATH
+        echo "export PATH=${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin:$PATH" >> $GITHUB_ENV
 
     - name: Check Python version
       run: python --version
