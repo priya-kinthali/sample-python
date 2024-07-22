@@ -57,8 +57,16 @@ jobs:
       run: python --version
 
     
-    - name: Check Python version with sudo
-      run: sudo python --version
+    - name: Print environment variables without sudo
+      run: printenv
+
+    - name: Print environment variables with sudo
+      run: sudo printenv
+
+    - name: Check Python version with sudo and preserved environment
+      run: sudo -E python --version
+    # - name: Check Python version with sudo
+    #   run: sudo python --version
     # - name: Download Python 3.12.3
     #   run: |
     #     wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
