@@ -30,7 +30,7 @@ jobs:
       #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.8.18'
         # env:
         #   AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
  
