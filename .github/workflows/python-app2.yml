@@ -83,10 +83,10 @@ jobs:
 
       # echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" | sudo tee /etc/sudoers.d/python-path
 
-      - name: Verify Python Installation
-        run: |
-          sudo python --version
-          python --version
+      # - name: Verify Python Installation
+      #   run: |
+      #     sudo python --version
+      #     python --version
       # - name: Verify Python Installation
       #   run: |
       #     sudo env "PATH=$PATH" python --version
@@ -146,20 +146,20 @@ jobs:
       # - name: Check Python Version with Sudo
       #   run: sudo ./temp_script.sh
       #---------------------
-      # - name: Create symbolic link
-      #   run: |
-      #       PYTHON_PATH="${{ runner.temp }}/bin/python3.11"
-      #       if [ ! -f "$PYTHON_PATH" ]; then
-      #         echo "Python 3.11 binary not found."
-      #         exit 1
-      #       fi
-      #       sudo ln -sf $PYTHON_PATH /usr/bin/python
-      #       sudo $PYTHON_PATH --version
-      # - name: Add Python 3.12 to PATH
-      #   run: |
-      #       echo "${{ runner.temp }}/bin" | sudo tee -a /etc/paths
-      #       export PATH="${{ runner.temp }}/bin:$PATH"
+      - name: Create symbolic link
+        run: |
+            PYTHON_PATH="${{ runner.temp }}/bin/python3.10"
+            if [ ! -f "$PYTHON_PATH" ]; then
+              echo "Python 3.10 binary not found."
+              exit 1
+            fi
+            sudo ln -sf $PYTHON_PATH /usr/bin/python
+            sudo $PYTHON_PATH --version
+      - name: Add Python 3.10 to PATH
+        run: |
+            echo "${{ runner.temp }}/bin" | sudo tee -a /etc/paths
+            export PATH="${{ runner.temp }}/bin:$PATH"
 
-      # - name: Check Python version with sudo and preserved environment
-      #   run: sudo env "PATH=$PATH" python --version
+      - name: Check Python version with sudo and preserved environment
+        run: sudo env "PATH=$PATH" python --version
       
