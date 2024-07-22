@@ -35,6 +35,14 @@ jobs:
         wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
         tar -xzf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz -C ${{ runner.temp }}
 
+    - name: List directory contents
+      run: |
+        ls -l ${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin
+
+    - name: Print PATH
+      run: |
+        echo $PATH
+
     - name: Create symbolic link
       run: |
         sudo ln -sf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin/python /usr/bin/python
