@@ -36,10 +36,10 @@ jobs:
  
       # - name: Print tool directory path
       #   run: echo $RUNNER_TOOL_CACHE
-      - name: Remove Python cache
+      - name: Update Python symbolic link
         run: |
-          sudo find /home/azureuser/actions-runner/_work/_tool/Python/3.9.19/x64 -type d -name "__pycache__" -exec rm -r {} +
-
+            PYTHON_PATH=$(which python3)
+            sudo ln -sf $PYTHON_PATH /usr/bin/python
       - name: Print temp directory path
         run: echo $RUNNER_TEMP
 
