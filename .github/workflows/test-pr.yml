@@ -49,10 +49,18 @@ jobs:
       run: |
         echo $PATH
 
+    # - name: Create symbolic link
+    #   run: |
+    #     sudo ln -sf ${{ runner.temp }}/bin/python3.12 /usr/bin/python
+    #     sudo ln -sf /usr/bin/python3 /usr/bin/python
     - name: Create symbolic link
       run: |
-        sudo ln -sf ${{ runner.temp }}/bin/python3.12 /usr/bin/python
-        sudo ln -sf /usr/bin/python3 /usr/bin/python
+        PYTHON_PATH=$(which python3.12)
+        if [ -z "$PYTHON_PATH" ]; then
+          echo "Python 3.12 is not installed."
+          exit 1
+        fi
+        sudo ln -sf $PYTHON_PATH /usr/bin/python
     - name: Check Python version
       run: python --version
 
