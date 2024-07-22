@@ -61,6 +61,7 @@ jobs:
           exit 1
         fi
         sudo ln -sf $PYTHON_PATH /usr/bin/python
+        sudo $PYTHON_PATH --version
     - name: Check Python version
       run: python --version
 
