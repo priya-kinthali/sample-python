@@ -55,9 +55,9 @@ jobs:
     #     sudo ln -sf /usr/bin/python3 /usr/bin/python
     - name: Create symbolic link
       run: |
-        PYTHON_PATH=$(which python3.12)
-        if [ -z "$PYTHON_PATH" ]; then
-          echo "Python 3.12 is not installed."
+        PYTHON_PATH="${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin/python3.12"
+        if [ ! -f "$PYTHON_PATH" ]; then
+          echo "Python 3.12 binary not found."
           exit 1
         fi
         sudo ln -sf $PYTHON_PATH /usr/bin/python
