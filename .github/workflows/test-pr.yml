@@ -72,8 +72,10 @@ jobs:
     - name: Print environment variables with sudo
       run: sudo printenv
 
+    - name: Add Python 3.12 to PATH
+      run: echo "${{ runner.temp }}/bin" | sudo tee -a /etc/paths
     - name: Check Python version with sudo and preserved environment
-      run: sudo -E python --version
+      run: sudo python --version
     # - name: Check Python version with sudo
     #   run: sudo python --version
     # - name: Download Python 3.12.3
