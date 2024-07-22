@@ -30,7 +30,7 @@ jobs:
       #     sudo bash -c "export LD_LIBRARY_PATH=$PYTHON_DIR/lib:\$LD_LIBRARY_PATH && $PYTHON_DIR/bin/python --version"
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
         # env:
         #   AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
  
@@ -83,10 +83,13 @@ jobs:
 
       # echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" | sudo tee /etc/sudoers.d/python-path
 
+      # - name: Verify Python Installation
+      #   run: |
+      #     sudo python --version
+      #     python --version
       - name: Verify Python Installation
         run: |
-          sudo python --version
-          python --version
+          sudo env "PATH=$PATH" python --version
       # - name: Add Python Path to Sudo Environment
       #   run: |
       #      sudo env "PATH=$PATH" python --version
@@ -142,4 +145,21 @@ jobs:
 
       # - name: Check Python Version with Sudo
       #   run: sudo ./temp_script.sh
+      #---------------------
+      # - name: Create symbolic link
+      #   run: |
+      #       PYTHON_PATH="${{ runner.temp }}/bin/python3.11"
+      #       if [ ! -f "$PYTHON_PATH" ]; then
+      #         echo "Python 3.11 binary not found."
+      #         exit 1
+      #       fi
+      #       sudo ln -sf $PYTHON_PATH /usr/bin/python
+      #       sudo $PYTHON_PATH --version
+      # - name: Add Python 3.12 to PATH
+      #   run: |
+      #       echo "${{ runner.temp }}/bin" | sudo tee -a /etc/paths
+      #       export PATH="${{ runner.temp }}/bin:$PATH"
+
+      # - name: Check Python version with sudo and preserved environment
+      #   run: sudo env "PATH=$PATH" python --version
       
