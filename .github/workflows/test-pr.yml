@@ -33,6 +33,13 @@ jobs:
     - name: Download Python artifact
       run: |
         wget https://github.com/priya-kinthali/python-versions/releases/download/3.12.3-10005803889/python-3.12.3-linux-22.04-x64.tar.gz -O ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
+
+    - name: List tar.gz contents
+      run: |
+        tar -tzf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz
+
+    - name: Extract Python artifact
+      run: |
         tar -xzf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64.tar.gz -C ${{ runner.temp }}
 
     - name: List directory contents
