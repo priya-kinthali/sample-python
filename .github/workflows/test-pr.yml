@@ -51,8 +51,7 @@ jobs:
 
     - name: Create symbolic link
       run: |
-        sudo ln -sf ${{ runner.temp }}/python-3.12.3-linux-22.04-x64/bin/python /usr/bin/python
-
+        sudo ln -sf ${{ runner.temp }}/lib/python3.12/python /usr/bin/python
     - name: Check Python version
       run: python --version
 
