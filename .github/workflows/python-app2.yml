@@ -83,13 +83,13 @@ jobs:
 
       # echo "Defaults secure_path=\"$PYTHON_PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" | sudo tee /etc/sudoers.d/python-path
 
-      # - name: Verify Python Installation
-      #   run: |
-      #     sudo python --version
-      #     python --version
       - name: Verify Python Installation
         run: |
-          sudo env "PATH=$PATH" python --version
+          sudo python --version
+          python --version
+      # - name: Verify Python Installation
+      #   run: |
+      #     sudo env "PATH=$PATH" python --version
       # - name: Add Python Path to Sudo Environment
       #   run: |
       #      sudo env "PATH=$PATH" python --version
