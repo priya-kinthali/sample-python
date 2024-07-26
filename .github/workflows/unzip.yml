@@ -12,7 +12,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Setup Python
       # uses: actions/setup-python@v5
-      uses: priyagupta108/setup-python@unzipwin
+      uses: priyagupta108/setup-python@fix-windows-extract-archive
       with:
           python-version: '3.9'
         #  python-version: 'pypy3.8'
