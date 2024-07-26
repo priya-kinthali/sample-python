@@ -16,10 +16,10 @@ jobs:
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
-        uses: priya-kinthali/setup-python@708-pr-test-agent
-        # uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@708-pr-test-agent
+        uses: actions/setup-python@v5
 
         with:
-          python-version: '3.12'
+          python-version: '3.11'
       - name: Check Python version
         run: python --version
