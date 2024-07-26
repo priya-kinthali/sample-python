@@ -5,6 +5,9 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: [macOS]
+    env:
+      AGENT_TOOLSDIRECTORY: /Users/lakshmipriya/hostedtoolcache
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -13,8 +16,8 @@ jobs:
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
-        # uses: priya-kinthali/setup-python@708-pr-test-agent
-        uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@708-pr-test-agent
+        # uses: actions/setup-python@v5
 
         with:
           python-version: '3.10.14'
