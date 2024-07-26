@@ -10,12 +10,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: Remove cache
+      run: |
+          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          mkdir -p "${{ runner.tool_cache }}"
     - name: Setup Python
       # uses: actions/setup-python@v5
       uses: priyagupta108/setup-python@fix-windows-extract-archive
       with:
-          # python-version: '3.9'
-        python-version: 'pypy3.8'
+          python-version: '3.11'
+        # python-version: 'pypy3.8'
          # python-version: 'graalpy-24.x'
     - name: Install dependencies
       run: |
