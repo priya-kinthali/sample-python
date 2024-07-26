@@ -5,8 +5,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: [macOS]
-    env:
-      AGENT_TOOLSDIRECTORY: /Users/lakshmipriya/hostedtoolcache
+    # env:
+    #   AGENT_TOOLSDIRECTORY: /Users/lakshmipriya/hostedtoolcache
     
     steps:
       - name: Checkout repository
