@@ -5,7 +5,7 @@ on:
       - test-871-port2
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: Linux
     # runs-on: windows-latest
     steps:
     - name: Checkout code
