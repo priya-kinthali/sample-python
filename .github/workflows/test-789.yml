@@ -1,10 +1,10 @@
-name: Python workflow
+name: Checkout and Setup of Workflow
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, macos]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
