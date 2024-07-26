@@ -9,7 +9,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Python
-        uses: priya-kinthali/setup-python@708-pr-test-agent
+        # uses: priya-kinthali/setup-python@708-pr-test-agent
+        uses: actions/setup-python@v5
+
         with:
           python-version: '3.11.6'
       - name: Check Python version
