@@ -21,12 +21,22 @@ jobs:
       - name: Check and install gettext
         run: |
           brew install gettext
+          brew unlink gettext
           brew link --force gettext
 
       - name: Create directory and symbolic link for libintl.8.dylib
         run: |
           sudo mkdir -p /usr/local/libodep/lib
           sudo ln -s /opt/homebrew/opt/gettext/lib/libintl.8.dylib /usr/local/libodep/lib/libintl.8.dylib
+
+      - name: Remove incorrect gettext binaries
+        run: |
+          rm -f /usr/local/bin/gettext
+          rm -f /usr/local/lib/libintl.8.dylib
+          brew prune
+
+      - name: Check gettext version to verify setup
+        run: /usr/local/opt/gettext/bin/gettext --version
 
       - name: Set library path for gettext
         run: echo "/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
