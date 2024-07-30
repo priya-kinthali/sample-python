@@ -13,27 +13,27 @@ jobs:
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
       
-      - name: Install and link gettext
-        run: |
-          brew install gettext
-          brew unlink gettext
-          brew link --force gettext
+      # - name: Install and link gettext
+      #   run: |
+      #     brew install gettext
+      #     brew unlink gettext
+      #     brew link --force gettext
 
-      - name: Set library path for gettext
-        run: |
-          echo "DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+      # - name: Set library path for gettext
+      #   run: |
+      #     echo "DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
 
-      - name: Find and check gettext version to verify setup
-        run: |
-          gettext_path=$(brew --prefix gettext)/bin/gettext
-          echo "Found gettext at $gettext_path"
-          $gettext_path --version
+      # - name: Find and check gettext version to verify setup
+      #   run: |
+      #     gettext_path=$(brew --prefix gettext)/bin/gettext
+      #     echo "Found gettext at $gettext_path"
+      #     $gettext_path --version
       - name: Set up Python
         # uses: priya-kinthali/setup-python@708-pr-test-agent
         uses: actions/setup-python@v5
 
         with:
-          python-version: '3.10.14'
+          python-version: '3.11.9'
 
       - name: Check Python version
         run: python --version
