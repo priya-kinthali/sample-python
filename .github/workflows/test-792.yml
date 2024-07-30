@@ -21,9 +21,8 @@ jobs:
 
       - name: Set library path for gettext
         run: |
-          echo "/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
           echo "DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
-          
+
       - name: Find and check gettext version to verify setup
         run: |
           gettext_path=$(brew --prefix gettext)/bin/gettext
