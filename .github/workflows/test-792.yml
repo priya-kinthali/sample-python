@@ -25,6 +25,13 @@ jobs:
 
       # - name: Set environment variables
       #   run: echo 'DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib:$DYLD_LIBRARY_PATH' >> $GITHUB_ENV
+      - name: Install gettext
+        run: brew install gettext
+
+      - name: Set environment variables
+        run: echo 'DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib:$DYLD_LIBRARY_PATH' >> $GITHUB_ENV
+
+
 
       - name: Set up Python
         # uses: priya-kinthali/setup-python@708-pr-test-agent
