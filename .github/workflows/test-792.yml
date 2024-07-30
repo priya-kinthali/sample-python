@@ -13,38 +13,22 @@ jobs:
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
       
-      - name: Install Rosetta 2
+      - name: Install and link gettext
         run: |
-          sudo softwareupdate --install-rosetta --agree-to-license
+          brew install gettext
+          brew unlink gettext
+          brew link --force gettext
+
+      - name: Set library path for gettext
+        run: |
+          echo "/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+          echo "DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
           
-      - name: Install and link x86_64 gettext
-        run: |
-          arch -x86_64 brew install gettext
-          arch -x86_64 brew unlink gettext
-          arch -x86_64 brew link --force gettext
-
-      - name: Create directory and symbolic link for libintl.8.dylib
-        run: |
-          sudo mkdir -p /usr/local/libodep/lib
-          sudo rm -f /usr/local/libodep/lib/libintl.8.dylib
-          sudo ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/libodep/lib/libintl.8.dylib
-
-      - name: Remove incorrect gettext binaries
-        run: |
-          rm -f /usr/local/bin/gettext
-          rm -f /usr/local/lib/libintl.8.dylib
-          brew cleanup
-
       - name: Find and check gettext version to verify setup
         run: |
           gettext_path=$(brew --prefix gettext)/bin/gettext
           echo "Found gettext at $gettext_path"
           $gettext_path --version
-
-      - name: Set library path for gettext
-        run: echo "DYLD_LIBRARY_PATH=/usr/local/opt/gettext/lib" >> $GITHUB_ENV
-
-
       - name: Set up Python
         # uses: priya-kinthali/setup-python@708-pr-test-agent
         uses: actions/setup-python@v5
