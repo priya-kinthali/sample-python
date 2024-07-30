@@ -5,9 +5,6 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: [macOS]
-    # env:
-    #   AGENT_TOOLSDIRECTORY: /Users/lakshmipriya/hostedtoolcache
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,24 +12,6 @@ jobs:
         run: |
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
-      # - name: Install gettext
-      #   run: brew install gettext
-      # - name: Create symlink for gettext
-      #   run: |
-      #     sudo mkdir -p /usr/local/opt/gettext/lib
-      #     sudo ln -sf /opt/homebrew/opt/gettext/lib/libintl.8.dylib /usr/local/opt/gettext/lib/libintl.8.dylib
-
-
-      # - name: Set environment variables
-      #   run: echo 'DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib:$DYLD_LIBRARY_PATH' >> $GITHUB_ENV
-      - name: Install gettext
-        run: brew install gettext
-
-      - name: Set environment variables
-        run: echo 'DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib:$DYLD_LIBRARY_PATH' >> $GITHUB_ENV
-
-
-
       - name: Set up Python
         # uses: priya-kinthali/setup-python@708-pr-test-agent
         uses: actions/setup-python@v5
