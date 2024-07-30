@@ -22,6 +22,7 @@ jobs:
       - name: Create directory and symbolic link for libintl.8.dylib
         run: |
           sudo mkdir -p /usr/local/libodep/lib
+          sudo rm -f /usr/local/libodep/lib/libintl.8.dylib
           sudo ln -s /opt/homebrew/opt/gettext/lib/libintl.8.dylib /usr/local/libodep/lib/libintl.8.dylib
 
       - name: Remove incorrect gettext binaries
