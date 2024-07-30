@@ -18,5 +18,18 @@ jobs:
 
         with:
           python-version: '3.10.14'
+      - name: Check and install gettext
+        run: |
+          brew install gettext
+          brew link --force gettext
+
+      - name: Create directory and symbolic link for libintl.8.dylib
+        run: |
+          sudo mkdir -p /usr/local/libodep/lib
+          sudo ln -s /opt/homebrew/opt/gettext/lib/libintl.8.dylib /usr/local/libodep/lib/libintl.8.dylib
+
+      - name: Set library path for gettext
+        run: echo "/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+
       - name: Check Python version
         run: python --version
