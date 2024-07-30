@@ -13,17 +13,21 @@ jobs:
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
       
-      - name: Check and install gettext
+      - name: Install Rosetta 2
         run: |
-          brew install gettext
-          brew unlink gettext
-          brew link --force gettext
+          sudo softwareupdate --install-rosetta --agree-to-license
+          
+      - name: Install and link x86_64 gettext
+        run: |
+          arch -x86_64 brew install gettext
+          arch -x86_64 brew unlink gettext
+          arch -x86_64 brew link --force gettext
 
       - name: Create directory and symbolic link for libintl.8.dylib
         run: |
           sudo mkdir -p /usr/local/libodep/lib
           sudo rm -f /usr/local/libodep/lib/libintl.8.dylib
-          sudo ln -s /opt/homebrew/opt/gettext/lib/libintl.8.dylib /usr/local/libodep/lib/libintl.8.dylib
+          sudo ln -s /usr/local/opt/gettext/lib/libintl.8.dylib /usr/local/libodep/lib/libintl.8.dylib
 
       - name: Remove incorrect gettext binaries
         run: |
@@ -38,7 +42,7 @@ jobs:
           $gettext_path --version
 
       - name: Set library path for gettext
-        run: echo "DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+        run: echo "DYLD_LIBRARY_PATH=/usr/local/opt/gettext/lib" >> $GITHUB_ENV
 
 
       - name: Set up Python
