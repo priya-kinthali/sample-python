@@ -28,7 +28,7 @@ jobs:
         run: |
           rm -f /usr/local/bin/gettext
           rm -f /usr/local/lib/libintl.8.dylib
-          brew prune
+          brew cleanup
 
       - name: Check gettext version to verify setup
         run: /usr/local/opt/gettext/bin/gettext --version
