@@ -29,8 +29,8 @@ jobs:
       #     echo "Found gettext at $gettext_path"
       #     $gettext_path --version
       - name: Set up Python
-        # uses: priya-kinthali/setup-python@708-pr-test-agent
-        uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@708-pr-test-agent
+        # uses: actions/setup-python@v5
 
         with:
           python-version: '3.11.9'
