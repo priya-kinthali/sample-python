@@ -17,6 +17,11 @@ jobs:
           mkdir -p "${{ runner.tool_cache }}"
       - name: Install gettext
         run: brew install gettext
+      - name: Create symlink for gettext
+        run: |
+          sudo mkdir -p /usr/local/opt/gettext/lib
+          sudo ln -sf /opt/homebrew/opt/gettext/lib/libintl.8.dylib /usr/local/opt/gettext/lib/libintl.8.dylib
+
 
       - name: Set environment variables
         run: echo 'DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib:$DYLD_LIBRARY_PATH' >> $GITHUB_ENV
