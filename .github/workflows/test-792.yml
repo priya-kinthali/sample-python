@@ -12,12 +12,7 @@ jobs:
         run: |
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"
-      - name: Set up Python
-        # uses: priya-kinthali/setup-python@708-pr-test-agent
-        uses: actions/setup-python@v5
-
-        with:
-          python-version: '3.10.14'
+      
       - name: Check and install gettext
         run: |
           brew install gettext
@@ -40,6 +35,13 @@ jobs:
 
       - name: Set library path for gettext
         run: echo "/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+
+      - name: Set up Python
+        # uses: priya-kinthali/setup-python@708-pr-test-agent
+        uses: actions/setup-python@v5
+
+        with:
+          python-version: '3.10.14'
 
       - name: Check Python version
         run: python --version
