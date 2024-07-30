@@ -38,7 +38,8 @@ jobs:
           $gettext_path --version
 
       - name: Set library path for gettext
-        run: echo "/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+        run: echo "DYLD_LIBRARY_PATH=/opt/homebrew/opt/gettext/lib" >> $GITHUB_ENV
+
 
       - name: Set up Python
         # uses: priya-kinthali/setup-python@708-pr-test-agent
