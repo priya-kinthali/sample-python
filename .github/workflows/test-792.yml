@@ -14,6 +14,13 @@ jobs:
           echo "DISTRIB_RELEASE=18.04" | sudo tee -a /etc/lsb-release
           echo "DISTRIB_CODENAME=bionic" | sudo tee -a /etc/lsb-release
           echo "DISTRIB_DESCRIPTION='Ubuntu 18.04.6 LTS'" | sudo tee -a /etc/lsb-release
+      - name: Set environment variables
+        run: |
+          echo "ID=ubuntu" | sudo tee /etc/os-release
+          echo "VERSION_ID=18.04" | sudo tee -a /etc/os-release
+          echo "VERSION_CODENAME=bionic" | sudo tee -a /etc/os-release
+          echo "UBUNTU_CODENAME=bionic" | sudo tee -a /etc/os-release
+
 
       - name: Set up Python
         uses: actions/setup-python@v5
