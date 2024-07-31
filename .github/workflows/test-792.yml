@@ -11,21 +11,17 @@ jobs:
       - name: Create /etc/lsb-release
         run: |
           echo "DISTRIB_ID=Ubuntu" | sudo tee /etc/lsb-release
-          echo "DISTRIB_RELEASE=18.04" | sudo tee -a /etc/lsb-release
-          echo "DISTRIB_CODENAME=bionic" | sudo tee -a /etc/lsb-release
-          echo "DISTRIB_DESCRIPTION='Ubuntu 18.04.6 LTS'" | sudo tee -a /etc/lsb-release
+          echo "DISTRIB_RELEASE=20.04" | sudo tee -a /etc/lsb-release
+          echo "DISTRIB_CODENAME=focal" | sudo tee -a /etc/lsb-release
+          echo "DISTRIB_DESCRIPTION='Ubuntu 20.04.6 LTS'" | sudo tee -a /etc/lsb-release
+
       - name: Set environment variables
         run: |
           echo "ID=ubuntu" | sudo tee /etc/os-release
-          echo "VERSION_ID=18.04" | sudo tee -a /etc/os-release
-          echo "VERSION_CODENAME=bionic" | sudo tee -a /etc/os-release
-          echo "UBUNTU_CODENAME=bionic" | sudo tee -a /etc/os-release
-
-      - name: Display /etc/lsb-release
-        run: cat /etc/lsb-release
-
-      - name: Display /etc/os-release
-        run: cat /etc/os-release
+          echo "VERSION_ID=20.04" | sudo tee -a /etc/os-release
+          echo "VERSION_CODENAME=focal" | sudo tee -a /etc/os-release
+          echo "UBUNTU_CODENAME=focal" | sudo tee -a /etc/os-release
+     
       - name: Set up Python
         uses: actions/setup-python@v5
 
