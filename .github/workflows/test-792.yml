@@ -21,7 +21,11 @@ jobs:
           echo "VERSION_CODENAME=bionic" | sudo tee -a /etc/os-release
           echo "UBUNTU_CODENAME=bionic" | sudo tee -a /etc/os-release
 
+      - name: Display /etc/lsb-release
+        run: cat /etc/lsb-release
 
+      - name: Display /etc/os-release
+        run: cat /etc/os-release
       - name: Set up Python
         uses: actions/setup-python@v5
 
