@@ -25,12 +25,12 @@ jobs:
       
       - name: Install OpenSSL on RHEL
         run: |
-         sudo yum install -y openssl11 openssl11-devel
+          sudo yum install -y openssl openssl-devel
 
       - name: Set environment variables
         run: |
-          export CFLAGS="-I/usr/include/openssl11"
-          export LDFLAGS="-L/usr/lib64/openssl11"
+          export CFLAGS="-I/usr/include/openssl"
+          export LDFLAGS="-L/usr/lib64"
       - name: Set up Python
         uses: actions/setup-python@v5
 
