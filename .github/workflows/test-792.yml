@@ -11,21 +11,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      # - name: Create /etc/lsb-release
+      #   run: |
+      #     echo "DISTRIB_ID=Ubuntu" | sudo tee /etc/lsb-release
+      #     echo "DISTRIB_RELEASE=20.04" | sudo tee -a /etc/lsb-release
+      #     echo "DISTRIB_CODENAME=focal" | sudo tee -a /etc/lsb-release
+      #     echo "DISTRIB_DESCRIPTION='Ubuntu 20.04.6 LTS'" | sudo tee -a /etc/lsb-release
+
+      # - name: Set environment variables
+      #   run: |
+      #     echo "ID=ubuntu" | sudo tee /etc/os-release
+      #     echo "VERSION_ID=20.04" | sudo tee -a /etc/os-release
+      #     echo "VERSION_CODENAME=focal" | sudo tee -a /etc/os-release
+      #     echo "UBUNTU_CODENAME=focal" | sudo tee -a /etc/os-release
+     
       - name: Create /etc/lsb-release
         run: |
-          echo "DISTRIB_ID=Ubuntu" | sudo tee /etc/lsb-release
+          
           echo "DISTRIB_RELEASE=20.04" | sudo tee -a /etc/lsb-release
-          echo "DISTRIB_CODENAME=focal" | sudo tee -a /etc/lsb-release
-          echo "DISTRIB_DESCRIPTION='Ubuntu 20.04.6 LTS'" | sudo tee -a /etc/lsb-release
 
-      - name: Set environment variables
-        run: |
-          echo "ID=ubuntu" | sudo tee /etc/os-release
-          echo "VERSION_ID=20.04" | sudo tee -a /etc/os-release
-          echo "VERSION_CODENAME=focal" | sudo tee -a /etc/os-release
-          echo "UBUNTU_CODENAME=focal" | sudo tee -a /etc/os-release
-     
-      
       # - name: Install OpenSSL on RHEL
       #   run: |
       #     sudo yum install -y openssl openssl-devel
@@ -34,9 +38,9 @@ jobs:
       #   run: |
       #     echo 'CFLAGS="-I/usr/include/openssl"' >> $GITHUB_ENV
       #     echo 'LDFLAGS="-L/usr/lib64"' >> $GITHUB_ENV
-      - name: Upgrade pip with trusted hosts
-        run: |
-          python3 -m pip install --upgrade pip --trusted-host pypi.org --trusted-host files.pythonhosted.org
+      # - name: Upgrade pip with trusted hosts
+      #   run: |
+      #     python3 -m pip install --upgrade pip --trusted-host pypi.org --trusted-host files.pythonhosted.org
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -44,8 +48,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Verify SSL module
-        run: python3.11 -c 'import ssl'
+      # - name: Verify SSL module
+      #   run: python3.11 -c 'import ssl'
       - name: Check Python version
         run: python --version
         # test 1
