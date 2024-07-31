@@ -5,9 +5,9 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: [self-hosted]
-    env:
-      CFLAGS: "-I/usr/include/openssl"
-      LDFLAGS: "-L/usr/lib64"
+    # env:
+    #   CFLAGS: "-I/usr/include/openssl"
+    #   LDFLAGS: "-L/usr/lib64"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,14 +26,18 @@ jobs:
           echo "UBUNTU_CODENAME=focal" | sudo tee -a /etc/os-release
      
       
-      - name: Install OpenSSL on RHEL
-        run: |
-          sudo yum install -y openssl openssl-devel
+      # - name: Install OpenSSL on RHEL
+      #   run: |
+      #     sudo yum install -y openssl openssl-devel
 
       # - name: Set environment variables
       #   run: |
       #     echo 'CFLAGS="-I/usr/include/openssl"' >> $GITHUB_ENV
       #     echo 'LDFLAGS="-L/usr/lib64"' >> $GITHUB_ENV
+      - name: Upgrade pip with trusted hosts
+        run: |
+          python3 -m pip install --upgrade pip --trusted-host pypi.org --trusted-host files.pythonhosted.org
+
       - name: Set up Python
         uses: actions/setup-python@v5
 
