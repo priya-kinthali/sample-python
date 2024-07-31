@@ -29,8 +29,8 @@ jobs:
 
       - name: Set environment variables
         run: |
-          export CFLAGS="-I/usr/include/openssl"
-          export LDFLAGS="-L/usr/lib64"
+          echo 'CFLAGS="-I/usr/include/openssl"' >> $GITHUB_ENV
+          echo 'LDFLAGS="-L/usr/lib64"' >> $GITHUB_ENV
       - name: Set up Python
         uses: actions/setup-python@v5
 
