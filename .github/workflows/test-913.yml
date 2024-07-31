@@ -1,0 +1,20 @@
+name: Checkout and Setup of Workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Create /etc/lsb-release
+        run: |
+          echo "DISTRIB_RELEASE=20.04" | sudo tee -a /etc/lsb-release
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Python version
+        run: python --version
+       
