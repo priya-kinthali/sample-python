@@ -4,7 +4,10 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: [macOS,macos-13]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-13, self-hosted]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
