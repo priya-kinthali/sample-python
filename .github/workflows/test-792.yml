@@ -21,7 +21,6 @@ jobs:
 
         with:
           python-version: '3.11.9'
-          # architecture: 'x64'
 
       - name: Check Python version
         run: python --version
