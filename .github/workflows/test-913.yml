@@ -8,12 +8,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Check distribution version
-        run: |
-          lsb_release -a
+      
       - name: Create /etc/lsb-release
         run: |
-          echo "DISTRIB_RELEASE=20.04" | sudo tee -a /etc/lsb-release
+          echo "DISTRIB_RELEASE=22.04" | sudo tee -a /etc/lsb-release
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
