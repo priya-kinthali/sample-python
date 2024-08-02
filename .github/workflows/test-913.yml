@@ -33,17 +33,21 @@ jobs:
         run: |
           sudo yum install -y openssl openssl-devel gcc make zlib zlib-devel
 
-      - name: Download Python
-        run: |
-          curl -O https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
-          tar xzf Python-3.12.4.tgz
+      # - name: Download Python
+      #   run: |
+      #     curl -O https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
+      #     tar xzf Python-3.12.4.tgz
 
-      - name: Compile and install Python
-        run: |
-          cd Python-3.12.4
-          ./configure --with-ssl
-          make
-          sudo make install
+      # - name: Compile and install Python
+      #   run: |
+      #     cd Python-3.12.4
+      #     ./configure --with-ssl
+      #     make
+      #     sudo make install
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
       - name: Check Python version
         run: python3 --version
