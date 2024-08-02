@@ -16,6 +16,10 @@ jobs:
         run: |
           sudo yum install -y openssl openssl-devel
 
+      - name: Set LD_LIBRARY_PATH
+        run: |
+          echo "LD_LIBRARY_PATH=/usr/lib64" >> $GITHUB_ENV
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
