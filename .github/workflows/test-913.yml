@@ -6,15 +6,15 @@ jobs:
   build:
     runs-on: [self-hosted]
     steps:
-      - name: Change ownership of workspace
-        run: sudo chown -R $(whoami) $(pwd)
+      # - name: Change ownership of workspace
+      #   run: sudo chown -R $(whoami) $(pwd)
 
       - name: Checkout repository
         uses: actions/checkout@v4
       
       - name: Create /etc/lsb-release
         run: |
-          echo "DISTRIB_RELEASE=22.04" | sudo tee -a /etc/lsb-release
+          echo "DISTRIB_RELEASE=20.04" | sudo tee -a /etc/lsb-release
       # - name: Install OpenSSL
       #   run: |
       #     sudo yum install -y openssl openssl-devel
@@ -29,9 +29,9 @@ jobs:
       #     python-version: '3.12'
       # - name: Check Python version
       #   run: python --version
-      - name: Install dependencies
-        run: |
-          sudo yum install -y openssl openssl-devel gcc make zlib zlib-devel
+      # - name: Install dependencies
+      #   run: |
+      #     sudo yum install -y openssl openssl-devel gcc make zlib zlib-devel
 
       # - name: Download Python
       #   run: |
@@ -47,7 +47,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12.3'
+          python-version: '3.11.6'
 
       - name: Check Python version
         run: python3 --version
