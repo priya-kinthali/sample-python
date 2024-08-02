@@ -6,6 +6,9 @@ jobs:
   build:
     runs-on: [self-hosted]
     steps:
+      - name: Change ownership of workspace
+        run: sudo chown -R $(whoami) $(pwd)
+
       - name: Checkout repository
         uses: actions/checkout@v4
       
