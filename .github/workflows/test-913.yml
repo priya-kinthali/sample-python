@@ -12,18 +12,36 @@ jobs:
       - name: Create /etc/lsb-release
         run: |
           echo "DISTRIB_RELEASE=22.04" | sudo tee -a /etc/lsb-release
-      - name: Install OpenSSL
-        run: |
-          sudo yum install -y openssl openssl-devel
+      # - name: Install OpenSSL
+      #   run: |
+      #     sudo yum install -y openssl openssl-devel
 
-      - name: Set LD_LIBRARY_PATH
-        run: |
-          echo "LD_LIBRARY_PATH=/usr/lib64" >> $GITHUB_ENV
+      # - name: Set LD_LIBRARY_PATH
+      #   run: |
+      #     echo "LD_LIBRARY_PATH=/usr/lib64" >> $GITHUB_ENV
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      # - name: Check Python version
+      #   run: python --version
+      - name: Install dependencies
+        run: |
+          sudo yum install -y openssl openssl-devel gcc make
+
+      - name: Download Python
+        run: |
+          curl -O https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
+          tar xzf Python-3.12.4.tgz
+
+      - name: Compile and install Python
+        run: |
+          cd Python-3.12.4
+          ./configure --with-ssl
+          make
+          sudo make install
+
       - name: Check Python version
-        run: python --version
+        run: python3 --version
        
