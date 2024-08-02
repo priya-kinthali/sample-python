@@ -28,7 +28,7 @@ jobs:
       #   run: python --version
       - name: Install dependencies
         run: |
-          sudo yum install -y openssl openssl-devel gcc make
+          sudo yum install -y openssl openssl-devel gcc make zlib zlib-devel
 
       - name: Download Python
         run: |
