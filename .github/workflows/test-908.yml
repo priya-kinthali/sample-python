@@ -1,0 +1,20 @@
+name: Checkout and Setup of Workflow
+
+on: [push, pull_request]
+jobs:
+  build:
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, windows-latest, macos-latest]
+        
+    runs-on: ${{ matrix.runner }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install poetry
+      run: pipx install poetry
+    - uses: gowridurgad/setup-python@doc-update
+      with:
+        python-version: '3.9'
+        cache: 'poetry'
+    - run: poetry install
+    - run: poetry run pytest
