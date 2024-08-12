@@ -10,11 +10,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Install poetry
+      run: pipx install poetry
     - name: Set up Python x86
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
         architecture: 'x86'
+        cache: "poetry"
 
     - name: Check Python version
       run: python --version
