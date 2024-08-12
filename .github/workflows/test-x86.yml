@@ -1,0 +1,20 @@
+name: test x86
+on: 
+  push:
+    branches:
+      - 826-CacheKeyConflict
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python x86
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        architecture: 'x86'
+
+    - name: Check Python version
+      run: python --version

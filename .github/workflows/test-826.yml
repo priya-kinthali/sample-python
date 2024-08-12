@@ -1,8 +1,9 @@
 name: test cachekey conflict for 826
 on: 
-  push:
-    branches:
-      - 826-CacheKeyConflict
+  # push:
+  #   branches:
+  #     - 826-CacheKeyConflict
+    workflow_dispatch:
 
 jobs:
   build:
@@ -30,8 +31,6 @@ jobs:
           python-version: "3.11"
           architecture: ${{ matrix.target.architecture }}
           cache: "poetry"
-        env:
-          RUNNER_ARCH: ${{ matrix.target.architecture }}
       - name: Check Python version
         run: python --version
         
