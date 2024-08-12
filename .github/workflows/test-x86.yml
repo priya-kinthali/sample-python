@@ -13,7 +13,8 @@ jobs:
     - name: Install poetry
       run: pipx install poetry
     - name: Set up Python x86
-      uses: actions/setup-python@main
+      # uses: actions/setup-python@main
+      uses: priya-kinthali/setup-python@test-826-cache-poetry
       with:
         python-version: '3.11'
         architecture: 'x86'
