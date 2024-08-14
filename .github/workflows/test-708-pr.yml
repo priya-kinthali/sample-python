@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
+      - name: Print AGENT_TOOLSDIRECTORY
+        run: echo "AGENT_TOOLSDIRECTORY is set to $AGENT_TOOLSDIRECTORY"
+      - name: List hostedtoolcache directory
+        run: ls -R /Users/lakshmipriya/hostedtoolcache
       - name: Check Python version
         run: python --version
       - name: Install dependencies
