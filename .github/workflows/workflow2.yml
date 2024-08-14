@@ -16,6 +16,6 @@ jobs:
       - name: Check cache hash keys
         run: |
           echo 'Expected "Set up Python" hash: '"${{ hashFiles('setup.py') }}"
-          echo '"Set up Python" should NOT use .github/workflows/test-742.yml hash: '"${{ hashFiles('.github/workflows/test-742.yml') }}"
+          echo '"Set up Python" should NOT use .github/workflows/workflow1.yml hash: '"${{ hashFiles('.github/workflows/workflow1.yml') }}"
       - name: Install dependencies
         run: pip install -r requirements.txt

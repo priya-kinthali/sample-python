@@ -12,10 +12,10 @@ jobs:
         with:
           python-version: 3.11
           cache: pip
-          cache-dependency-path: .github/workflows/test-742.yml
+          cache-dependency-path: .github/workflows/workflow1.yml
       - name: Check cache hash keys
         run: |
-          echo 'Expected "Set up Python" hash: '"${{ hashFiles('.github/workflows/test-742.yml') }}"
+          echo 'Expected "Set up Python" hash: '"${{ hashFiles('.github/workflows/workflow1.yml') }}"
           echo '"Set up Python" should NOT use setup.py hash: '"${{ hashFiles('setup.py') }}"
       - name: Install dependencies
         run: pip install -r requirements.txt
