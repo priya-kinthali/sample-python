@@ -18,6 +18,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Configure OpenSSL for Python
+        run: |
+          export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+          export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+          export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+          python3 -m ensurepip --upgrade
       - name: Check Python version
         run: python --version
       - name: Install dependencies
