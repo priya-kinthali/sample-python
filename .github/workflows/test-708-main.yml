@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install OpenSSL
+        run: brew install openssl@3
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -24,6 +26,10 @@ jobs:
           export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
           export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
           export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+          echo 'export LDFLAGS="-L/usr/local/opt/openssl@3/lib"' >> ~/.zshrc
+          echo 'export CPPFLAGS="-I/usr/local/opt/openssl@3/include"' >> ~/.zshrc
+          echo 'export PATH="/usr/local/opt/openssl@3/bin:$PATH"' >> ~/.zshrc
+          source ~/.zshrc
           python3 -m ensurepip --upgrade
       - name: Check Python version
         run: python --version
