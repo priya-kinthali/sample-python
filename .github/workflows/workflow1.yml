@@ -1,0 +1,21 @@
+name: Workflow 1
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+          cache: pip
+          cache-dependency-path: .github/workflows/test-742.yml
+      - name: Check cache hash keys
+        run: |
+          echo 'Expected "Set up Python" hash: '"${{ hashFiles('.github/workflows/test-742.yml') }}"
+          echo '"Set up Python" should NOT use setup.py hash: '"${{ hashFiles('setup.py') }}"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
