@@ -12,21 +12,17 @@ jobs:
     strategy:
       matrix:
         os: [macos-12, macos-latest, macos-13, self-hosted]
-        python-version: ['3.10', '3.12']
+        # python-version: ['3.10', '3.12']
+        python-version: ['3.12']
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Ensure hostedtoolcache Directory Exists
-        run: mkdir -p /Users/lakshmipriya/hostedtoolcache
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-708
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      - name: Print AGENT_TOOLSDIRECTORY
-        run: echo "AGENT_TOOLSDIRECTORY is set to $AGENT_TOOLSDIRECTORY"
-      - name: List hostedtoolcache directory
-        run: ls -R /Users/lakshmipriya/hostedtoolcache
       - name: Check Python version
         run: python --version
       - name: Install dependencies
