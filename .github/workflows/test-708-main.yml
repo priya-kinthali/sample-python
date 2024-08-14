@@ -19,11 +19,11 @@ jobs:
           brew install openssl@3
           brew link openssl@3 --force
           brew install gnu-tar
-      - name: Set environment variables for OpenSSL
+      - name: Set environment variables for OpenSSL and gtar
         run: |
           echo 'LDFLAGS="-L/usr/local/opt/openssl@3/lib"' >> $GITHUB_ENV
           echo 'CPPFLAGS="-I/usr/local/opt/openssl@3/include"' >> $GITHUB_ENV
-          echo 'PATH="/usr/local/opt/openssl@3/bin:$PATH"' >> $GITHUB_ENV
+          echo 'PATH="/usr/local/opt/openssl@3/bin:/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v5
