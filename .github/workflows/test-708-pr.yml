@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Ensure hostedtoolcache Directory Exists
+        run: mkdir -p /Users/lakshmipriya/hostedtoolcache
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-708
         with:
