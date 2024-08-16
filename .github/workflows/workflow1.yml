@@ -19,3 +19,4 @@ jobs:
           echo '"Set up Python" should NOT use setup.py hash: '"${{ hashFiles('setup.py') }}"
       - name: Install dependencies
         run: pip install -r requirements.txt
+        # test
