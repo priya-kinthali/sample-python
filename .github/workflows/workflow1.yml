@@ -4,7 +4,10 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-13]
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -19,4 +22,4 @@ jobs:
           echo '"Set up Python" should NOT use setup.py hash: '"${{ hashFiles('setup.py') }}"
       - name: Install dependencies
         run: pip install -r requirements.txt
-        # test
+        # test2
