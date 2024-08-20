@@ -1,4 +1,4 @@
-name: Workflow 2
+name: Workflow 1 for actions/cache
 
 on: [push, pull_request]
 
@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-${{ runner.architecture }}-${{ matrix.os }}-python-${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-${{ runner.architecture }}-${{ matrix.os }}-python-${{ matrix.python-version }}-pip-${{ hashFiles('**/setup.py') }}
           restore-keys: |
             ${{ runner.os }}-${{ runner.architecture }}-${{ matrix.os }}-python-${{ matrix.python-version }}-pip-
     
