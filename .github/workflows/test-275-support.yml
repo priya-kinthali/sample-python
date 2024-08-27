@@ -10,20 +10,9 @@ jobs:
   build:
     runs-on: [self-hosted, Linux]
     container: ubuntu:20.04
-      # image: ubuntu:20.04
-    # container: ubuntu:20.04
-    # services:
-    #   postgres:
-      
+      # image: ubuntu:20.04   
 
     steps:
-      # - name: Check Docker installation
-      #   run: docker --version
-      # - name: Check Docker Container
-      #   run: |
-      #     echo "Running inside Docker container:"
-      #     cat /etc/os-release
-      #     docker --version
 
       - uses: actions/checkout@v4
       - name: Install Docker
@@ -40,19 +29,12 @@ jobs:
           cat /etc/os-release
           docker --version
 
-      
-      - name: Fix pip cache permissions
-        run: |
-          mkdir -p /github/home/.cache/pip
-          sudo chown -R $(whoami) /github/home/.cache/pip
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12.4"
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
-
-
 
       - name: Install poetry
         run: |
