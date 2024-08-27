@@ -9,8 +9,8 @@ on:
 jobs:
   build:
     runs-on: [self-hosted, Linux]
-    container: 
-      image: ubuntu:20.04
+    container: ubuntu:20.04
+      # image: ubuntu:20.04
     # container: ubuntu:20.04
     # services:
     #   postgres:
