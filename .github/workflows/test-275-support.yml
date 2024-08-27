@@ -30,11 +30,16 @@ jobs:
         run: |
           apt-get update
           apt-get install -y docker.io
+      - name: Install lsb-release
+        run: |
+          apt-get update
+          apt-get install -y lsb-release
       - name: Check Docker Container
         run: |
           echo "Running inside Docker container:"
           cat /etc/os-release
           docker --version
+
       
 
       - name: Setup Python
