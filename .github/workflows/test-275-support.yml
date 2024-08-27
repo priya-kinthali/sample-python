@@ -22,7 +22,9 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11.9"
+          python-version: "3.12.5"
+          cache: 'poetry'
+          cache-dependency-path: '**/poetry.lock'
 
       - name: Install poetry
         run: |
