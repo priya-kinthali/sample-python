@@ -48,6 +48,11 @@ jobs:
           python-version: "3.12.4"
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
+      - name: Fix pip cache permissions
+        run: |
+          mkdir -p /github/home/.cache/pip
+          sudo chown -R $(whoami) /github/home/.cache/pip
+
 
       - name: Install poetry
         run: |
