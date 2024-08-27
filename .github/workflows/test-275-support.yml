@@ -26,10 +26,6 @@ jobs:
       #     docker --version
 
       - uses: actions/checkout@v4
-      - name: Install lsb-release
-        run: sudo apt-get update && sudo apt-get install -y lsb-release
-
-
       
 
       - name: Setup Python
