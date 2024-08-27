@@ -26,6 +26,11 @@ jobs:
       #     docker --version
 
       - uses: actions/checkout@v4
+      - name: Check Docker Container
+        run: |
+          echo "Running inside Docker container:"
+          cat /etc/os-release
+          docker --version
       
 
       - name: Setup Python
