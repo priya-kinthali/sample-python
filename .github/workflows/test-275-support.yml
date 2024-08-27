@@ -58,11 +58,11 @@ jobs:
       - name: Upgrade pip
         run: |
           python -m poetry run pip install --upgrade pip
-      # - name: Cache the virtualenv
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ./.venv
-      #     key: ${{ runner.os }}-venv1-${{ hashFiles('**/poetry.lock') }}
+      - name: Cache the virtualenv
+        uses: actions/cache@v2
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-venv1-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: |
