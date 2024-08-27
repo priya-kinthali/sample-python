@@ -42,3 +42,4 @@ jobs:
       - name: Install dependencies
         run: |
           python -m poetry install
+          python -m pip install -r requirements.txt --ignore-installed
