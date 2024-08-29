@@ -1,0 +1,39 @@
+name: Test actions/setup-python, and the versions it installs
+on:
+  push:
+      branches:
+        - test-929-macos-version
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Run tests (${{ matrix.os }}, Python ${{ matrix.python_version }})
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: 
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        python_version:
+          - '3.12'
+          - '3.11'
+          - '3.10'
+          - '3.9'
+
+    steps:
+      -  uses: actions/checkout@v4.1.1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '${{matrix.python_version}}'
+
+      - run: python --version
