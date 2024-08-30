@@ -6,7 +6,7 @@ exclude_lines = [
 ]
 fail_under = 100
 omit = [
-  '**/tm_devices/commands/**'  #TODO: remove this exclusion
+  "**/tm_devices/commands/**"  # TODO: remove this exclusion
 ]
 show_missing = true
 skip_empty = true
