@@ -19,8 +19,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python from pyproject.toml
-        # uses: actions/setup-python@v5
-        uses: priya-kinthali/setup-python@fix-935-test
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@fix-935-tomlparse
         with:
           python-version-file: pyproject.toml   
          
