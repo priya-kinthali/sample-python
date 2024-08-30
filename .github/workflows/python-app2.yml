@@ -18,7 +18,7 @@ jobs:
 
       - name: Set up Python from pyproject.toml
        
-        uses: actions/setup-python@v5.1.1
+        uses: priya-kinthali/setup-python@fix-935
         
 
         with:
