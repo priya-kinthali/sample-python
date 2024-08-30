@@ -1,15 +1,11 @@
-[tool.coverage.report]
-exclude_lines = [
-  "if TYPE_CHECKING:",
-  "pragma: no cover",
-  "raise NotImplementedError"
-]
-fail_under = 100
-omit = [
-  "**/tm_devices/commands/**"  # TODO: remove this exclusion
-]
-show_missing = true
-skip_empty = true
+[server]
+host = "localhost"        # TODO: helloooo     
+port = 8080
+ssl = false
 
-[tool.poetry.dependencies]
-python = "^3.8"  # This is the main Python version requirement
+[database]
+url = "mongodb://localhost:27017" # TODO: helloooo
+name = "mydb"
+username = "myuser"
+password = "mypassword"
+level = "info"
