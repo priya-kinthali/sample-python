@@ -1,31 +1,15 @@
-[tool.poetry]
-name = "SAMPLE-PYTHON"
-description = "Test package to setup python on Github"
-requires-python = ">=3.12"
-license = ""
-keywords = []
-authors = [
-    "" 
+[tool.coverage.report]
+exclude_lines = [
+  "if TYPE_CHECKING:",
+  "pragma: no cover",
+  "raise NotImplementedError"
 ]
-
-[build-system]
-requires = ["poetry-core>=1.8.0", "poetry-dynamic-versioning>=1.0.0"]
-build-backend = "poetry_dynamic_versioning.backend"
-
-[tool.poetry-dynamic-versioning]
-enable = false
-strict = true
-style = "pep440"
-pattern = "default-unprefixed"
-tag-branch = "test-897-parse-version"
-
-[tool.poetry-dynamic-versioning.substitution]
-folders = [{ path = "." }]
-patterns = [
-  "(^__version__\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])",
-  "(^release\\s*(?::.*?)?=\\s*['\"])[^'\"]*(['\"])",
-  { value = "(^__version_tuple__\\s*(?::.*?)?=\\s*\\()[^)]*(\\))", mode = "tuple" },
+fail_under = 100
+omit = [
+  "**/tm_devices/commands/**"  # TODO: remove this exclusion
 ]
+show_missing = true
+skip_empty = true
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.8"  # This is the main Python version requirement
