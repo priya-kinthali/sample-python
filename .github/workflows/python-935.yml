@@ -3,7 +3,7 @@ name: Test Python Setup with pyproject.toml
 on:
   push:
     branches:
-      - test-935
+      - test-pyprojtoml
 
 jobs:
   test-python-setup:
