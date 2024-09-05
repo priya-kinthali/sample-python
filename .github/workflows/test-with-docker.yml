@@ -28,9 +28,8 @@ jobs:
           echo "Running inside Docker container:"
           cat /etc/os-release
           docker --version
-      - name: Fix pip cache permissions
-        run: |
-          mkdir -p /github/home/.cache/pip
+      - name: fix pip issue
+        run: mkdir -p /github/home/.cache/pip
 
       - name: Setup Python
         uses: actions/setup-python@v5
