@@ -1,0 +1,21 @@
+name: PIP_ROOT_USER_ACTION ignored 
+
+on:
+  push:
+    branches:
+      - test-930
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [self-hosted]
+   
+    steps:
+
+      - uses: actions/checkout@v4
+     
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.4"
+         
