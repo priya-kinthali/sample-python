@@ -43,6 +43,10 @@ jobs:
         run: |
           echo "Container ID used: ${{ env.container_id }}"
           /usr/bin/docker exec ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+      - name: Create pip configuration in Docker
+        run: |
+          /usr/bin/docker exec ${{ env.container_id }} sh -c "mkdir -p ~/.pip && echo '[global]' > ~/.pip/pip.conf && echo 'root-user-action = ignore' >> ~/.pip/pip.conf"
+      
           
       - name: Setup Python
         uses: actions/setup-python@v5
