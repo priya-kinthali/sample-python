@@ -1,21 +1,23 @@
-name: PIP_ROOT_USER_ACTION ignored 
-
+name: Tests
 on:
   push:
     branches:
       - test-930
   workflow_dispatch:
-
+env:
+        PIP_ROOT_USER_ACTION: ignore
 jobs:
-  build:
-    runs-on: [self-hosted]
-    container: ubuntu:20.04
-    env:
-      PIP_ROOT_USER_ACTION: ignore
-      # image: ubuntu:20.04   
-
+  test1:
+    runs-on: ubuntu-20.04
+    container:
+      image: ubuntu:20.04
+      # env:
+      #   PIP_ROOT_USER_ACTION: ignore
+    
+    strategy:
+      matrix:
+        python: [3.12.6]
     steps:
-
       - uses: actions/checkout@v4
       - name: Install Docker
         run: |
@@ -25,44 +27,56 @@ jobs:
         run: |
           apt-get update
           apt-get install -y lsb-release
-      - name: Check Docker Container
-        run: |
-          echo "Running inside Docker container:"
-          cat /etc/os-release
-          docker --version
+
       - name: fix pip issue
         run: mkdir -p /github/home/.cache/pip
-
+      - name: Get container ID
+        id: get_container_id
+        run: |
+          container_id=$(docker ps -q -f ancestor=ubuntu:20.04)
+          full_container_id=$(docker inspect --format="{{.Id}}" $container_id)
+          echo "Container ID: $full_container_id"
+          echo "container_id=$full_container_id" >> $GITHUB_ENV
+          
+      - name: Set PIP_ROOT_USER_ACTION in Docker
+        run: |
+          /usr/bin/docker exec -e PIP_ROOT_USER_ACTION=ignore ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+      
+      - name: Show Container ID and Environment Variable
+        run: |
+          echo "Container ID used: ${{ env.container_id }}"
+          /usr/bin/docker exec ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+          
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12.5"
+          python-version: ${{ matrix.python }}
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
+        # env:
+        #   PIP_ROOT_USER_ACTION: ignore
+
       
-      - name: Echo PIP_ROOT_USER_ACTION
-        run: echo "Value of PIP_ROOT_USER_ACTION is $PIP_ROOT_USER_ACTION"
- 
+      - name: Verify PIP_ROOT_USER_ACTION in Docker
+        run: |
+          /usr/bin/docker exec ${container_id} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+          
+      - name: Show Container ID and Release Info
+        run: |
+          echo "Container ID used: ${container_id}"
+          /usr/bin/docker exec ${container_id} sh -c "cat /etc/*release | grep ^ID"
+          
 
-      - name: Install poetry
-        run: |
-          pip install --upgrade pip
-          python -m pip install poetry==1.8.3
-      - name: Configure poetry
-        run: |
-          python -m poetry config virtualenvs.in-project true
-      - name: Upgrade pip
-        run: |
-          python -m poetry run pip install --upgrade pip
-      - name: Cache the virtualenv
-        uses: actions/cache@v2
+  test2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.12.6]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          path: ./.venv
-          key: ${{ runner.os }}-venv1-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          python -m poetry install
-          python -m pip install -U pip "setuptools<72.1.0" wheel pytest pytest-cov  --ignore-installed
-          python -m pip install -r requirements.txt --ignore-installed
+          python-version: ${{ matrix.python }}
+          cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
