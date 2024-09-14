@@ -4,15 +4,13 @@ on:
     branches:
       - test-930
   workflow_dispatch:
-env:
-        PIP_ROOT_USER_ACTION: ignore
 jobs:
   test1:
     runs-on: ubuntu-20.04
     container:
       image: ubuntu:20.04
-      # env:
-      #   PIP_ROOT_USER_ACTION: ignore
+      env:
+        PIP_ROOT_USER_ACTION: ignore
     
     strategy:
       matrix:
@@ -27,7 +25,6 @@ jobs:
         run: |
           apt-get update
           apt-get install -y lsb-release
-
       - name: fix pip issue
         run: mkdir -p /github/home/.cache/pip
       - name: Get container ID
@@ -53,18 +50,8 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
-        # env:
-        #   PIP_ROOT_USER_ACTION: ignore
-
-      
-      - name: Verify PIP_ROOT_USER_ACTION in Docker
-        run: |
-          /usr/bin/docker exec ${container_id} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
-          
-      - name: Show Container ID and Release Info
-        run: |
-          echo "Container ID used: ${container_id}"
-          /usr/bin/docker exec ${container_id} sh -c "cat /etc/*release | grep ^ID"
+        env:
+          PIP_ROOT_USER_ACTION: ignore
           
 
   test2:
