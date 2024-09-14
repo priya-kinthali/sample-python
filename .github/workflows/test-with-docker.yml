@@ -9,43 +9,43 @@ jobs:
     runs-on: ubuntu-20.04
     container:
       image: mcr.microsoft.com/devcontainers/python:1-3.8-bullseye
-      env:
-        PIP_ROOT_USER_ACTION: ignore
+      # env:
+      #   PIP_ROOT_USER_ACTION: ignore
     
     strategy:
       matrix:
         python: [3.12.6]
     steps:
       - uses: actions/checkout@v4
-      - name: Install Docker
-        run: |
-          apt-get update
-          apt-get install -y docker.io
-      - name: Install lsb-release
-        run: |
-          apt-get update
-          apt-get install -y lsb-release
-      - name: fix pip issue
-        run: mkdir -p /github/home/.cache/pip
-      - name: Get container ID
-        id: get_container_id
-        run: |
-          container_id=$(docker ps -q -f ancestor=ubuntu:20.04)
-          full_container_id=$(docker inspect --format="{{.Id}}" $container_id)
-          echo "Container ID: $full_container_id"
-          echo "container_id=$full_container_id" >> $GITHUB_ENV
+      # - name: Install Docker
+      #   run: |
+      #     apt-get update
+      #     apt-get install -y docker.io
+      # - name: Install lsb-release
+      #   run: |
+      #     apt-get update
+      #     apt-get install -y lsb-release
+      # - name: fix pip issue
+      #   run: mkdir -p /github/home/.cache/pip
+      # - name: Get container ID
+      #   id: get_container_id
+      #   run: |
+      #     container_id=$(docker ps -q -f ancestor=ubuntu:20.04)
+      #     full_container_id=$(docker inspect --format="{{.Id}}" $container_id)
+      #     echo "Container ID: $full_container_id"
+      #     echo "container_id=$full_container_id" >> $GITHUB_ENV
           
-      - name: Set PIP_ROOT_USER_ACTION in Docker
-        run: |
-          /usr/bin/docker exec -e PIP_ROOT_USER_ACTION=ignore ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+      # - name: Set PIP_ROOT_USER_ACTION in Docker
+      #   run: |
+      #     /usr/bin/docker exec -e PIP_ROOT_USER_ACTION=ignore ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
       
-      - name: Show Container ID and Environment Variable
-        run: |
-          echo "Container ID used: ${{ env.container_id }}"
-          /usr/bin/docker exec ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
-      - name: Create pip configuration in Docker
-        run: |
-          /usr/bin/docker exec ${{ env.container_id }} sh -c "mkdir -p ~/.pip && echo '[global]' > ~/.pip/pip.conf && echo 'root-user-action = ignore' >> ~/.pip/pip.conf"
+      # - name: Show Container ID and Environment Variable
+      #   run: |
+      #     echo "Container ID used: ${{ env.container_id }}"
+      #     /usr/bin/docker exec ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+      # - name: Create pip configuration in Docker
+      #   run: |
+      #     /usr/bin/docker exec ${{ env.container_id }} sh -c "mkdir -p ~/.pip && echo '[global]' > ~/.pip/pip.conf && echo 'root-user-action = ignore' >> ~/.pip/pip.conf"
       
           
       - name: Setup Python
@@ -54,8 +54,8 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
-        env:
-          PIP_ROOT_USER_ACTION: ignore
+        # env:
+        #   PIP_ROOT_USER_ACTION: ignore
           
 
   test2:
