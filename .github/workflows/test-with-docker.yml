@@ -21,10 +21,10 @@ jobs:
       #   run: |
       #     apt-get update
       #     apt-get install -y docker.io
-      # - name: Install lsb-release
-      #   run: |
-      #     apt-get update
-      #     apt-get install -y lsb-release
+      - name: Install lsb-release
+        run: |
+          apt-get update
+          apt-get install -y lsb-release
       # - name: fix pip issue
       #   run: mkdir -p /github/home/.cache/pip
       # - name: Get container ID
