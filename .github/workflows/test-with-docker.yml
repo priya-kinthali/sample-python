@@ -68,6 +68,9 @@ jobs:
           cache-dependency-path: 'requirements.txt'
         # env:
         #   PIP_ROOT_USER_ACTION: ignore
+      - name: Check permissions
+        run: |
+          ls -la /github/home/.cache/pip
 
         
           
