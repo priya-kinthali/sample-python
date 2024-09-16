@@ -8,7 +8,7 @@ jobs:
   test1:
     runs-on: ubuntu-22.04
     env:
-          AGENT_TOOLSDIRECTORY: '/Users/runner/hostedtoolcache'
+          AGENT_TOOLSDIRECTORY: '/opt/hostedtoolcache'
     container:
       # image: mcr.microsoft.com/devcontainers/python:1-3.8-bullseye
       # image: python
