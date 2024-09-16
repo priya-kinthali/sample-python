@@ -65,6 +65,12 @@ jobs:
           cache-dependency-path: 'requirements.txt'
         # env:
         #   PIP_ROOT_USER_ACTION: ignore
+      - name: fix pip issue
+        run: |
+            mkdir -p /github/home/.cache/pip
+            chown -R $USER:$USER /github/home/.cache/pip
+            chmod -R 775 /github/home/.cache/pip
+        
           
 
   test2:
