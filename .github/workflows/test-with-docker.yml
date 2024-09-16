@@ -51,7 +51,7 @@ jobs:
       #     ls -la /github/home/.cache/pip
       - name: Change ownership
         run: |
-          sudo chown -R $USER:$USER //github/home/.cache/pip
+          sudo chown -R $USER:$USER /github/home/.cache/pip
           ls -la /github/home/.cache/pip
 
       #           sudo chown -R $USER:$USER /github/home/.cache/pip
