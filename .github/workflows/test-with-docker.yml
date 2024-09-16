@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       # image: mcr.microsoft.com/devcontainers/python:1-3.8-bullseye
-      image: python
+      # image: python
+      image: promptpanel/promptpanel:1.10
+
       env:
         PIP_ROOT_USER_ACTION: ignore
     
