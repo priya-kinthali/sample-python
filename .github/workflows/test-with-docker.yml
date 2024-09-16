@@ -55,7 +55,7 @@ jobs:
         run: |
             
             useradd -m myuser
-            mkdir -p /github/home/.cache/pip
+            mkdir -p /github/home/.cache/pip/http-v2
             chown -R myuser:myuser /github/home/.cache
             chmod -R 775 /github/home/.cache
             
