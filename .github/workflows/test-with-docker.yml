@@ -60,7 +60,9 @@ jobs:
             chmod -R 775 /github/home/.cache
             
             ls -la /github/home/.cache/pip
-
+      - name: Setup Python
+        run: |
+          sudo -u myuser -H sh -c "source /etc/profile"
       #       chown -R $USER:$USER /github/home/.cache/pip
       #       chmod -R 775 /github/home/.cache/pip
       # - name: Check permissions
