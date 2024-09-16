@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
 jobs:
   test1:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu:22.04
     container:
       # image: mcr.microsoft.com/devcontainers/python:1-3.8-bullseye
       # image: python
-      image: civisanalytics/datascience-python:8
+      image: ubuntu:22.04
       
 
       # env:
@@ -18,7 +18,7 @@ jobs:
     
     strategy:
       matrix:
-        python: [3.11.6]
+        python: [3.8.12]
     steps:
       # - name: Setup and prepare
       #   run: |
@@ -46,9 +46,9 @@ jobs:
       - name: Create /etc/lsb-release
         run: |
           echo "DISTRIB_RELEASE=22.04" | tee -a /etc/lsb-release
-      - name: fix pip issue
-        run: |
-            mkdir -p /github/home/.cache/pip
+      # - name: fix pip issue
+      #   run: |
+      #       mkdir -p /github/home/.cache/pip
       #       chown -R $USER:$USER /github/home/.cache/pip
       #       chmod -R 775 /github/home/.cache/pip
       # - name: Check permissions
@@ -88,7 +88,7 @@ jobs:
       
           
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.1.0
         with:
           python-version: ${{ matrix.python }}
           cache: 'pip'
