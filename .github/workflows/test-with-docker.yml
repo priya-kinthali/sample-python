@@ -54,8 +54,8 @@ jobs:
       - name: fix pip issue
         run: |
             mkdir -p /github/home/.cache/pip
-            # sudo useradd -m myuser
-            # sudo chown -R myuser:myuser /github/home/.cache
+            useradd -m myuser
+            chown -R myuser:myuser /github/home/.cache
             # sudo chmod -R 775 /github/home/.cache
             ls -la /github/home/.cache/pip
 
@@ -112,19 +112,19 @@ jobs:
         
           
 
-  test2:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: [3.12.6]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-          cache: 'pip'
-          cache-dependency-path: 'requirements.txt'
-      - name: Check permissions
-        run: |
-          ls -la /home/runner/.cache/pip
+  # test2:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       python: [3.12.6]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: ${{ matrix.python }}
+  #         cache: 'pip'
+  #         cache-dependency-path: 'requirements.txt'
+  #     - name: Check permissions
+  #       run: |
+  #         ls -la /home/runner/.cache/pip
