@@ -45,6 +45,7 @@ jobs:
       - name: Check permissions
         run: |
           mkdir -p /github/home/.cache/pip
+          chown -R runner:docker /github/home/.cache/pip
           chmod -R 777 /github/home/.cache/pip
 
           ls -la /github/home/.cache/pip
