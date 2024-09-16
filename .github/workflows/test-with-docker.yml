@@ -24,6 +24,12 @@ jobs:
       #   run: |
       #     apt-get update
       #     apt-get install -y docker.io
+      - name: Ensure Sudo is Installed
+        run: |
+          if ! command -v sudo &> /dev/null; then
+            echo "sudo could not be found. Installing..."
+            apt-get update && apt-get install -y sudo
+          fi
       - name: Install lsb-release
         run: |
           apt-get update
