@@ -17,7 +17,7 @@ jobs:
     
     strategy:
       matrix:
-        python: [3.13.0-rc.2]
+        python: [3.11.6]
     steps:
       - uses: actions/checkout@v4
       # - name: Install Docker
@@ -28,9 +28,9 @@ jobs:
       #   run: |
       #     apt-get update
       #     apt-get install -y lsb-release
-      # - name: Create /etc/lsb-release
-      #   run: |
-      #     echo "DISTRIB_RELEASE=22.04" | tee -a /etc/lsb-release
+      - name: Create /etc/lsb-release
+        run: |
+          echo "DISTRIB_RELEASE=22.04" | tee -a /etc/lsb-release
       - name: fix pip issue
         run: mkdir -p /github/home/.cache/pip
       # - name: Get container ID
