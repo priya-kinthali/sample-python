@@ -11,6 +11,8 @@ jobs:
       # image: mcr.microsoft.com/devcontainers/python:1-3.8-bullseye
       # image: python
       image: promptpanel/promptpanel:1.10
+      options: --user 1000:1000  # Use a non-root user. Adjust the UID and GID as needed.
+
 
       env:
         PIP_ROOT_USER_ACTION: ignore
