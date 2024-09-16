@@ -53,10 +53,10 @@ jobs:
       #     ls -la /github/home/.cache/pip
       - name: fix pip issue
         run: |
-            sudo mkdir -p /github/home/.cache/pip
-            sudo useradd -m myuser
-            sudo chown -R myuser:myuser /github/home/.cache
-            sudo chmod -R 775 /github/home/.cache
+            mkdir -p /github/home/.cache/pip
+            # sudo useradd -m myuser
+            # sudo chown -R myuser:myuser /github/home/.cache
+            # sudo chmod -R 775 /github/home/.cache
             ls -la /github/home/.cache/pip
 
       #       chown -R $USER:$USER /github/home/.cache/pip
