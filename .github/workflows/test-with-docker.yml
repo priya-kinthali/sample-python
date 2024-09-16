@@ -44,9 +44,10 @@ jobs:
       #       chmod -R 775 /github/home/.cache/pip
       - name: Check permissions
         run: |
-          mkdir -p /github/home/runner/.cache/pip
+          sudo chmod -R 777 /github/home/.cache/pip
 
-          ls -la /github/home/runner/.cache/pip
+          ls -la /github/home/.cache/pip
+
       #           sudo chown -R $USER:$USER /github/home/.cache/pip
       # sudo chmod -R 775 /github/home/.cache/pip
       # - name: Get container ID
