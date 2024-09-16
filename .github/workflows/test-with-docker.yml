@@ -42,12 +42,16 @@ jobs:
       #       mkdir -p /github/home/.cache/pip
       #       chown -R $USER:$USER /github/home/.cache/pip
       #       chmod -R 775 /github/home/.cache/pip
-      - name: Check permissions
-        run: |
-          mkdir -p /github/home/.cache/pip
-          chown -R runner:runner /github/home/.cache/pip
-          chmod -R 777 /github/home/.cache/pip
+      # - name: Check permissions
+      #   run: |
+      #     mkdir -p /github/home/.cache/pip
+      #     chown -R runner:runner /github/home/.cache/pip
+      #     chmod -R 777 /github/home/.cache/pip
 
+      #     ls -la /github/home/.cache/pip
+      - name: Change ownership
+        run: |
+          sudo chown -R $USER:$USER //github/home/.cache/pip
           ls -la /github/home/.cache/pip
 
       #           sudo chown -R $USER:$USER /github/home/.cache/pip
