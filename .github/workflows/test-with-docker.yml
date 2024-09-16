@@ -56,8 +56,8 @@ jobs:
             
             useradd -m myuser
             mkdir -p /github/home/.cache/pip
-            chown -R myuser:myuser /github/home/.cache/pip
-            chmod -R 775 /github/home/.cache/pip
+            chown -R myuser:myuser /github/home/.cache
+            chmod -R 775 /github/home/.cache
             
             ls -la /github/home/.cache/pip
 
