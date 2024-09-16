@@ -44,10 +44,11 @@ jobs:
       #       chmod -R 775 /github/home/.cache/pip
       - name: Check permissions
         run: |
-          mkdir -p /github/home/.cache/pip
-          sudo chown -R $USER:$USER /github/home/.cache/pip
-          chmod -R 775 /github/home/.cache/pip
+          mkdir -p /github//home/runner/.cache/pip
+
           ls -la /github/home/.cache/pip
+      #           sudo chown -R $USER:$USER /github/home/.cache/pip
+      # sudo chmod -R 775 /github/home/.cache/pip
       # - name: Get container ID
       #   id: get_container_id
       #   run: |
@@ -97,3 +98,6 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
+      - name: Check permissions
+        run: |
+          ls -la /home/runner/.cache/pip
