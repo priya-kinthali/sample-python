@@ -32,7 +32,10 @@ jobs:
         run: |
           echo "DISTRIB_RELEASE=22.04" | tee -a /etc/lsb-release
       - name: fix pip issue
-        run: mkdir -p /github/home/.cache/pip
+        run: |
+            mkdir -p /github/home/.cache/pip
+            chown -R $USER:$USER /github/home/.cache/pip
+            chmod -R 775 /github/home/.cache/pip
       # - name: Get container ID
       #   id: get_container_id
       #   run: |
