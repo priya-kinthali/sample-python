@@ -21,6 +21,9 @@ jobs:
       matrix:
         python: [3.11.6]
     steps:
+      - name: Setup and prepare
+        run: |
+            sudo chown -R $(whoami):$(whoami) /__w/_temp /github/home/.cache
       - uses: actions/checkout@v4
         with:
           repository: priya-kinthali/sample-python
