@@ -1,0 +1,126 @@
+name: Tests
+on:
+  push:
+    branches:
+      - test-930
+  workflow_dispatch:
+jobs:
+  test1:
+    runs-on: ubuntu-22.04
+    env:
+          AGENT_TOOLSDIRECTORY: '/Users/runner/hostedtoolcache'
+    container:
+      # image: mcr.microsoft.com/devcontainers/python:1-3.8-bullseye
+      # image: python
+      image: ubuntu:22.04
+      
+
+      # env:
+      #   PIP_ROOT_USER_ACTION: ignore
+    
+    strategy:
+      matrix:
+        python: [3.8.12]
+    steps:
+      # - name: Setup and prepare
+      #   run: |
+      #       sudo chown -R $(whoami):$(whoami) /__w/_temp /github/home/.cache
+      - uses: actions/checkout@v4
+        # with:
+        #   repository: priya-kinthali/sample-python
+        #   token: ${{ secrets.GITHUB_TOKEN }}
+        #   fetch-depth: 1
+
+      # - name: Install Docker
+      #   run: |
+      #     apt-get update
+      #     apt-get install -y docker.io
+      # - name: Ensure Sudo is Installed
+      #   run: |
+      #     if ! command -v sudo &> /dev/null; then
+      #       echo "sudo could not be found. Installing..."
+      #       apt-get update && apt-get install -y sudo
+      #     fi
+      - name: Install lsb-release
+        run: |
+          apt-get update
+          apt-get install -y lsb-release
+      - name: Create /etc/lsb-release
+        run: |
+          echo "DISTRIB_RELEASE=22.04" | tee -a /etc/lsb-release
+      - name: Check permissions
+        run: |
+          ls -la /github/home/.cache/pip
+      # - name: fix pip issue
+      #   run: |
+      #       mkdir -p /github/home/.cache/pip
+      #       chown -R $USER:$USER /github/home/.cache/pip
+      #       chmod -R 775 /github/home/.cache/pip
+      # - name: Check permissions
+      #   run: |
+      #     mkdir -p /github/home/.cache/pip
+      #     chown -R runner:runner /github/home/.cache/pip
+      #     chmod -R 777 /github/home/.cache/pip
+
+      #     ls -la /github/home/.cache/pip
+      # - name: Change ownership
+      #   run: |
+      #     mkdir -p /github/home/.cache/pip
+      #     sudo chown -R $USER:$USER /github/home/.cache/pip
+      #     ls -la /github/home/.cache/pip
+
+      #           sudo chown -R $USER:$USER /github/home/.cache/pip
+      # sudo chmod -R 775 /github/home/.cache/pip
+      # - name: Get container ID
+      #   id: get_container_id
+      #   run: |
+      #     container_id=$(docker ps -q -f ancestor=ubuntu:20.04)
+      #     full_container_id=$(docker inspect --format="{{.Id}}" $container_id)
+      #     echo "Container ID: $full_container_id"
+      #     echo "container_id=$full_container_id" >> $GITHUB_ENV
+          
+      # - name: Set PIP_ROOT_USER_ACTION in Docker
+      #   run: |
+      #     /usr/bin/docker exec -e PIP_ROOT_USER_ACTION=ignore ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+      
+      # - name: Show Container ID and Environment Variable
+      #   run: |
+      #     echo "Container ID used: ${{ env.container_id }}"
+      #     /usr/bin/docker exec ${{ env.container_id }} sh -c "echo 'PIP_ROOT_USER_ACTION: ' \$PIP_ROOT_USER_ACTION"
+      # - name: Create pip configuration in Docker
+      #   run: |
+      #     /usr/bin/docker exec ${{ env.container_id }} sh -c "mkdir -p ~/.pip && echo '[global]' > ~/.pip/pip.conf && echo 'root-user-action = ignore' >> ~/.pip/pip.conf"
+      
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: ${{ matrix.python }}
+          cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
+        
+        # env:
+        #   PIP_ROOT_USER_ACTION: ignore
+      - name: Check permissions
+        run: |
+          ls -la /github/home/.cache/pip
+
+        
+          
+
+  test2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.12.6]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
+      - name: Check permissions
+        run: |
+          ls -la /home/runner/.cache/pip
