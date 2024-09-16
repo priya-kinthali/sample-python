@@ -22,6 +22,11 @@ jobs:
         python: [3.11.6]
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: priya-kinthali/sample-python
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
       # - name: Install Docker
       #   run: |
       #     apt-get update
