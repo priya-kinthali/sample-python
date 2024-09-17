@@ -123,9 +123,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Add myuser
         run: |
-          sudo useradd -m myuser
+          sudo useradd -m root
           sudo mkdir -p /home/runner/.cache/pip
-          sudo chown -R myuser:myuser /home/runner/.cache
+          sudo chown -R root:root /home/runner/.cache
           sudo chmod -R 775 /home/runner/.cache
           ls -la /home/runner/.cache/pip
         shell: /usr/bin/bash -e {0}
