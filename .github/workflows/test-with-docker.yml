@@ -123,7 +123,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: change ownership
         run: |
-          
+          useradd -m myuser
           chown -R myuser:myuser /home/runner/.cache
           chmod -R 775 /home/runner/.cache
           ls -la /home/runner/.cache/pip
