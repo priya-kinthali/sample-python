@@ -124,7 +124,7 @@ jobs:
       - name: Add myuser
         run: |
           sudo useradd -m myuser
-          sudo mkdir -p /home/runner/.cache
+          sudo mkdir -p /home/runner/.cache/pip
           sudo chown -R myuser:myuser /home/runner/.cache
           sudo chmod -R 775 /home/runner/.cache
           ls -la /home/runner/.cache/pip
