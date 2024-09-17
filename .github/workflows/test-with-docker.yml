@@ -124,9 +124,10 @@ jobs:
       - name: Add myuser
         run: |
           # sudo useradd -m root
+          sudo mkdir -p /home/runner/.cache/pip
           sudo chown -R root:root /home/runner/.cache
           ls -la /home/runner/.cache/pip
-          # sudo mkdir -p /home/runner/.cache/pip
+          
           
         shell: /usr/bin/bash -e {0}
       # - name: Change ownership of /github/home
