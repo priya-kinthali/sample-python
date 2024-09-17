@@ -121,12 +121,13 @@ jobs:
         python: [3.12.6]
     steps:
       - uses: actions/checkout@v4
-      - name: change ownership
+      - name: Add myuser
         run: |
-          useradd -m myuser
-          chown -R myuser:myuser /home/runner/.cache
-          chmod -R 775 /home/runner/.cache
+          sudo useradd -m myuser
+          sudo chown -R myuser:myuser /home/runner/.cache
+          sudo chmod -R 775 /home/runner/.cache
           ls -la /home/runner/.cache/pip
+        shell: /usr/bin/bash -e {0}
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
