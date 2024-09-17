@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: [3.12.6]
+        python: [3.12.4]
     steps:
       - uses: actions/checkout@v4
       - name: Add myuser
@@ -144,6 +144,6 @@ jobs:
           python-version: ${{ matrix.python }}
           cache: 'pip'
           cache-dependency-path: 'requirements.txt'
-      - name: Check permissions
-        run: |
-          ls -la /home/runner/.cache/pip
+      # - name: Check permissions
+      #   run: |
+      #     ls -la /home/runner/.cache/pip
