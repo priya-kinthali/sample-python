@@ -102,19 +102,19 @@ jobs:
         
           
 
-  test2:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: [3.12.4]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-          cache: 'pip'
-          cache-dependency-path: 'requirements.txt'
+  # test2:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       python: [3.12.4]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: ${{ matrix.python }}
+  #         cache: 'pip'
+  #         cache-dependency-path: 'requirements.txt'
       # - name: Add myuser
       #   run: |
       #     # sudo useradd -m root
