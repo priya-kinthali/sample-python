@@ -34,10 +34,10 @@ jobs:
       - name: fix pip issue
         run: |
             
-            useradd -m myuser
+            # useradd -m myuser
             mkdir -p /github/home/.cache/pip
-            chown -R myuser:myuser /github/home/.cache
-            chmod -R 775 /github/home/.cache
+            # chown -R myuser:myuser /github/home/.cache
+            # chmod -R 775 /github/home/.cache
             ls -la /github/home/.cache/pip
       - name: Setup Python
         uses: actions/setup-python@v5
