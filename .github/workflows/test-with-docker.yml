@@ -42,7 +42,7 @@ jobs:
             # chmod -R 775 /github/home/.cache
             ls -la /github/home/.cache/pip
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@test-930
         with:
           python-version: ${{ matrix.python }}
           cache: 'pip'
