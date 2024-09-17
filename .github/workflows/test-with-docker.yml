@@ -132,11 +132,18 @@ jobs:
       #   run: sudo chown -R $(whoami) /github/home
 
       - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-          cache: 'pip'
-          cache-dependency-path: 'requirements.txt'
-      - name: Check permissions
         run: |
-          ls -la /home/runner/.cache/pip
+          sudo -E actions/setup-python@v5
+          with:
+            python-version: ${{ matrix.python }}
+            cache: 'pip'
+            cache-dependency-path: 'requirements.txt'
+      # - name: Setup Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: ${{ matrix.python }}
+      #     cache: 'pip'
+      #     cache-dependency-path: 'requirements.txt'
+      # - name: Check permissions
+      #   run: |
+      #     ls -la /home/runner/.cache/pip
