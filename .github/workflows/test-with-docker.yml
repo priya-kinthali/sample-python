@@ -36,8 +36,8 @@ jobs:
             
             useradd -m myuser
             mkdir -p /github/home/myuser/.cache/pip
-            chown -R myuser:myuser /github/home/myuser/.cache/pip
-            chmod -R 775 /github/home/myuser/.cache/pip
+            chown -R myuser:myuser /github/home/myuser/.cache
+            chmod -R 775 /github/home/myuser/.cache
             ls -la /github/home/myuser/.cache/pip
       - name: Setup Python
         uses: actions/setup-python@v5
