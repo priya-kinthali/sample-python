@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: ubuntu:22.04
+      env:
+        PIP_ROOT_USER_ACTION: ignore
     strategy:
       matrix:
         python: [3.11.6]
