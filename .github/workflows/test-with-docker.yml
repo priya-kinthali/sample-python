@@ -111,11 +111,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check ownership
-        run: ls -ld /github/home
-      - name: Change ownership to root of /github/home
-        run: sudo chown -R root /github/home
+        run: ls -ld /home/runner
+      - name: Change ownership to root of /home/runner
+        run: sudo chown -R root /home/runner
       - name: Check ownership
-        run: ls -ld /github/home
+        run: ls -ld /home/runner
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
