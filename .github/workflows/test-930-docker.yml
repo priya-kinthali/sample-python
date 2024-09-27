@@ -68,21 +68,23 @@ jobs:
         run: |
           docker inspect --format '{{ .Config.Env }}' ${{ steps.get_container_id.outputs.container_id }}
 
-      # - name: Setup Python
-      #   uses: priya-kinthali/setup-python@test-930
-      #   with:
-      #     python-version: ${{ matrix.python }}
-      - name: Check installed pip version
-        run: |
-          docker exec ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "dpkg --get-selections | { grep -i pip || true; }"
-      - name: List all installed packages
-        run: |
-          docker exec ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "apt list --installed"
-      - name: Upgrade pip in Docker container
-        run: |
-          # docker exec ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "apt-get update && apt-get install -y python3 python3-pip && PIP_ROOT_USER_ACTION=ignore python3 -m pip install --upgrade pip"
-          docker exec -e PIP_ROOT_USER_ACTION=ignore ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "apt-get update && apt-get install -y python3 python3-pip && python3 -m pip install --upgrade pip"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-930
+        with:
+          python-version: ${{ matrix.python }}
+      # - name: Check installed pip version
+      #   run: |
+      #     docker exec ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "dpkg --get-selections | { grep -i pip || true; }"
+      # - name: List all installed packages
+      #   run: |
+      #     docker exec ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "apt list --installed"
+      # - name: Upgrade pip in Docker container
+      #   run: |
+      #     # docker exec ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "apt-get update && apt-get install -y python3 python3-pip && PIP_ROOT_USER_ACTION=ignore python3 -m pip install --upgrade pip"
+      #     docker exec -e PIP_ROOT_USER_ACTION=ignore ${{ steps.get_container_id.outputs.container_id }} /bin/bash -c "apt-get update && apt-get install -y python3 python3-pip && python3 -m pip install --upgrade pip"
 
+  
   # test2:
   #   runs-on: self-hosted
   #   strategy:
