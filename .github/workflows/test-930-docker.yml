@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   test1:
-    runs-on: ubuntu-22.04
+    runs-on: macos-13
     container:
       image: ubuntu:jammy
       env:
@@ -69,8 +69,8 @@ jobs:
           docker inspect --format '{{ .Config.Env }}' ${{ steps.get_container_id.outputs.container_id }}
 
       - name: Setup Python
-        # uses: actions/setup-python@v5
-        uses: priya-kinthali/setup-python@test-930
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-930
         with:
           python-version: ${{ matrix.python }}
       # - name: Check installed pip version
