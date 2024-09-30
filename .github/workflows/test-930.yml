@@ -1,9 +1,9 @@
 name: PIP_ROOT_USER_ACTION ignored 
 
 on:
-  push:
-    branches:
-      - test-930
+  # push:
+  #   branches:
+  #     - test-930
   workflow_dispatch:
 
 jobs:
