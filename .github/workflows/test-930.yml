@@ -12,10 +12,10 @@ jobs:
     # runs-on: ubuntu-20.04
    
     steps:
-      # - name: Clear cache
-      #   run: |
-      #       mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-      #       mkdir -p "${{ runner.tool_cache }}"
+      - name: Clear cache
+        run: |
+            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
 
       - uses: actions/checkout@v4
      
@@ -23,5 +23,5 @@ jobs:
         uses: actions/setup-python@v5
         # uses: priya-kinthali/setup-python@test-930
         with:
-          python-version: "3.11.5"
+          python-version: "3.11.6"
          
