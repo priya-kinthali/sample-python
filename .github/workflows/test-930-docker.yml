@@ -69,7 +69,7 @@ jobs:
           docker inspect --format '{{ .Config.Env }}' ${{ steps.get_container_id.outputs.container_id }}
 
       - name: Setup Python
-        uses: actions/setup-python@v5 test
+        uses: actions/setup-python@v5 
         # uses: priya-kinthali/setup-python@test-930
         with:
           python-version: ${{ matrix.python }}
