@@ -11,8 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - os: "windows-latest"
-            architecture: "x64"
+          # - os: "windows-latest"
+          #   architecture: "x64"
           - os: "windows-latest"
             architecture: "x86"
     defaults:
