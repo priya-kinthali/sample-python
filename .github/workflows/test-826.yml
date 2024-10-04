@@ -1,9 +1,9 @@
 name: test cachekey conflict for 826
 on: 
-  # push:
-  #   branches:
-  #     - 826-CacheKeyConflict
-    workflow_dispatch:
+  push:
+    branches:
+      - 826-CacheKeyConflict
+  workflow_dispatch:
 
 jobs:
   build:

@@ -1,8 +1,10 @@
 name: test x86
 on: 
-  push:
-    branches:
-      - 826-CacheKeyConflict
+  # push:
+  #   branches:
+  #     - 826-CacheKeyConflict
+  workflow_dispatch:
+    
 
 jobs:
   build:
