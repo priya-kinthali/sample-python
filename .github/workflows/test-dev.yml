@@ -1,0 +1,23 @@
+name: Setup Python on Windows Server 2022
+
+on:
+  push:
+    branches:
+      - test-769
+
+jobs:
+  setup-dev-version:
+    name: Setup 3.14-dev ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-13]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: setup-python 3.14-dev
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14-dev'
