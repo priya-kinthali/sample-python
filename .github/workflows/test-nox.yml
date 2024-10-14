@@ -24,6 +24,29 @@ on:
 #       - name: Run python-path sample 3.13
 #         run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
 jobs:
+    setup-python-multiple-python-versions:
+      runs-on: ${{ matrix.os }}
+      strategy:
+        fail-fast: false
+        matrix:
+          os:
+          [
+            ubuntu-20.04,
+            ubuntu-22.04,
+            ubuntu-latest,
+            windows-latest,
+            macos-latest,
+            macos-13
+          ]
+      steps:
+      - uses: actions/checkout@v4
+      - name: Run with setup-python 3.8
+        if: matrix.os != 'macos-latest' && matrix.os != 'windows-latest'
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+      - name: Verify 3.8
+        run: python __tests__/verify-python.py 3.8
   # setup-python-multiple-python-versions:
   #   runs-on: ${{ matrix.os }}
   #   strategy:
@@ -64,59 +87,8 @@ jobs:
   #         }
   #         $pythonVersion
   #       shell: pwsh
-  setup-versions-from-poetry-pyproject-file:
-    name: Setup ${{ matrix.python }} ${{ matrix.os }} poetry pyproject file
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          [
-            ubuntu-20.04,
-            ubuntu-22.04,
-            ubuntu-latest,
-            windows-latest,
-            macos-latest,
-            macos-13
-          ]
-        python: [3.8.18, 3.9.13, 3.10.11, 3.11.9, 3.12.3, 3.13.0]
-        # exclude:
-        #   - os: macos-latest
-        #     python: '3.8.18'
-        #   - os: windows-latest
-        #     python: '3.8.18'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: build-version-file ${{ matrix.python }}
-        run: |
-          echo '[tool.poetry.dependencies]
-            python = "${{ matrix.python }}"
-          ' > pyproject.toml
-
-      - name: setup-python ${{ matrix.python }}
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: pyproject.toml
-
-      # - name: Check python-path
-      #   run: ./__tests__/check-python-path.sh '${{ steps.setup-python.outputs.python-path }}'
-      #   shell: bash
-
-      - name: Validate version
-        run: |
-          $pythonVersion = (python --version)
-          if ("Python ${{ matrix.python }}" -ne "$pythonVersion"){
-            Write-Host "The current version is $pythonVersion; expected version is ${{ matrix.python }}"
-            exit 1
-          }
-          $pythonVersion
-        shell: pwsh
-
-      - name: Run simple code
-        run: python -c 'import math; print(math.factorial(5))'
+  # 
+  
 # [tool.poetry]
 # name = "sample-python"
 # version = "0.1.0"
