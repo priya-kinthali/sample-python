@@ -1,0 +1,24 @@
+name: Setup Python on Windows Server 2022
+on:
+  push:
+    branches:
+      - test-769
+  workflow_dispatch:
+jobs:
+  test-python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-13, ubuntu-22.04, ubuntu-20.04]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run with setup-python 3.13
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.13'
+      - name: Verify 3.13
+        run: python __tests__/verify-python.py 3.13
+      - name: Run python-path sample 3.13
+        run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
