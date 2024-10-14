@@ -24,7 +24,48 @@ on:
 #       - name: Run python-path sample 3.13
 #         run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
 jobs:
-  setup-python-multiple-python-versions:
+  # setup-python-multiple-python-versions:
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os:
+  #         [
+  #           ubuntu-20.04,
+  #           ubuntu-22.04,
+  #           ubuntu-latest,
+  #           windows-latest,
+  #           macos-latest,
+  #           macos-13
+  #         ]
+  #       python: ['3.8', '3.9', '3.11', '3.12', '3.13']
+  #       exclude:
+  #         - os: macos-latest
+  #           python: '3.9'
+  #         - os: windows-latest
+  #           python: '3.9'
+  #         - os: macos-latest
+  #           python: '3.8'
+  #         - os: windows-latest
+  #           python: '3.8'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup Python and check latest
+  #       uses: actions/setup-python@v3
+  #       with:
+  #         python-version: ${{ matrix.python }}
+  #         check-latest: true
+  #     - name: Validate version
+  #       run: |
+  #         $pythonVersion = (python --version)
+  #         if ("$pythonVersion" -NotMatch "${{ matrix.python }}"){
+  #           Write-Host "The current version is $pythonVersion; expected version is ${{ matrix.python }}"
+  #           exit 1
+  #         }
+  #         $pythonVersion
+  #       shell: pwsh
+  setup-versions-noenv:
+    name: Setup ${{ matrix.python }} ${{ matrix.os }} (noenv)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -49,18 +90,18 @@ jobs:
         #   - os: windows-latest
         #     python: '3.8'
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python and check latest
-        uses: actions/setup-python@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: setup-python ${{ matrix.python }}
+        id: setup-python
+        uses: ./
         with:
           python-version: ${{ matrix.python }}
-          check-latest: true
-      - name: Validate version
-        run: |
-          $pythonVersion = (python --version)
-          if ("$pythonVersion" -NotMatch "${{ matrix.python }}"){
-            Write-Host "The current version is $pythonVersion; expected version is ${{ matrix.python }}"
-            exit 1
-          }
-          $pythonVersion
-        shell: pwsh
+          update-environment: false
+
+      - name: Python version
+        run: ${{ steps.setup-python.outputs.python-path }} --version
+
+      - name: Run simple code
+        run: ${{ steps.setup-python.outputs.python-path }} -c 'import math; print(math.factorial(5))'
