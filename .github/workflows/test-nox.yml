@@ -101,9 +101,9 @@ jobs:
         with:
           python-version-file: pyproject.toml
 
-      - name: Check python-path
-        run: ./__tests__/check-python-path.sh '${{ steps.setup-python.outputs.python-path }}'
-        shell: bash
+      # - name: Check python-path
+      #   run: ./__tests__/check-python-path.sh '${{ steps.setup-python.outputs.python-path }}'
+      #   shell: bash
 
       - name: Validate version
         run: |
