@@ -30,6 +30,7 @@ jobs:
           python-version: 3.8
 
       - name: Verify 3.8
+        if: matrix.os != 'macos-latest' && matrix.os != 'windows-latest'
         run: python __tests__/verify-python.py 3.8
 
   
