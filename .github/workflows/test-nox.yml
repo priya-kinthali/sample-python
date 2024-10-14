@@ -36,7 +36,7 @@ jobs:
 
         - name: Run with setup-python ${{ matrix.python }}
           id: setup-python
-          uses: ./
+          uses: actions/setup-python@v5
           with:
             python-version: ${{ matrix.python }}
         - name: Verify ${{ matrix.python }}
