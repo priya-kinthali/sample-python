@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run with setup-python 3.13
+        id: cp313
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
