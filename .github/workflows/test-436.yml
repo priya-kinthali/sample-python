@@ -15,11 +15,12 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      # uses: actions/setup-python@v5
-      uses: aparnajyothi-y/setup-python@update-error-message
+      uses: actions/setup-python@v5
+      # uses: aparnajyothi-y/setup-python@update-error-message
       with:
         python-version: '3.9'
-        cache: 'pip'
+        cache-dependency-path : 'requirements.txt'
+        # cache: 'pip'
 
     # - name: Install dependencies
     #   run: |
