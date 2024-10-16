@@ -19,7 +19,7 @@ jobs:
       # uses: aparnajyothi-y/setup-python@update-error-message
       with:
         python-version: '3.9'
-        cache-dependency-path : 'requirements.txt'
+        cache-dependency-path : 'requirement.txt'
         # cache: 'pip'
 
     # - name: Install dependencies
