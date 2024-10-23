@@ -30,11 +30,16 @@ jobs:
       # - run: pipenv install
       # - name: Verify Python Version
       #   run: python --version
-      - name: Install poetry
-        run: pipx install poetry
+      # - name: Install poetry
+      #   run: pipx install poetry
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.13'
+      #     cache: 'poetry'
+      # - run: poetry install
+      # - run: poetry run pytest
       - uses: actions/setup-python@v5
+        id: cp313
         with:
-          python-version: '3.13'
-          cache: 'poetry'
-      - run: poetry install
-      - run: poetry run pytest
+          python-version: "3.13"
+      - run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
