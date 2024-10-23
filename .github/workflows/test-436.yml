@@ -16,7 +16,7 @@ jobs:
 
     - name: Set up Python
       uses: actions/setup-python@v5
-      # uses: aparnajyothi-y/setup-python@update-error-message
+      # uses: aparnajyothi-y/setup-python@update-error-message test
       with:
         python-version: '3.9'
         cache: 'pip'
