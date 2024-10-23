@@ -1,9 +1,9 @@
 name: Reproduce Issue
 
 on:
-  push:
-    branches:
-      - test-769
+  # push:
+  #   branches:
+  #     - test-769
   workflow_dispatch:
 
 jobs:
