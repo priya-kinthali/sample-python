@@ -11,9 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # - uses: actions/checkout@v4
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.13.0-alpha - 3.13.0'
+      # - name: Verify Python Version
+      #   run: python --version
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13.0-alpha - 3.13.0'
+          python-version: '3.13'
+          cache: 'pipenv'
+      - name: Install pipenv
+        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
+      - run: pipenv install
       - name: Verify Python Version
         run: python --version
