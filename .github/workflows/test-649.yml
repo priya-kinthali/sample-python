@@ -2,7 +2,7 @@ name: Test Python Tk
 on:
   push:
     branches:
-      - main
+      - test-649
   workflow_dispatch:
 
 jobs:
