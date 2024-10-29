@@ -5,7 +5,11 @@ on:
       - test-967
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-24.04, ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
@@ -17,9 +21,9 @@ jobs:
         run: python --version
       - name: Get pipx version
         run: pipx --version
-      # - name: Install Python Package
-      #   run: pipx install .
       - name: Install Python Package
         run: pipx install .
-        env:
-          PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
+      # - name: Install Python Package
+      #   run: pipx install .
+      #   env:
+      #     PIPX_DEFAULT_PYTHON: ${{ steps.python.outputs.python-path }}
