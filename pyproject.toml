@@ -1,18 +1,10 @@
-[tool.poetry]
-name = "testactiontasks"
+[project]
+name = "setup-python-example"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = ">=3.8,<3.14"
-flake8 = "^4.0.1"
-pyinstaller = "^6.11.0"
-pytest = "^8.3.3"
-
-
-[tool.poetry.dev-dependencies]
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[project.scripts]
+example = "hello:main"
