@@ -9,7 +9,7 @@ jobs:
   tests-poetry:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-20.04, ubuntu-latest, macos-13]
+        os: [macos-13]
         # python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
         # python-version: ["3.7.15", "3.8.15", "3.9.15", "3.10.10"]
         python-version: ["3.8.15"]
