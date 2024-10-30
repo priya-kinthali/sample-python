@@ -36,4 +36,9 @@ jobs:
       - name: Run tk script (closes itself after 5 seconds)
         if: runner.os != 'Linux'
         run: python tk_min.py
+        env:
+          PATH: "/usr/local/opt/tcl-tk/bin:$PATH"
+          LDFLAGS: "-L/usr/local/opt/tcl-tk/lib"
+          CPPFLAGS: "-I/usr/local/opt/tcl-tk/include"
+          PKG_CONFIG_PATH: "/usr/local/opt/tcl-tk/lib/pkgconfig"
       
