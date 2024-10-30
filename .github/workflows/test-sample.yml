@@ -12,6 +12,8 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
+      - name: Install Python Package
+        run: pipx install .
       - name: Setup Python
         id: python
         uses: actions/setup-python@v4
@@ -21,8 +23,8 @@ jobs:
         run: python --version
       - name: Get pipx version
         run: pipx --version
-      - name: Install Python Package
-        run: pipx install .
+      # - name: Install Python Package
+      #   run: pipx install .
       # - name: Install Python Package
       #   run: pipx install .
       #   env:
