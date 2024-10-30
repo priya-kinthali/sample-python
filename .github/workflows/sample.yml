@@ -2,7 +2,7 @@ name: test
 on:
   push:
     branches:
-      - test-967
+      - test-649
 jobs:
   test:
     runs-on: ${{ matrix.os }}
