@@ -20,7 +20,7 @@ jobs:
       - name: Set up environment for macOS
         if: runner.os == 'macOS'
         run: |
-          brew install tcl-tk
+          brew reinstall tcl-tk
           echo 'export PATH="/usr/local/opt/tcl-tk/bin:$PATH"' >> $GITHUB_ENV
           echo 'export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"' >> $GITHUB_ENV
           echo 'export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"' >> $GITHUB_ENV
