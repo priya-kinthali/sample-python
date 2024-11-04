@@ -1,15 +1,15 @@
 name: test
 on:
-  # push:
-  #   branches:
-  #     - test-967
+  push:
+    branches:
+      - test-967
   workflow_dispatch:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, ubuntu-24.04, ubuntu-latest, windows-latest, macos-latest, macos-13]
+        os: [macos-12, ubuntu-20.04, ubuntu-24.04, ubuntu-latest, windows-latest, macos-latest, macos-13]
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
