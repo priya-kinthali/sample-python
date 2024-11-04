@@ -20,6 +20,10 @@ jobs:
           python-version: "3.12"
       - name: Get Python version
         run: python --version
+      - name: Install pipx
+        run: python -m pip install --user pipx
+      - name: Ensure pipx uses the correct Python
+        run: python -m pipx ensurepath
       - name: Get pipx version
         run: pipx --version
       - name: Install Python Package
