@@ -23,7 +23,7 @@ jobs:
       - name: Find and check tk.h version
         run: |
           echo "Finding tk.h..."
-          TK_H_PATH=$(find / -name tk.h 2>/dev/null | head -n 1)
+          TK_H_PATH=$(find /usr /Library /System -name tk.h 2>/dev/null | head -n 1)
           if [ -n "$TK_H_PATH" ]; then
             echo "Checking tk.h version at $TK_H_PATH..."
             if grep -q "TCL_VERSION" "$TK_H_PATH"; then
@@ -38,7 +38,7 @@ jobs:
       - name: Find and check libtk.a version
         run: |
           echo "Finding libtk.a..."
-          LIBTK_A_PATH=$(find / -name libtk.a 2>/dev/null | head -n 1)
+          LIBTK_A_PATH=$(find /usr /Library /System -name libtk.a 2>/dev/null | head -n 1)
           if [ -n "$LIBTK_A_PATH" ]; then
             echo "Checking libtk.a version at $LIBTK_A_PATH..."
             if nm "$LIBTK_A_PATH" | grep -q "Tcl_InitStubs"; then
