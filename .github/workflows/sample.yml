@@ -35,6 +35,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libxkbcommon-x11-0 xvfb
+      - name: Check Tcl/Tk environment variables
+        run: env | grep -i 'tcl\|tk'
       - name: Run tk script (closes itself after 5 seconds) - Ubuntu
         if: runner.os == 'Linux'
         run: xvfb-run python tk_min.py
