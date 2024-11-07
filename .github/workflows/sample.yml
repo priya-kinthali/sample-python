@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-13]
-        python-version: ["3.10.15"]
+        python-version: ["3.10.11"]
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -18,20 +18,10 @@ jobs:
       - uses: actions/checkout@v4
       # - name: Set up Python ${{ matrix.python-version }}
       #   uses: actions/setup-python@v5
-      # - uses: priya-kinthali/setup-python@test-930
-      #   with:
-      #     python-version: ${{ matrix.python-version }}
-      - name: Install Python ${{ matrix.python-version }} on macOS
-        if: runner.os == 'macOS'
-        run: |
-          curl -L -o python-3.10.15-darwin-x64.tar.gz https://github.com/priya-kinthali/python-versions/releases/download/3.10.15-11719709455/python-3.10.15-darwin-x64.tar.gz
-          tar -xzf python-3.10.15-darwin-x64.tar.gz
-          ls -l
-          ls -l python-3.10.15
-          sudo mv python-3.10.15 /usr/local/python-3.10.15
-          echo 'export PATH="/usr/local/python-3.10.15/bin:$PATH"' >> ~/.zshrc
-          source ~/.zshrc
-          python3.10.15 -m pip install --upgrade pip
+      - uses: priya-kinthali/setup-python@test-930
+        with:
+          python-version: ${{ matrix.python-version }}
+
       # - name: Install Python ${{ matrix.python-version }} on macOS
       #   if: runner.os == 'macOS'
       #   run: |
