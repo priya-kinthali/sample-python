@@ -21,17 +21,11 @@ jobs:
           python-version: 3.11
       - name: Check tk.h version
         run: |
-          if [ -f /Library/Frameworks/Tk.framework/Versions/Current/Headers/tk.h ]; then
-            grep -oP 'define TK_VERSION "\K[^"]+' /Library/Frameworks/Tk.framework/Versions/Current/Headers/tk.h
-          else
-            echo "tk.h not found"
-          fi
+          echo "tk.h version:"
+          grep "TCL_VERSION" /usr/include/tk.h || echo "tk.h not found"
 
       - name: Check libtk.a version
         run: |
-          if [ -f /Library/Frameworks/Tk.framework/Versions/Current/lib/libtk.a ]; then
-            strings /Library/Frameworks/Tk.framework/Versions/Current/lib/libtk.a | grep -oP 'Tk (\d+\.\d+)'
-          else
-            echo "libtk.a not found"
-          fi
+          echo "libtk.a version:"
+          nm /usr/lib/libtk.a | grep "Tcl_InitStubs" || echo "libtk.a not found"
 
