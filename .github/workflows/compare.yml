@@ -1,8 +1,8 @@
 name: Test Python Tk
 on:
-  push:
-    branches:
-      - test-649
+  # push:
+  #   branches:
+  #     - test-649
   workflow_dispatch:
 
 jobs:

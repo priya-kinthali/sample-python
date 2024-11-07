@@ -1,8 +1,8 @@
 name: Test Python Tk
 on:
-  # push:
-  #   branches:
-  #     - test-649
+  push:
+    branches:
+      - test-649
   workflow_dispatch:
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-13]
-        python-version: ["3.10.11"]
+        python-version: ["3.10.3"]
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -18,25 +18,23 @@ jobs:
       - uses: actions/checkout@v4
       # - name: Set up Python ${{ matrix.python-version }}
       #   uses: actions/setup-python@v5
-      # - uses: priya-kinthali/setup-python@test-930
-      #   with:
-      #     python-version: ${{ matrix.python-version }}
+      - uses: priya-kinthali/setup-python@test-930
+        with:
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install Python ${{ matrix.python-version }} on macOS
-        if: runner.os == 'macOS'
-        run: |
-          brew update
-          brew install pyenv
-          pyenv install ${{ matrix.python-version }}
-          pyenv global ${{ matrix.python-version }}
-          python -m pip install --upgrade pip
+      # - name: Install Python ${{ matrix.python-version }} on macOS
+      #   if: runner.os == 'macOS'
+      #   run: |
+      #     brew update
+      #     brew install pyenv
+      #     pyenv install ${{ matrix.python-version }}
+      #     pyenv global ${{ matrix.python-version }}
+      #     python -m pip install --upgrade pip
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y libxkbcommon-x11-0 xvfb
-      - name: Check Tcl/Tk environment variables
-        run: env | grep -i 'tcl\|tk'
       - name: Run tk script (closes itself after 5 seconds) - Ubuntu
         if: runner.os == 'Linux'
         run: xvfb-run python tk_min.py
