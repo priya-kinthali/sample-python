@@ -1,0 +1,44 @@
+name: Test Python Tk
+on:
+  push:
+    branches:
+      - test-649
+  workflow_dispatch:
+
+jobs:
+  tests-poetry:
+    strategy:
+      matrix:
+        os: [macos-13, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Check tk.h version
+        run: |
+          if [ -f /usr/include/tk.h ]; then
+            grep -oP 'define TK_VERSION "\K[^"]+' /usr/include/tk.h
+          else
+            echo "tk.h not found"
+          fi
+
+      - name: Check libtk.a version
+        run: |
+          if [ -f /usr/lib/libtk.a ]; then
+            strings /usr/lib/libtk.a | grep -oP 'Tk (\d+\.\d+)'
+          else
+            echo "libtk.a not found"
+          fi
+
