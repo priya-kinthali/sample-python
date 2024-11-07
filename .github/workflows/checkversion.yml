@@ -19,13 +19,27 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
-      - name: Check tk.h version
+      - name: Find and check tk.h version
         run: |
-          echo "tk.h version:"
-          grep "TCL_VERSION" /usr/include/tk.h || echo "tk.h not found"
+          echo "Finding tk.h..."
+          find / -name tk.h 2>/dev/null
+          echo "Checking tk.h version..."
+          TK_H_PATH=$(find / -name tk.h 2>/dev/null | head -n 1)
+          if [ -n "$TK_H_PATH" ]; then
+            grep "TCL_VERSION" "$TK_H_PATH"
+          else
+            echo "tk.h not found"
+          fi
 
-      - name: Check libtk.a version
+      - name: Find and check libtk.a version
         run: |
-          echo "libtk.a version:"
-          nm /usr/lib/libtk.a | grep "Tcl_InitStubs" || echo "libtk.a not found"
+          echo "Finding libtk.a..."
+          find / -name libtk.a 2>/dev/null
+          echo "Checking libtk.a version..."
+          LIBTK_A_PATH=$(find / -name libtk.a 2>/dev/null | head -n 1)
+          if [ -n "$LIBTK_A_PATH" ]; then
+            nm "$LIBTK_A_PATH" | grep "Tcl_InitStubs"
+          else
+            echo "libtk.a not found"
+          fi
 
