@@ -19,25 +19,18 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.11
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          poetry install
-
       - name: Check tk.h version
         run: |
-          if [ -f /usr/include/tk.h ]; then
-            grep -oP 'define TK_VERSION "\K[^"]+' /usr/include/tk.h
+          if [ -f /Library/Frameworks/Tk.framework/Versions/Current/Headers/tk.h ]; then
+            grep -oP 'define TK_VERSION "\K[^"]+' /Library/Frameworks/Tk.framework/Versions/Current/Headers/tk.h
           else
             echo "tk.h not found"
           fi
 
       - name: Check libtk.a version
         run: |
-          if [ -f /usr/lib/libtk.a ]; then
-            strings /usr/lib/libtk.a | grep -oP 'Tk (\d+\.\d+)'
+          if [ -f /Library/Frameworks/Tk.framework/Versions/Current/lib/libtk.a ]; then
+            strings /Library/Frameworks/Tk.framework/Versions/Current/lib/libtk.a | grep -oP 'Tk (\d+\.\d+)'
           else
             echo "libtk.a not found"
           fi
