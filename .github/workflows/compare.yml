@@ -31,9 +31,11 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install tcl-tk
-          export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
-          export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
-          export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
+          echo 'export PATH="/usr/local/opt/tcl-tk/bin:$PATH"' >> $GITHUB_ENV
+          echo 'export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"' >> $GITHUB_ENV
+          echo 'export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"' >> $GITHUB_ENV
+          echo 'export TCL_LIBRARY="/usr/local/opt/tcl-tk/lib"' >> $GITHUB_ENV
+          echo 'export TK_LIBRARY="/usr/local/opt/tcl-tk/lib"' >> $GITHUB_ENV
       - name: Run tk script (closes itself after 5 seconds) - Ubuntu
         if: runner.os == 'Linux'
         run: xvfb-run python tk_min.py
