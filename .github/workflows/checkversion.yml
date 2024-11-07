@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-13, macos-latest]
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out the repository
@@ -22,11 +23,14 @@ jobs:
       - name: Find and check tk.h version
         run: |
           echo "Finding tk.h..."
-          find / -name tk.h 2>/dev/null
-          echo "Checking tk.h version..."
           TK_H_PATH=$(find / -name tk.h 2>/dev/null | head -n 1)
           if [ -n "$TK_H_PATH" ]; then
-            grep "TCL_VERSION" "$TK_H_PATH"
+            echo "Checking tk.h version at $TK_H_PATH..."
+            if grep -q "TCL_VERSION" "$TK_H_PATH"; then
+              grep "TCL_VERSION" "$TK_H_PATH"
+            else
+              echo "TCL_VERSION not found in $TK_H_PATH"
+            fi
           else
             echo "tk.h not found"
           fi
@@ -34,11 +38,14 @@ jobs:
       - name: Find and check libtk.a version
         run: |
           echo "Finding libtk.a..."
-          find / -name libtk.a 2>/dev/null
-          echo "Checking libtk.a version..."
           LIBTK_A_PATH=$(find / -name libtk.a 2>/dev/null | head -n 1)
           if [ -n "$LIBTK_A_PATH" ]; then
-            nm "$LIBTK_A_PATH" | grep "Tcl_InitStubs"
+            echo "Checking libtk.a version at $LIBTK_A_PATH..."
+            if nm "$LIBTK_A_PATH" | grep -q "Tcl_InitStubs"; then
+              nm "$LIBTK_A_PATH" | grep "Tcl_InitStubs"
+            else
+              echo "Tcl_InitStubs not found in $LIBTK_A_PATH"
+            fi
           else
             echo "libtk.a not found"
           fi
