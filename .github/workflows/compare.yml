@@ -27,6 +27,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libxkbcommon-x11-0 xvfb
+      - name: Prepare macOS Tk
+        if: runner.os == 'macOS'
+        run: |
+          brew install tcl-tk
+          export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+          export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
+          export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
       - name: Run tk script (closes itself after 5 seconds) - Ubuntu
         if: runner.os == 'Linux'
         run: xvfb-run python tk_min.py
