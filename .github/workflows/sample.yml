@@ -23,6 +23,17 @@ jobs:
       # - uses: priya-kinthali/setup-python@test-930
         with:
           python-version: ${{ matrix.python-version }}
+      # Install Tk 8.6 via Homebrew
+      - name: Install Tk 8.6
+        run: |
+          brew install tcl-tk@8.6
+          brew link tcl-tk@8.6 --force --overwrite
+      # Set environment variables for Tk
+      - name: Set Tk environment variables
+        run: |
+          export TCL_LIBRARY=$(brew --prefix tcl-tk@8.6)/lib/tcl-tk
+          export TK_LIBRARY=$(brew --prefix tcl-tk@8.6)/lib/tcl-tk
+      # Verify Python Tk version
       - name: Verify Python Tk Version
         run: |
           python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
