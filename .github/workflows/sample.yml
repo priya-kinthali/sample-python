@@ -35,7 +35,12 @@ jobs:
       - name: Install Tcl/Tk on macOS 13
         if: matrix.os == 'macos-13'
         run: |
+          brew update
           brew install tcl-tk
+          echo 'export PATH="/usr/local/opt/tcl-tk/bin:$PATH"' >> ~/.zshrc
+          echo 'export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"' >> ~/.zshrc
+          echo 'export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"' >> ~/.zshrc
+          source ~/.zshrc
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
