@@ -1,52 +1,46 @@
 name: Test Python Tk
 on:
-  # push:
-  #   branches:
-  #     - test-649
+  push:
+    branches:
+      - test-649
   workflow_dispatch:
 
 jobs:
   tests-poetry:
     strategy:
       matrix:
-        os: [macos-13, macos-latest]
+        os: [macos-13]
+        python-version: ["3.10.4"]
       fail-fast: false
+    name: ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      # - name: Set up Python ${{ matrix.python-version }}
+      #   uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-930
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-      - name: Find and check tk.h version
+        # with:
+        #   python-version: ${{ matrix.python-version }}
+      - name: Install Python ${{ matrix.python-version }} on macOS
+        if: runner.os == 'macOS'
         run: |
-          echo "Finding tk.h..."
-          TK_H_PATH=$(find /usr /Library /System -name tk.h 2>/dev/null | head -n 1)
-          if [ -n "$TK_H_PATH" ]; then
-            echo "Checking tk.h version at $TK_H_PATH..."
-            if grep -q "TCL_VERSION" "$TK_H_PATH"; then
-              grep "TCL_VERSION" "$TK_H_PATH"
-            else
-              echo "TCL_VERSION not found in $TK_H_PATH"
-            fi
-          else
-            echo "tk.h not found"
-          fi
-
-      - name: Find and check libtk.a version
+          brew update
+          brew install pyenv
+          pyenv install ${{ matrix.python-version }}
+          pyenv global ${{ matrix.python-version }}
+          python -m pip install --upgrade pip
+      - name: Verify Python Tk Version
         run: |
-          echo "Finding libtk.a..."
-          LIBTK_A_PATH=$(find /usr /Library /System -name libtk.a 2>/dev/null | head -n 1)
-          if [ -n "$LIBTK_A_PATH" ]; then
-            echo "Checking libtk.a version at $LIBTK_A_PATH..."
-            if nm "$LIBTK_A_PATH" | grep -q "Tcl_InitStubs"; then
-              nm "$LIBTK_A_PATH" | grep "Tcl_InitStubs"
-            else
-              echo "Tcl_InitStubs not found in $LIBTK_A_PATH"
-            fi
-          else
-            echo "libtk.a not found"
-          fi
-
+          python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
+      - name: Prepare Ubuntu xvfb
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxkbcommon-x11-0 xvfb
+      - name: Run tk script (closes itself after 5 seconds) - Ubuntu
+        if: runner.os == 'Linux'
+        run: xvfb-run python tk_min.py
+      - name: Run tk script (closes itself after 5 seconds)
+        if: runner.os != 'Linux'
+        run: python tk_min.py
