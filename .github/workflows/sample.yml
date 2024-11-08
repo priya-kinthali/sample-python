@@ -26,8 +26,8 @@ jobs:
       # Install Tk 8.6 via Homebrew
       - name: Install Tk 8.6
         run: |
-          brew install tcl-tk@8.6
-          brew link tcl-tk@8.6 --force --overwrite
+          brew install tcl-tk
+          brew link tcl-tk --force --overwrite
       # Set environment variables for Tk
       - name: Set Tk environment variables
         run: |
