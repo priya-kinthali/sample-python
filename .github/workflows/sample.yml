@@ -19,23 +19,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # - name: Set up Python ${{ matrix.python-version }}
-      - uses: actions/setup-python@v5
-      # - uses: priya-kinthali/setup-python@test-930
+      # - uses: actions/setup-python@v5
+      - uses: priya-kinthali/setup-python@test-930
         with:
           python-version: ${{ matrix.python-version }}
       # Install Tk 8.6 via Homebrew
-      - name: Install Tk 8.6
-        run: |
-          brew install tcl-tk
-          brew link tcl-tk --force --overwrite
-      # Set environment variables for Tk
-      # Set environment variables for Tcl/Tk
-      - name: Set Tcl/Tk environment variables
-        run: |
-          export TCL_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
-          export TK_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
-          echo "TCL_LIBRARY set to: $TCL_LIBRARY"
-          echo "TK_LIBRARY set to: $TK_LIBRARY"
+      # - name: Install Tk 8.6
+      #   run: |
+      #     brew install tcl-tk
+      #     brew link tcl-tk --force --overwrite
+      # # Set environment variables for Tk
+      # # Set environment variables for Tcl/Tk
+      # - name: Set Tcl/Tk environment variables
+      #   run: |
+      #     export TCL_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
+      #     export TK_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
+      #     echo "TCL_LIBRARY set to: $TCL_LIBRARY"
+      #     echo "TK_LIBRARY set to: $TK_LIBRARY"
       # Verify Python Tk version
       - name: Verify Python Tk Version
         run: |
