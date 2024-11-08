@@ -29,10 +29,13 @@ jobs:
           brew install tcl-tk
           brew link tcl-tk --force --overwrite
       # Set environment variables for Tk
-      - name: Set Tk environment variables
+      # Set environment variables for Tcl/Tk
+      - name: Set Tcl/Tk environment variables
         run: |
-          export TCL_LIBRARY=$(brew --prefix tcl-tk@8.6)/lib/tcl-tk
-          export TK_LIBRARY=$(brew --prefix tcl-tk@8.6)/lib/tcl-tk
+          export TCL_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
+          export TK_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
+          echo "TCL_LIBRARY set to: $TCL_LIBRARY"
+          echo "TK_LIBRARY set to: $TK_LIBRARY"
       # Verify Python Tk version
       - name: Verify Python Tk Version
         run: |
