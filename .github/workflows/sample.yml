@@ -23,11 +23,9 @@ jobs:
       # - uses: priya-kinthali/setup-python@test-930
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Homebrew and Tk
+      - name: Verify Python Tk Version
         run: |
-          brew info tcl-tk
-          export TCL_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
-          export TK_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
+          python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
 
       # - name: Install Python ${{ matrix.python-version }} on macOS
       #   if: runner.os == 'macOS'
