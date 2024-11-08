@@ -25,7 +25,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Homebrew and Tk
         run: |
-          brew install tcl-tk
+          brew info tcl-tk
           export TCL_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
           export TK_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
 
