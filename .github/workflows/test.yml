@@ -6,31 +6,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: macos-13
+  verify-tkinter:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-13, ubuntu-22.04, ubuntu-20.04]
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.10'
-
-    - name: Set environment variables for Tcl/Tk
-      run: |
-        echo "TCL_INCLUDE_PATH=/usr/local/opt/tcl-tk/include" >> $GITHUB_ENV
-        echo "TCL_LIBRARY_PATH=/usr/local/opt/tcl-tk/lib" >> $GITHUB_ENV
-        echo "TK_INCLUDE_PATH=/usr/local/opt/tcl-tk/include" >> $GITHUB_ENV
-        echo "TK_LIBRARY_PATH=/usr/local/opt/tcl-tk/lib" >> $GITHUB_ENV
-
-    - name: Build Python
-      run: |
-        ./configure --prefix=$RUNNER_TOOL_CACHE/Python/3.10.4/x64 --enable-optimizations --enable-shared --with-lto --with-openssl=/usr/local/opt/openssl@3 --with-tcltk-includes="-I $TCL_INCLUDE_PATH" --with-tcltk-libs="-L$TCL_LIBRARY_PATH -ltcl8.6 -ltk8.6" --enable-loadable-sqlite-extensions
-        make
-        make install
-
+      uses: actions/checkout@v4
     - name: Verify Tcl/Tk version
       run: |
         python -c "import tkinter; print(tkinter.TkVersion)"
