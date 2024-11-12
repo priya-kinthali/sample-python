@@ -18,6 +18,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Clear existing Python versions
+        run: |
+          sudo rm -rf /Users/runner/hostedtoolcache/Python
       - name: Set up Python ${{ matrix.python-version }}
         # uses: actions/setup-python@v5
         uses: priya-kinthali/setup-python@test-930
