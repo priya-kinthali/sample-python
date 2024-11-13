@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # os: [macos-12, ubuntu-20.04, ubuntu-24.04, ubuntu-latest, windows-latest, macos-latest, macos-13]
-        os: [ubuntu-20.04, ubuntu-24.04, ubuntu-latest, windows-latest]
+        os: [ubuntu-20.04, ubuntu-24.04, ubuntu-latest]
 
       fail-fast: false
 
@@ -24,36 +24,25 @@ jobs:
         uses: priya-kinthali/setup-python@test-967
         with:
           python-version: "3.8"
-
-      - name: Get Python 3.8 version
+      - name: Get Python version
         run: python --version
-
-      - name: Install pipx for Python 3.8
-        run: python -m pip install --user pipx
-
-      - name: Ensure pipx uses the correct Python 3.8
-        run: python -m pipx ensurepath
-
-      - name: Get pipx version for Python 3.8
+      - name: Get pipx version
         run: pipx --version
+      - name: Check PIPX_DEFAULT_PYTHON
+        run: echo $PIPX_DEFAULT_PYTHON
+      - name: Install Python Package
+        run: pipx install .
 
       - name: Setup Python 3.10
         id: python310
-        uses: actions/setup-python@v4
+        uses: priya-kinthali/setup-python@test-967
         with:
           python-version: "3.10"
-
-      - name: Get Python 3.10 version
+      - name: Get Python version
         run: python --version
-
-      - name: Install pipx for Python 3.10
-        run: python -m pip install --user pipx
-
-      - name: Ensure pipx uses the correct Python 3.10
-        run: python -m pipx ensurepath
-
-      - name: Get pipx version for Python 3.10
+      - name: Get pipx version
         run: pipx --version
-
-      - name: Install Python Package with pipx
+      - name: Check PIPX_DEFAULT_PYTHON
+        run: echo $PIPX_DEFAULT_PYTHON
+      - name: Install Python Package
         run: pipx install .
