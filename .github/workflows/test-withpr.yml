@@ -28,8 +28,8 @@ jobs:
         run: python --version
       - name: Get pipx version
         run: pipx --version
-      - name: Check PIPX_DEFAULT_PYTHON
-        run: echo $PIPX_DEFAULT_PYTHON
+      - name: Check Python Path
+        run: echo ${{ steps.python38.outputs.python-path }}
       - name: Install Python Package
         run: pipx install .
 
@@ -42,7 +42,7 @@ jobs:
         run: python --version
       - name: Get pipx version
         run: pipx --version
-      - name: Check PIPX_DEFAULT_PYTHON
-        run: echo $PIPX_DEFAULT_PYTHON
+      - name: Check Python Path
+        run: echo ${{ steps.python310.outputs.python-path }}
       - name: Install Python Package
         run: pipx install .
