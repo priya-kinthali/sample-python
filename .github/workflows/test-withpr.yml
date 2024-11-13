@@ -1,9 +1,9 @@
 name: test
 
 on:
-  push:
-    branches:
-      - test-967
+  # push:
+  #   branches:
+  #     - test-967
   workflow_dispatch:
 
 jobs:
