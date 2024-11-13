@@ -20,8 +20,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Python 3.11
-        id: python38
-        uses: priya-kinthali/setup-python@test-967
+        id: python311
+        uses: actions/setup-python/@v5
+        # uses: priya-kinthali/setup-python@test-967
         with:
           python-version: "3.11"
       - name: Get Python version
@@ -34,8 +35,9 @@ jobs:
         run: pipx install .
 
       - name: Setup Python 3.12
-        id: python310
-        uses: priya-kinthali/setup-python@test-967
+        id: python312
+        uses: actions/setup-python/@v5
+        # uses: priya-kinthali/setup-python@test-967
         with:
           python-version: "3.12"
       - name: Get Python version
