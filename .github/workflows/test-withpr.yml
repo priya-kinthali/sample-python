@@ -33,6 +33,8 @@ jobs:
         run: pipx --version
       # - name: Check Python Path
       #   run: echo ${{ steps.python38.outputs.python-path }}
+      - name: Run black
+        run: black .
       - name: Install Python Package
         run: pipx install .
 
