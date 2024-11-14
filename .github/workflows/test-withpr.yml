@@ -1,9 +1,9 @@
 name: test
 
 on:
-  # push:
-  #   branches:
-  #     - test-967
+  push:
+    branches:
+      - test-967
   workflow_dispatch:
 
 jobs:
@@ -18,7 +18,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      - name: Use pipx to install a package
+        run: |
+          pipx install black
       - name: Setup Python 3.11
         id: python311
         uses: actions/setup-python/@v5
@@ -34,17 +36,17 @@ jobs:
       - name: Install Python Package
         run: pipx install .
 
-      - name: Setup Python 3.12
-        id: python312
-        uses: actions/setup-python/@v5
-        # uses: priya-kinthali/setup-python@test-967
-        with:
-          python-version: "3.12"
-      - name: Get Python version
-        run: python --version
-      - name: Get pipx version
-        run: pipx --version
-      # - name: Check Python Path
-      #   run: echo ${{ steps.python310.outputs.python-path }}
-      - name: Install Python Package
-        run: pipx install .
+      # - name: Setup Python 3.12
+      #   id: python312
+      #   uses: actions/setup-python/@v5
+      #   # uses: priya-kinthali/setup-python@test-967
+      #   with:
+      #     python-version: "3.12"
+      # - name: Get Python version
+      #   run: python --version
+      # - name: Get pipx version
+      #   run: pipx --version
+      # # - name: Check Python Path
+      # #   run: echo ${{ steps.python310.outputs.python-path }}
+      # - name: Install Python Package
+      #   run: pipx install .
