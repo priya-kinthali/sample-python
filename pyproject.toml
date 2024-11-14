@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "setup-python-example"
+name = "sample-python"
 version = "0.1.0"
 description = ""
 authors = ["priya-kinthali <priya-kinthali@github.com>"]
