@@ -23,8 +23,8 @@ jobs:
           pipx install black
       - name: Setup Python 3.11
         id: python311
-        uses: actions/setup-python/@v5
-        # uses: priya-kinthali/setup-python@test-967
+        # uses: actions/setup-python/@v5
+        uses: priya-kinthali/setup-python@test-967
         with:
           python-version: "3.11"
       - name: Get Python version
