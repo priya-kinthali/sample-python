@@ -18,9 +18,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use pipx to install a package
-        run: |
-          pipx install black
+      # - name: Use pipx to install a package
+      #   run: |
+      #     pipx install black
+      - name: Install poetry
+        run: pipx install poetry
       - name: Setup Python 3.11
         id: python311
         # uses: actions/setup-python/@v5
@@ -31,10 +33,9 @@ jobs:
         run: python --version
       - name: Get pipx version
         run: pipx --version
-      # - name: Check Python Path
-      #   run: echo ${{ steps.python38.outputs.python-path }}
-      - name: Run black
-        run: black .
+      - run: poetry install
+      # - name: Run black
+      #   run: black .
       - name: Install Python Package
         run: pipx install .
 
