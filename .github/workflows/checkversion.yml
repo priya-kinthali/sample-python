@@ -26,8 +26,8 @@ jobs:
           tclsh <<< 'puts [info patchlevel]; exit'
           wish <<< 'puts [info patchlevel]; exit'
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        # uses: priya-kinthali/setup-python@test-930
+        # uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@test-930
 
         with:
           python-version: ${{ matrix.python-version }}
