@@ -26,8 +26,8 @@ jobs:
           tclsh <<< 'puts [info patchlevel]; exit'
           wish <<< 'puts [info patchlevel]; exit'
       - name: Set up Python ${{ matrix.python-version }}
-        # uses: actions/setup-python@v5
-        uses: priya-kinthali/setup-python@test-930
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-930
 
         with:
           python-version: ${{ matrix.python-version }}
@@ -39,9 +39,10 @@ jobs:
       #     pyenv install ${{ matrix.python-version }}
       #     pyenv global ${{ matrix.python-version }}
       #     python -m pip install --upgrade pip
-      - name: Verify Python Tk Version
+      - name: Print Tcl/Tk version
         run: |
-          python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
+          tclsh <<< 'puts [info patchlevel]; exit'
+          wish <<< 'puts [info patchlevel]; exit'
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
