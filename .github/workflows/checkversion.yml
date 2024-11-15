@@ -43,6 +43,9 @@ jobs:
         run: |
           tclsh <<< 'puts [info patchlevel]; exit'
           wish <<< 'puts [info patchlevel]; exit'
+      - name: Verify Python Tk Version
+        run: |
+          python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
