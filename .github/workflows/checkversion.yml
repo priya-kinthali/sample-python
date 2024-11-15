@@ -23,8 +23,8 @@ jobs:
       #     sudo rm -rf /Users/runner/hostedtoolcache/Python
       - name: Print Tcl/Tk version
         run: |
-          tclsh <<< 'puts [info patchlevel]'
-          wish <<< 'puts [info patchlevel]'
+          tclsh <<< 'puts [info patchlevel]; exit'
+          wish <<< 'puts [info patchlevel]; exit'
       - name: Set up Python ${{ matrix.python-version }}
         # uses: actions/setup-python@v5
         uses: priya-kinthali/setup-python@test-930
