@@ -11,7 +11,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         # python-version: ["3.8.18", "3.9.15", "3.10.4"]
-        python-version: ["3.9.13"]
+        python-version: ["3.9.20"]
 
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
