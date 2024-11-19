@@ -14,7 +14,7 @@ jobs:
         os: [macos-12, macos-latest, macos-13, self-hosted]
         # python-version: ['3.10', '3.12']
         python-version: ['3.8.10', '3.9.13', '3.10.11']
-
+      fail-fast: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
