@@ -70,3 +70,14 @@ jobs:
       - name: Run tk script (closes itself after 5 seconds)
         if: runner.os != 'Linux'
         run: python tk_min.py
+              # - name: Install Python ${{ matrix.python-version }} on macOS
+      #   if: runner.os == 'macOS'
+      #   run: |
+      #     brew update
+      #     brew install pyenv
+      #     pyenv install ${{ matrix.python-version }}
+      #     pyenv global ${{ matrix.python-version }}
+      #     python -m pip install --upgrade pip
+            # - name: Clear existing Python versions
+      #   run: |
+      #     sudo rm -rf /Users/runner/hostedtoolcache/Python
