@@ -1,9 +1,9 @@
 name: Setup Python on Windows Server 2022
 
 on:
-  # push:
-  #   branches:
-  #     - test-769
+  push:
+    branches:
+      - test-769
   workflow_dispatch:
     
 
@@ -14,10 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v4
+      - name: Set up Python 3.8.10
+        uses: priya-kinthali/setup-python@test-930
         with:
-          python-version: 3.11
+          python-version: 3.8.10
           cache: 'pip'
          
 
