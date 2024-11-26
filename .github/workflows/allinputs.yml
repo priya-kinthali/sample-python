@@ -3,7 +3,7 @@ name: Setup Python inputs test
 on:
   push:
     branches: 
-      - setup-python-test 
+      - test-649
   workflow_dispatch:
 
 jobs:
