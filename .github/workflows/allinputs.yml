@@ -1,0 +1,54 @@
+name: Setup Python inputs test 
+
+on:
+  push:
+    branches: 
+      - setup-python-test 
+  workflow_dispatch:
+
+jobs:
+  build-x86:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: priya-kinthali/setup-python@test-930 # actions/setup-python@v4
+      with:
+        python-version: '3.11.6'
+        architecture: 'x86'
+        cache: 'pip'
+        check-latest: true
+        # token: ${{ secrets.GIT_TOKEN_PRIYA }}
+        cache-dependency-path: 'requirements.txt'
+        update-environment: false
+        allow-prereleases: false
+    - run: pip install -r requirements.txt
+    - name: Run script
+      run: python app.py
+
+  build-x64:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: priya-kinthali/setup-python@test-930 # actions/setup-python@v4
+      with:
+        python-version: '3.8.10'
+        architecture: 'x64'
+        cache: 'pip'
+        check-latest: true
+        # token: ${{ secrets.PROXIMA_TOKEN }}
+        cache-dependency-path: 'requirements.txt'
+        update-environment: false
+        allow-prereleases: false
+    - run: pip install -r requirements.txt
+    - name: Run script
+      run: python app.py
+# test
