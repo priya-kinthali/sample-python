@@ -11,7 +11,7 @@ jobs:
       matrix:
         os: [macos-13]
         # python-version: ["3.8.10", "3.8.17", "3.9.1", "3.9.19", "3.9.19", "3.10.1", "3.10.14", "3.11.9"]
-        python-version: [ "3.10.16"]
+        python-version: [ "3.11.6"]
 
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
@@ -19,8 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        # uses: actions/setup-python@v5
-        uses: priya-kinthali/setup-python@test-tcl
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-tcl
         with:
           python-version: ${{ matrix.python-version }}
       # - name: Print Tcl/Tk version
