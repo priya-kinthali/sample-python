@@ -34,7 +34,7 @@ jobs:
 
       - name: Import tkinter
         run: | 
-          python3.9 -c "import tkinter; print(f'Tkinter imported successfully. Version: {tkinter.TkVersion}')"
+          python3.10 -c "import tkinter; print(f'Tkinter imported successfully. Version: {tkinter.TkVersion}')"
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
