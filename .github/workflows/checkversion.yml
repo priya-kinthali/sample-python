@@ -30,7 +30,7 @@ jobs:
       #     wish <<< 'puts [info patchlevel]; exit'
       - name: Adding Symlink
         run: |
-          ln -sf /usr/local/opt/tcl-tk@8 /usr/local/opt/tcl-tk/include/tcl-tk
+          ln -sf /usr/local/opt/tcl-tk/include/tcl-tk@8 /usr/local/opt/tcl-tk/include/tcl-tk
 
       - name: Import tkinter
         run: | 
