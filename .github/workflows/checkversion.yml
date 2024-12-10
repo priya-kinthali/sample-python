@@ -28,9 +28,8 @@ jobs:
       #   run: |
       #     tclsh <<< 'puts [info patchlevel]; exit'
       #     wish <<< 'puts [info patchlevel]; exit'
-      # - name: Adding Symlink
-      #   run: |
-      #     ln -sf /usr/local/opt/tcl-tk/include/tcl-tk /usr/local/opt/tcl-tk/include/tcl-tk
+      - name: Adding Symlink
+        run: ln -sf /usr/local/opt/tcl-tk@8 /usr/local/opt/tcl-tk
 
       - name: Import tkinter
         run: | 
