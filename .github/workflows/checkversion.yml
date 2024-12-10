@@ -28,9 +28,13 @@ jobs:
       #   run: |
       #     tclsh <<< 'puts [info patchlevel]; exit'
       #     wish <<< 'puts [info patchlevel]; exit'
-      - name: Verify Python Tk Version
+      - name: Adding Symlink
         run: |
-          python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
+          ln -sf /usr/local/opt/tcl-tk@8 /usr/local/opt/tcl-tk
+
+      - name: Import tkinter
+        run: | 
+          python3.9 -c "import tkinter; print(f'Tkinter imported successfully. Version: {tkinter.TkVersion}')"
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
