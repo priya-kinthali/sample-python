@@ -1,8 +1,8 @@
 name: Test Python Tk
 on:
-  # push:
-  #   branches:
-  #     - test-649
+  push:
+    branches:
+      - test-649
   workflow_dispatch:
 
 jobs:
@@ -12,53 +12,23 @@ jobs:
         # os: [macos-13,macos-13-xlarge, macos-latest-large, macos-latest, macos-15-large, macos-15, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, windows-2019, windows-latest]
         os: [macos-13]
 
-        python-version: ["3.10.4"]
+        python-version: ["3.9.20"]
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      # - name: Set up Python ${{ matrix.python-version }}
-      - uses: actions/setup-python@v5
-      # - uses: priya-kinthali/setup-python@test-930
+      - name: Clear existing Python versions
+        run: |
+          sudo rm -rf /Users/runner/hostedtoolcache/Python
+      - name: Set up Python ${{ matrix.python-version }}
+        # uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@test-tcltk
         with:
           python-version: ${{ matrix.python-version }}
-      # Install Tk 8.6 via Homebrew
-      # - name: Install Tk 8.6
-      #   run: |
-      #     brew install tcl-tk
-      #     brew link tcl-tk --force --overwrite
-      - name: Install Tcl/Tk
+      - name: Verify Python Tk Version
         run: |
-          brew reinstall tcl-tk
-          brew unlink tcl-tk && brew link tcl-tk --force --overwrite
-          export TCL_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
-          export TK_LIBRARY=$(brew --prefix tcl-tk)/lib/tcl-tk
-          echo "TCL_LIBRARY set to: $TCL_LIBRARY"
-          echo "TK_LIBRARY set to: $TK_LIBRARY"
           python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
-      # - name: Verify Python Tk Version
-      #   run: |
-      #     python -c "import tkinter; print(f'Tkinter TkVersion: {tkinter.TkVersion}')"
-
-      # - name: Install Python ${{ matrix.python-version }} on macOS
-      #   if: runner.os == 'macOS'
-      #   run: |
-      #     brew update
-      #     brew install pyenv
-      #     pyenv install ${{ matrix.python-version }}
-      #     pyenv global ${{ matrix.python-version }}
-      #     python -m pip install --upgrade pip
-      # - name: Install Tcl/Tk on macOS 13
-      #   if: matrix.os == 'macos-13'
-      #   run: |
-      #     brew update
-      #     brew install tcl-tk
-      #     echo 'export PATH="/usr/local/opt/tcl-tk/bin:$PATH"' >> ~/.zshrc
-      #     echo 'export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"' >> ~/.zshrc
-      #     echo 'export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"' >> ~/.zshrc
-      #     source ~/.zshrc
-
       - name: Prepare Ubuntu xvfb
         if: runner.os == 'Linux'
         run: |
@@ -70,14 +40,4 @@ jobs:
       - name: Run tk script (closes itself after 5 seconds)
         if: runner.os != 'Linux'
         run: python tk_min.py
-              # - name: Install Python ${{ matrix.python-version }} on macOS
-      #   if: runner.os == 'macOS'
-      #   run: |
-      #     brew update
-      #     brew install pyenv
-      #     pyenv install ${{ matrix.python-version }}
-      #     pyenv global ${{ matrix.python-version }}
-      #     python -m pip install --upgrade pip
-            # - name: Clear existing Python versions
-      #   run: |
-      #     sudo rm -rf /Users/runner/hostedtoolcache/Python
+
