@@ -1,8 +1,8 @@
 name: Test Python Tk
 on:
-  # push:
-  #   branches:
-  #     - test-649
+  push:
+    branches:
+      - test-649
   workflow_dispatch:
 
 jobs:
@@ -22,8 +22,8 @@ jobs:
         run: |
           sudo rm -rf /Users/runner/hostedtoolcache/Python
       - name: Set up Python ${{ matrix.python-version }}
-        # uses: actions/setup-python@v5
-        uses: priya-kinthali/setup-python@test-tcltk
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-tcltk
         with:
           python-version: ${{ matrix.python-version }}
       - name: Verify Python Tk Version
