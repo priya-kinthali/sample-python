@@ -1,0 +1,36 @@
+name: Reproduce Python 3.11.11 Error
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11.11"
+
+    - name: Install pipenv
+      run: |
+        python -m pip install --upgrade pipenv wheel
+
+    - name: Cache pipenv virtualenvs
+      uses: actions/cache@v4
+      id: pipenv-cache
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pipenv-
+
+    - name: Install dependencies
+      if: steps.pipenv-cache.outputs.cache-hit != 'true'
+      run: |
+        pipenv install --deploy --dev
+        pipenv install -e .
