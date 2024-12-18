@@ -1,15 +1,15 @@
 name: Reproduce Python 3.11.11 Error
 
 on:
-  # push:
-  #   branches:
-  #     - test-983
+  push:
+    branches:
+      - test-983
   workflow_dispatch:
 
 jobs:
   test:
     name: Run Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Check out repository code
@@ -18,7 +18,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.11.11"
+        python-version: "3.11.10"
       
     - name: Install pipenv
       run: |
