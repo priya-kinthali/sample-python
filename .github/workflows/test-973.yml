@@ -12,7 +12,9 @@ jobs:
       matrix:
         # os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-13-xlarge, macos-14, macos-15, macos-13, macos-latest-large, macos-15-large, windows-latest, windows-2019, windows-2022]  
         os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-14, macos-13, windows-2019]  
-        python-version: ["3.10.10t", "3.12.3t", "3.12.7t", "3.13.0t"]
+        # python-version: ["3.10.10t", "3.12.3t", "3.12.7t", "3.13.0t"]
+        python-version: ["3.13t"]
+
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
