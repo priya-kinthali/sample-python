@@ -10,7 +10,9 @@ jobs:
     strategy:
       matrix:
         os: [macos-13, macos-latest-large, macos-15-large]
-        python-version: ["3.8.18", "3.9.21", "3.10.16"]
+        # python-version: ["3.8.18", "3.9.21", "3.10.16"]
+        python-version: ["3.8", "3.9", "3.10"]
+
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
