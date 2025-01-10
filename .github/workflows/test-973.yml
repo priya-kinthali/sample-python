@@ -27,7 +27,7 @@ jobs:
         # uses: Quansight-Labs/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          architecture: 'x64-freethreaded'
+          # architecture: 'x64-freethreaded'
       - name: Verify Python Version
         run: |
           python -c "import sys; print(sys.version)"
