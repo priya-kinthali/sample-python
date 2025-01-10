@@ -35,3 +35,4 @@ jobs:
       - name: Run tk script (closes itself after 5 seconds)
         if: runner.os != 'Linux'
         run: python tk_min.py
+        #test
