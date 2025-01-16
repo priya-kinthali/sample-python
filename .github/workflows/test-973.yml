@@ -24,7 +24,7 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         # uses: actions/setup-python@v5
         # uses: priya-kinthali/setup-python@freethread-pr-319
-        uses: Quansight-Labs/setup-python@v5
+        uses: priyagupta108/setup-python@test-pr-973
         with:
           python-version: ${{ matrix.python-version }}
           # architecture: 'x64-freethreaded'
