@@ -12,20 +12,20 @@ jobs:
       fail-fast: false
       matrix:
         os: ["windows-latest", "ubuntu-latest", "macos-13"]
-        architecture: ["x64"]
-        include:
-          - os: "windows-latest"
-            architecture: "x86"
-          - os: "macos-14"
-            architecture: "arm64"
+        # architecture: ["x64"]
+        # include:
+        #   - os: "windows-latest"
+        #     architecture: "x86"
+          # - os: "macos-14"
+          #   architecture: "arm64"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
-        uses: priyagupta108/setup-python@test-pr-973
+        uses: priya-kinthali/setup-python@freethread-pr-319
         with:
-          python-version: "3.13t"
-          architecture: ${{ matrix.architecture }}
+          python-version: "3.13.0t"
+          architecture: 'x64-freethreaded'
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
         uses: priyagupta108/setup-python@test-pr-973
