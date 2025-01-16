@@ -1,9 +1,7 @@
 name: SandBox
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
   workflow_dispatch:
 
 jobs:
@@ -31,9 +29,8 @@ jobs:
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
         uses: priyagupta108/setup-python@test-pr-973
-        
         with:
-          python-version: "3.13"
+          python-version: "3.13.0"
           architecture: ${{ matrix.architecture }}
       - name: Check python
         run: |
@@ -45,10 +42,8 @@ jobs:
           fi
           which python
           which python3
-          which python3.13 
-          which python3.13t || true
+          which python3.13 || true
+          which python3.13t
           python3.13 -VV || python3 -VV
-          python3.13t -VV || true
+          python3.13t -VV
         shell: bash
-        # env:
-        #   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.1/x64/lib:/opt/hostedtoolcache/Python/3.13.1/x64-freethreaded/lib
