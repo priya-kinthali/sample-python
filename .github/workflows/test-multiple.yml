@@ -24,13 +24,13 @@ jobs:
         # uses: quansight-labs/setup-python@v5
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version: "3.13.0"
+          python-version: "3.13.1"
           architecture: ${{ matrix.architecture }}
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version: "3.13t"
+          python-version: "3.13.0"
           architecture: ${{ matrix.architecture }}
 
       - name: Check python
@@ -44,7 +44,7 @@ jobs:
           which python
           which python3
           which python3.13 || true
-          which python3.13t
-          python3.13 -VV || python3 -VV
-          python3.13t -VV
+          # which python3.13t
+          # python3.13 -VV || python3 -VV
+          # python3.13t -VV
         shell: bash
