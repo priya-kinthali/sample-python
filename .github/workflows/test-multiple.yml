@@ -46,9 +46,9 @@ jobs:
           which python
           which python3
           which python3.13 || true
-          which python3.13t
+          which python3.13t || true
           python3.13 -VV || python3 -VV
-          python3.13t -VV
+          python3.13t -VV || true
         shell: bash
-        env:
-          LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.1/x64/lib:/opt/hostedtoolcache/Python/3.13.1/x64-freethreaded/lib
+        # env:
+        #   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.1/x64/lib:/opt/hostedtoolcache/Python/3.13.1/x64-freethreaded/lib
