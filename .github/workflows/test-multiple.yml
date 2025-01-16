@@ -24,7 +24,7 @@ jobs:
         # uses: quansight-labs/setup-python@v5
         uses: priya-kinthali/setup-python@freethread-pr-319
         with:
-          python-version: "3.13.0t"
+          python-version: "3.13.0"
           architecture: 'x64-freethreaded'
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
