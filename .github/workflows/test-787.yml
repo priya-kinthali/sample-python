@@ -23,5 +23,6 @@ jobs:
         with:
           python-version-file: '.python-version'
 
-      - name: Run Python script
-        run: python app.py
+      - name: Run a script
+        run: |
+          echo "Running some script"
