@@ -1,50 +1,43 @@
-name: SandBox
+name: Test Multiple Python Versions (3.13t -> 3.13)
 
 on:
   push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
-  setup_python:
-    name: ${{ matrix.os }} ${{ matrix.architecture }}
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        os: ["windows-latest", "ubuntu-latest", "macos-13"]
-        architecture: ["x64"]
-        include:
-          - os: "windows-latest"
-            architecture: "x86"
-          - os: "macos-14"
-            architecture: "arm64"
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        # uses: quansight-labs/setup-python@v5
-        uses: priyagupta108/setup-python@test-pr-973
-        with:
-          python-version: "3.13.1"
-          architecture: ${{ matrix.architecture }}
-      - name: Set up Python
-        # uses: quansight-labs/setup-python@v5
-        uses: priyagupta108/setup-python@test-pr-973
-        with:
-          python-version: "3.13.0"
-          architecture: ${{ matrix.architecture }}
 
-      - name: Check python
-        run: |
-          set -ex
-          echo "$PATH"
-          # if [ -d /c/hostedtoolcache/windows ]; then
-          #     find /c/hostedtoolcache/windows/Python/3.13.0 -maxdepth 2 -name 'python*'
-          #     py --list
-          # fi
-          which python
-          which python3
-          which python3.13 || true
-          # which python3.13t
-          # python3.13 -VV || python3 -VV
-          # python3.13t -VV
-        shell: bash
+      - name: Set up Python 1
+        uses: Quansight-Labs/setup-python@v5
+        with:
+          python-version: "3.13t"
+
+      - name: Display Python version 1
+        run: python -c "import sys; print(sys.version)"
+
+      - run: python -VVV
+
+      - run: |
+          python -m pip install numpy
+          python -c "import numpy; print(numpy.random.randn(10))"
+      - name: Set up Python 2
+        uses: Quansight-Labs/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Display Python version 2
+        run: python -c "import sys; print(sys.version)"
+
+      - run: python -VVV
+
+      - run: |
+          python -m pip install numpy
+          python -c "import numpy; print(numpy.random.randn(10))"
