@@ -24,15 +24,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
-        # uses: priyagupta108/setup-python@test-pr-973
-        uses: astral-sh/setup-uv@v3
+        uses: priyagupta108/setup-python@test-pr-973
         with:
           python-version: "3.13t"
           architecture: ${{ matrix.architecture }}
       - name: Set up Python
         # uses: quansight-labs/setup-python@v5
-        # uses: priyagupta108/setup-python@test-pr-973
-        uses: astral-sh/setup-uv@v3
+        uses: priyagupta108/setup-python@test-pr-973
+        
         with:
           python-version: "3.13"
           architecture: ${{ matrix.architecture }}
@@ -51,3 +50,5 @@ jobs:
           python3.13 -VV || python3 -VV
           python3.13t -VV
         shell: bash
+        env:
+          LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.1/x64/lib:/opt/hostedtoolcache/Python/3.13.1/x64-freethreaded/lib
