@@ -1,9 +1,9 @@
 name: Test PR for Free Threaded Python Versions
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,9 +12,9 @@ jobs:
       matrix:
         # os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-13-xlarge, macos-14, macos-15, macos-13, macos-latest-large, macos-15-large, windows-latest, windows-2019, windows-2022]  
         # os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-14, macos-13, windows-2019]  
-        os: [macos-13, windows-2019]  
+        os: [macos-13, windows-2019, ubuntu-24.04]  
         # python-version: ["3.10.10t", "3.12.3t", "3.12.7t", "3.13.0t"]
-        python-version: ["3.13.1"]
+        python-version: ["3.13.1t"]
 
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
@@ -22,15 +22,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        # uses: actions/setup-python@v5
         # uses: priya-kinthali/setup-python@freethread-pr-319
-        # uses: Quansight-Labs/setup-python@v5
+        uses: Quansight-Labs/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           # architecture: 'x64-freethreaded'
       - name: Verify Python Version
         run: |
-          python -c "import sys; print(sys.version)"
+          # python -c "import sys; print(sys.version)"
+          which python3.13t
       - name: Run thread.py
         run: |
           python thread.py
