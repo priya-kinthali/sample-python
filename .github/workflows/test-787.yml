@@ -1,0 +1,27 @@
+name: Test Python Version from File
+on:
+  push:
+    branches:
+      - test-787-multipythonversion
+  workflow_dispatch:
+
+jobs:
+  test-python-version:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python from .python-version file
+        uses: actions/setup-python@v5
+        # uses: priya-kinthali/setup-python@test-787
+        with:
+          python-version-file: '.python-version'
+
+      - name: Run Python script
+        run: python app.py
