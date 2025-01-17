@@ -40,7 +40,7 @@ jobs:
           Start-Process -FilePath "python-$pythonVersion-amd64.exe" -ArgumentList "/quiet Include_freethreaded=1" -Wait
           Remove-Item -Force "python-$pythonVersion-amd64.exe"
           $freethreadedPath = [System.IO.Path]::Combine($env:LOCALAPPDATA, 'Programs', 'Python', 'Python313', 'python3.13t.exe')
-          echo $freethreadedPath >> $Env:GITHUB_PATH
+          echo "##[add-path]$freethreadedPath"
       - name: Verify Python Version
         run: |
           python -VVV
