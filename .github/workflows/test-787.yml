@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, macos-latest, macos-13, ubuntu-22.04, ubuntu-20.04]
-        os: [windows-latest, windows-2019]
+        os: [ubuntu-latest, macos-latest, macos-13, ubuntu-22.04, ubuntu-20.04]
+        # os: [windows-latest, windows-2019]
 
 
     steps:
