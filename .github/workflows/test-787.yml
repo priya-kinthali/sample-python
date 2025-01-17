@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, macos-13, ubuntu-22.04, ubuntu-20.04]
-        # os: [windows-latest, windows-2019, windows-2025]
+        # os: [ubuntu-latest, macos-latest, macos-13, ubuntu-22.04, ubuntu-20.04]
+        os: [windows-latest, windows-2019]
 
 
     steps:
@@ -20,8 +20,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Python from .python-version file
-        uses: actions/setup-python@v5
-        # uses: priya-kinthali/setup-python@test-787
+        # uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@test-787
         with:
           python-version-file: '.python-version'
 
