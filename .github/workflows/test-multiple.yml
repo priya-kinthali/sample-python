@@ -1,9 +1,9 @@
 name: Test Multiple Python Versions (3.13t -> 3.13)
 
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
