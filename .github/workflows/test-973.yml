@@ -40,7 +40,8 @@ jobs:
           Start-Process -FilePath "python-$pythonVersion-amd64.exe" -ArgumentList "/quiet Include_freethreaded=1" -Wait
           Remove-Item -Force "python-$pythonVersion-amd64.exe"
           $freethreadedPath = [System.IO.Path]::Combine($env:LOCALAPPDATA, 'Programs', 'Python', 'Python313', 'python3.13t.exe')
-          echo "$freethreadedPath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
+          [System.Environment]::SetEnvironmentVariable('PATH', $freethreadedPath + ';' + [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Process), [System.EnvironmentVariableTarget]::Process)
+
       - name: Verify Python Version
         run: |
           python -VVV
