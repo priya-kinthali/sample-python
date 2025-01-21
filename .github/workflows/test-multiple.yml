@@ -1,9 +1,9 @@
 name: Test Multiple Python Versions (3.13t -> 3.13)
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -14,30 +14,33 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-13, macos-14]
     steps:
       - uses: actions/checkout@v4
+      - name: Clear existing Python versions
+        run: |
+          sudo rm -rf /Users/runner/hostedtoolcache/Python
 
-      - name: Set up Python 1
-        uses: Quansight-Labs/setup-python@v5
+      - name: Set up Python
+        uses: quansight-labs/setup-python@v5
         with:
           python-version: "3.13t"
-
-      - name: Display Python version 1
-        run: python -c "import sys; print(sys.version)"
-
-      - run: python -VVV
-
-      - run: |
-          python -m pip install numpy
-          python -c "import numpy; print(numpy.random.randn(10))"
-      - name: Set up Python 2
-        uses: Quansight-Labs/setup-python@v5
+          architecture: ${{ matrix.architecture }}
+      - name: Set up Python
+        uses: quansight-labs/setup-python@v5
         with:
           python-version: "3.13"
+          architecture: ${{ matrix.architecture }}
+      - name: Check python
+        run: |
+          set -ex
+          echo "$PATH"
+          if [ -d /c/hostedtoolcache/windows ]; then
+              find /c/hostedtoolcache/windows/Python/3.13.0 -maxdepth 2 -name 'python*'
+              py --list
+          fi
+          which python
+          which python3
+          which python3.13 || true
+          which python3.13t
+          python3.13 -VV || python3 -VV
+          python3.13t -VV
+        shell: bash
 
-      - name: Display Python version 2
-        run: python -c "import sys; print(sys.version)"
-
-      - run: python -VVV
-
-      - run: |
-          python -m pip install numpy
-          python -c "import numpy; print(numpy.random.randn(10))"
