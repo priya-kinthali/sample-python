@@ -1,4 +1,4 @@
-name: SandBox ubuntu
+name: SandBox win,darwin
 
 on:
   push:
@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: ["windows-latest", "ubuntu-latest", "macos-13"]
-        os: [ "ubuntu-latest"]
+        os: ["windows-latest", "macos-13"]
+       
 
         architecture: ["x64"]
         include:
@@ -25,12 +25,12 @@ jobs:
       - name: Set up Python
         uses: priya-kinthali/setup-python@freethread-pr-319
         with:
-          python-version: "3.13.0t"
+          python-version: "3.13.1t"
           architecture: ${{ matrix.architecture }}
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13.0"
+          python-version: "3.13.1"
           architecture: ${{ matrix.architecture }}
       - name: Check python
         run: |
@@ -42,8 +42,8 @@ jobs:
           fi
           which python
           which python3
-          which python3.13.0 || true
-          which python3.13.0t
-          python3.13.0 -VV || python3 -VV
-          python3.13.0t -VV
+          which python3.13.1 || true
+          which python3.13.1t
+          python3.13.1 -VV || python3 -VV
+          python3.13.1t -VV
         shell: bash
