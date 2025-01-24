@@ -14,24 +14,24 @@ jobs:
         # os: ["windows-latest", "ubuntu-latest", "macos-13"]
         os: [ "ubuntu-latest"]
 
-        architecture: ["x64"]
-        include:
-          - os: "windows-latest"
-            architecture: "x86"
-          - os: "macos-14"
-            architecture: "arm64"
+        # architecture: ["x64"]
+        # include:
+        #   - os: "windows-latest"
+        #     architecture: "x86"
+        #   - os: "macos-14"
+        #     architecture: "arm64"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: priya-kinthali/setup-python@freethread-pr-319
         with:
           python-version: "3.13.0t"
-          architecture: ${{ matrix.architecture }}
+          architecture: "x64-freethreaded"
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13.0"
-          architecture: ${{ matrix.architecture }}
+          architecture: "x64"
       - name: Check python
         run: |
           set -ex
