@@ -26,12 +26,12 @@ jobs:
         uses: priya-kinthali/setup-python@freethread-pr-319
         with:
           python-version: "3.13.0t"
-          architecture: "x64-freethreaded"
+          # architecture: "x64-freethreaded"
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13.0"
-          architecture: "x64"
+          # architecture: "x64"
       - name: Check python
         run: |
           set -ex
