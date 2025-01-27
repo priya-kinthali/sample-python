@@ -20,8 +20,7 @@ jobs:
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version: '3.13.0t'
-          cache: 'pipenv'
+          python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
       - run: pipenv install
