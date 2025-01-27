@@ -23,6 +23,12 @@ jobs:
         with:
           python-version: '3.12.1'
           cache: 'poetry'
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Add Poetry to PATH
+        shell: bash
+        run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
       - run: poetry install
       - run: poetry run pytest
 
