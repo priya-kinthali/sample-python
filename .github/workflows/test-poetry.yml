@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version: '3.13.0'
+          python-version: '3.12.1'
           cache: 'poetry'
       - run: poetry install
       - run: poetry run pytest
