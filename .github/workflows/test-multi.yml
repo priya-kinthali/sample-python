@@ -5,33 +5,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup_python:
-    name: ${{ matrix.os }} ${{ matrix.architecture }}
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: ["windows-latest", "macos-13"]
-       
-
-        architecture: ["x64"]
-        include:
-          - os: "windows-latest"
-            architecture: "x86"
-          - os: "macos-14"
-            architecture: "arm64"
+        os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Set up Python
-        uses: priya-kinthali/setup-python@freethread-pr-319
+        uses: priyagupta108/setup-python@test-pr-973
         with:
           python-version: "3.13.1t"
-          architecture: ${{ matrix.architecture }}
+          # architecture: ${{ matrix.architecture }}
+          cache: 'pip'
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13.1"
-          architecture: ${{ matrix.architecture }}
+          # architecture: ${{ matrix.architecture }}
+          cache: 'pip'
       - name: Check python
         run: |
           set -ex
