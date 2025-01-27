@@ -1,7 +1,7 @@
 name: SandBox win,darwin
 
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:

@@ -1,9 +1,8 @@
-name: Test Using the python-version-file input
-
+name: Test pipenv
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -20,7 +19,8 @@ jobs:
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
+          python-version: '3.13.1t'
+          cache: 'pipenv'
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
       - run: pipenv install

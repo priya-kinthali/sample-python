@@ -1,0 +1,27 @@
+name: Test pipenv
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: priyagupta108/setup-python@test-pr-973
+        with:
+          python-version-file: '.python-version' # Read python version from a file pyproject.toml
+      - name: Verify Python Version
+        run: |
+          python -VVV
+
+
