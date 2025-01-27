@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: priya-kinthali/setup-python@test-973
+        uses: priyagupta108/setup-python@test-pr-973
         with:
           python-version: '3.13.0t'
           cache: 'pipenv'
