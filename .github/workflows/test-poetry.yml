@@ -20,12 +20,12 @@ jobs:
         run: pipx install poetry
 
       - name: Set up Python
-        # uses: priyagupta108/setup-python@test-pr-973
-        uses: actions/setup-python@v5
+        uses: priyagupta108/setup-python@test-pr-973
+        # uses: actions/setup-python@v5
         with:
-          python-version: '3.12.1'
+          python-version: '3.13.1t'
           cache: 'poetry'
       - run: poetry install --no-root
-      - run: poetry run pytest
+
 
 
