@@ -21,7 +21,7 @@ jobs:
           # architecture: ${{ matrix.architecture }}
           cache: 'pip'
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: priyagupta108/setup-python@test-pr-973
         with:
           python-version: "3.13.1"
           # architecture: ${{ matrix.architecture }}
