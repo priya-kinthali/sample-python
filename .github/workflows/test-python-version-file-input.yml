@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-973
         with:
-          python-version-file: '.python-version'
+          python-version-file: 'pyproject.toml'
       - name: Verify Python Version
         run: python -VVV
 
