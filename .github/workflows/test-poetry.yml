@@ -1,9 +1,9 @@
 name: Test Using the python-version-file input
 
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: '3.13.1t'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install -r requirements.txt
 
 
 
