@@ -1,4 +1,5 @@
-name: Test pipenv
+name: check latest
+
 on:
   # push:
   #   branches:
@@ -15,14 +16,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
+        # uses: actions/setup-python@v5
         with:
           python-version: '3.13'
           check-latest: true
-      - name: Install pipenv
-        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
-      - run: pipenv install
+      - name: Verify Python Version
+        run: |
+          python -VVV
+
 
 
