@@ -1,7 +1,7 @@
 # This is a comment
 # The following lines specify the Python versions to be used
 
-  3.14.0-alpha.4t
+  3.14.0-alpha.4-freethreaded
 3.14.0-alpha.3t
 
 "3.13.0t"
