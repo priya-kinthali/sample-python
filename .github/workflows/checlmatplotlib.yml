@@ -1,15 +1,15 @@
 name: Test Python Tk
 on:
-  # push:
-  #   branches:
-  #     - test-649
+  push:
+    branches:
+      - test-649
   workflow_dispatch:
 
 jobs:
   tests-poetry:
     strategy:
       matrix:
-        os: [macos-13, macos-latest-large, macos-15-large]
+        os: [macos-13]
         # python-version: ["3.8.18", "3.9.21", "3.10.16"]
         python-version: ["3.8", "3.9", "3.10"]
 
@@ -37,4 +37,5 @@ jobs:
       - name: Run tk script (closes itself after 5 seconds)
         if: runner.os != 'Linux'
         run: python tk_min.py
-        #test
+      - name: Run pytest
+        run: pytest
