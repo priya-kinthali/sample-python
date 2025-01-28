@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: priyagupta108/setup-python@test-pr-973
+        uses: Quansight-Labs/setup-python@v5
         with:
           python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
       - name: Verify Python Version
