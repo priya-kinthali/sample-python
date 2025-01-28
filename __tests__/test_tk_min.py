@@ -6,7 +6,8 @@ import sys
 @pytest.mark.xfail(
     ('GITHUB_ACTION' in os.environ) and
     sys.platform == 'darwin' and sys.version_info[:2] < (3, 9),
-    reason='Tk version mismatch on Azure macOS CI'
+    reason='Tk version mismatch on Azure macOS CI',
+    strict=True
 )
 def test_tk_min_script():
     # Run the tk_min.py script and check if it executes without errors
