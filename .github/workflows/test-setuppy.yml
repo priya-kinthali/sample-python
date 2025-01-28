@@ -1,8 +1,9 @@
-name: Using a list of file paths to cache dependencies
+name: Caching projects that use setup.py
+
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -15,15 +16,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
+        # uses: actions/setup-python@v5
         with:
           python-version: '3.13.1t'
           cache: 'pip'
-          cache-dependency-path: '**/requirements.txt'
-      - name: Verify Python Version
-        run: |
-          python -VVV
+          cache-dependency-path: setup.py
+      - run: pip install -e .
+
 
 
