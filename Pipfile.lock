@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "36e1c383c8f14d4e4b1d43774b9af054d8e0365c428949455cbbe4fa164cb539"
+            "sha256": "bb05e48b4006429d7b395bb33b8932d996fd9f8735c61170f9bcd5434611d6a1"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.13.0"
+            "python_version": "3.13.1t"
         },
         "sources": [
             {
