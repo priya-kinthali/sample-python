@@ -21,8 +21,10 @@ jobs:
         id: cp312
         with:
           python-version: "3.13.0t"
-      - run: echo '${{ steps.cp312.outputs.python-version }}'
-      - run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
+          cache: "poetry"
+      - run: echo '${{ steps.cp312.outputs.cache-hit }}' # true if cache-hit occurred on the primary key
+      # - run: echo '${{ steps.cp312.outputs.python-version }}'
+      # - run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
       - name: Verify Python Version
         run: |
           python -VVV
