@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  # push:
+  #   branches:
+  #     - test-649
+  workflow_dispatch:
 
 jobs:
   Job-A:
