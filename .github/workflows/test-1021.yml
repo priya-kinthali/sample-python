@@ -61,5 +61,5 @@ jobs:
 
       - name: Install newly added packages
         run: |
-          pip install -r /requirements.txt
+          pip install -r requirements.txt
           pip install psycopg2-binary==2.9.9
