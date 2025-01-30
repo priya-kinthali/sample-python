@@ -40,10 +40,19 @@ jobs:
             echo "sudo could not be found. Installing..."
             apt-get update && apt-get install -y sudo
           fi
+      - name: Install lsb-release
+        run: |
+          apt-get update
+          apt-get install -y lsb-release
+      - name: Create /etc/lsb-release
+        run: |
+          echo "DISTRIB_RELEASE=22.04" | tee -a /etc/lsb-release
       - name: Install Docker
         run: |
           apt-get update
           apt-get install -y docker.io
+      - name: Change ownership of /github/home
+        run: sudo chown -R $(whoami) /github/home
 
       - uses: actions/setup-python@v4
         with:
