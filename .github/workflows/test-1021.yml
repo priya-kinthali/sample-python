@@ -1,0 +1,56 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  Job-A:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Check out repository code 🕵🏻‍♀️
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.10'
+          cache: 'pip'
+
+      - name: Run Mypy
+        run: |
+          pip install -r requirements.txt
+
+  Job-B:
+    runs-on: [ubuntu-latest]
+    # services:
+      # postgresql:
+    container:
+      image: ubuntu:jammy
+        # ports:
+        #   - 5432:5432
+        # env:
+        #   SOME_VAR: SOMEVAR
+        # credentials:
+        #   username: someuser
+        #   password: somepass
+    steps:
+      - name: Check out repository code 🕵🏻‍♀️
+        uses: actions/checkout@v4
+      - name: Ensure Sudo is Installed
+        run: |
+          if ! command -v sudo &> /dev/null; then
+            echo "sudo could not be found. Installing..."
+            apt-get update && apt-get install -y sudo
+          fi
+      - name: Install Docker
+        run: |
+          apt-get update
+          apt-get install -y docker.io
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.10'
+          cache: 'pip'
+
+      - name: Install newly added packages
+        run: |
+          pip install -r /requirements.txt
+          pip install psycopg2-binary==2.9.9
