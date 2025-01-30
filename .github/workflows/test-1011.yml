@@ -23,8 +23,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        # uses: mayeut/setup-python@pypy-aarch64
+        # uses: actions/setup-python@v5
+        uses: mayeut/setup-python@pypy-aarch64
         with:
           python-version: ${{ matrix.python-version }}
 
