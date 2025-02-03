@@ -5,7 +5,7 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-python = "3.13.1t"
+python = "3.13.1"
 pyinstaller = "^6.11.0"
 pytest = "^8.3.3"
 

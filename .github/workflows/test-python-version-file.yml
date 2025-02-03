@@ -20,6 +20,7 @@ jobs:
         uses: Quansight-Labs/setup-python@v5
         with:
           python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
+          freethreaded: true
       - name: Verify Python Version
         run: |
           python -VVV
