@@ -22,7 +22,7 @@ jobs:
         uses: priyagupta108/setup-python@test-pr-973
         id: cp312
         with:
-          python-version: "3.13.0"
+          python-version: "3.13.1"
           freethreaded: true
           cache: "poetry"
       - run: echo '${{ steps.cp312.outputs.cache-hit }}' # true if cache-hit occurred on the primary key
