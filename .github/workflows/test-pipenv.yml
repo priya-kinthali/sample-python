@@ -19,8 +19,8 @@ jobs:
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version: '3.13.1'
-          freethreaded: true
+          python-version: '3.13.1t'
+          # freethreaded: true
           cache: 'pipenv'
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
