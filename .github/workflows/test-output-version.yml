@@ -25,7 +25,8 @@ jobs:
           python-version: "3.13.1"
           freethreaded: true
           cache: "poetry"
-      - run: echo '${{ steps.cp312.outputs.cache-hit }}' # true if cache-hit occurred on the primary key
+      # - run: echo '${{ steps.cp312.outputs.cache-hit }}' # true if cache-hit occurred on the primary key
+      - run: echo '${{ steps.cp312.outputs.python-version }}'
       # - run: echo '${{ steps.cp312.outputs.python-version }}'
       # - run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
       - name: Verify Python Version
