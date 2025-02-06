@@ -1,9 +1,9 @@
 name: Test Using the python-version-file input
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -27,6 +27,11 @@ jobs:
           # freethreaded: true
           cache: 'poetry'
       - run: poetry install --no-root
+      - name: Set up Python 3.13.1 default
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.1'
+          cache: 'poetry'
 
 
 
