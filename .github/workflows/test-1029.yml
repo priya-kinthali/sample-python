@@ -1,0 +1,28 @@
+name: Reproduce ModuleNotFoundError
+
+on:
+  push:
+    branches:
+      - test-1029
+  workflow_dispatch:
+
+jobs:
+  reproduce-error:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11"]
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install docker helper dependencies
+        run: pip install --upgrade setuptools setuptools_scm
