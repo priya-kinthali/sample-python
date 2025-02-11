@@ -22,7 +22,7 @@ jobs:
 
         with:
           python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
-          freethreaded: true
+          # freethreaded: true
       - name: Verify Python Version
         run: |
           python -VVV
