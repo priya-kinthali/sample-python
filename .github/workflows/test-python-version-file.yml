@@ -1,8 +1,8 @@
 name: Test pipenv
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -17,7 +17,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: priyagupta108/setup-python@test-pr-973
+        # uses: priyagupta108/setup-python@test-pr-973
+        uses: actions/setup-python@v5
+
         with:
           python-version-file: '.pyproject.toml' # Read python version from a file pyproject.toml
           freethreaded: true
