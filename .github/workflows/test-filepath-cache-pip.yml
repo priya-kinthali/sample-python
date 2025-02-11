@@ -23,6 +23,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
           cache-dependency-path: '**/requirements.txt'
+      - name: Install dependencies
+        run: pip install numpy pandas requests
       - name: Verify Python Version
         run: |
           python -VVV
