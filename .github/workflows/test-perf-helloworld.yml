@@ -22,7 +22,7 @@ jobs:
           python-version: '3.13.1'
       - name: Run default binary performance test
         run: |
-          python performance_test.py
+          python hello_world.py
       - name: Set up Python freethreaded binary
         uses: priyagupta108/setup-python@test-pr-973
         with:
@@ -30,4 +30,4 @@ jobs:
           freethreaded: true
       - name: Run freethreaded binary performance test
         run: |
-          python performance_test.py
+          python hello_world.py
