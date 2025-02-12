@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13.1'
-      - name: Run freethreaded binary performance test
+      - name: Run default binary performance test
         run: |
           python performance_test.py
       - name: Set up Python freethreaded binary
@@ -28,6 +28,6 @@ jobs:
         with:
           python-version: '3.13.1'
           freethreaded: true
-      - name: Run default binary performance test
+      - name: Run freethreaded binary performance test
         run: |
           python performance_test.py
