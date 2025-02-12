@@ -1,9 +1,9 @@
-name: Test Permoramnce
+name: Test Permoramnce for hello world
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -19,14 +19,14 @@ jobs:
       - name: Set up Python default binary
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13.0'
+          python-version: '3.13.1'
       - name: Run default binary performance test
         run: |
           python performance_test.py
       - name: Set up Python freethreaded binary
         uses: priyagupta108/setup-python@test-pr-973
         with:
-          python-version: '3.13.0'
+          python-version: '3.13.1'
           freethreaded: true
       - name: Run freethreaded binary performance test
         run: |
