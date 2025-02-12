@@ -1,0 +1,29 @@
+name: Test Permoramnce for hello world
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
+        os: [ubuntu-latest]
+
+        python-version: [ "3.13.1"]
+        include:
+        # Free-threaded
+        - { os: "ubuntu-latest", python-version: "3.13.1", disable-gil: true }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }} (free-threaded)
+        uses: deadsnakes/action@v3.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          nogil: ${{ matrix.disable-gil }}
+
