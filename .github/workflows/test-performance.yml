@@ -1,0 +1,33 @@
+name: check latest
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python default binary
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.1'
+      - name: Run freethreaded binary performance test
+        run: |
+          python performance_test.py
+      - name: Set up Python freethreaded binary
+        uses: priyagupta108/setup-python@test-pr-973
+        with:
+          python-version: '3.13.1'
+          freethreaded: true
+      - name: Run default binary performance test
+        run: |
+          python performance_test.py
