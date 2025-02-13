@@ -26,12 +26,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Check pip version before clearing cache
-        run: pip --version
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-      - name: Check pip version before clearing cache
-        run: pip --version
+      - name: Check urllib3 version
+        run: pip show urllib3
 
       - name: Install docker helper dependencies
         run: pip install --upgrade setuptools setuptools_scm
