@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install urllib3
+        run: pip install urllib3
       - name: Check urllib3 version
         run: pip show urllib3
 
