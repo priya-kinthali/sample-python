@@ -16,7 +16,7 @@ jobs:
         python-version: ["3.11"]
 
         # os: [windows-latest, macos-latest, ubuntu-latest]
-        os: [buildjet-2vcpu-ubuntu-2204]
+        os: [ubuntu-latest]
 
     steps:
       - name: Checkout repository
@@ -26,10 +26,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      # - name: Install urllib3
-      #   run: pip install urllib3
-      # - name: Check urllib3 version
-      #   run: pip show urllib3
+      - name: Install urllib3 and six
+        # run: pip install urllib3
+        run: pip install --upgrade urllib3 six
+      - name: Check urllib3 version
+        run: |
+          pip show six
+          pip show urllib3
 
       - name: Install docker helper dependencies
         run: pip install --upgrade setuptools setuptools_scm
