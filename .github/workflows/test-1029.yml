@@ -6,7 +6,7 @@ on:
       - test-1029
   workflow_dispatch:
   schedule:
-    - cron: '*/2 * * * *'  # This will run the workflow every 2 minutes
+    - cron: '*/1 * * * *'  # This will run the workflow every 2 minutes
 
 jobs:
   reproduce-error:
@@ -29,14 +29,7 @@ jobs:
       - name: Install docker helper dependencies
         run: pip install --upgrade setuptools setuptools_scm
 
-      - name: Run loop 15 times
-        run: |
-          for i in {1..15}
-          do
-            echo "Running iteration $i"
-            # Add your commands here
-            sleep 2
-          done
+
 
 # name: Reproduce ModuleNotFoundError
 
