@@ -8,7 +8,11 @@ on:
 jobs:
   install_and_check:
     runs-on: windows-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+        architecture: ['x86', 'x64']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,8 +22,8 @@ jobs:
         # uses: actions/setup-python@v5
 
         with:
-          python-version: '3.11'
-          architecture: 'x86'
+          python-version: ${{ matrix.python-version }}
+          architecture: ${{ matrix.architecture }}
       
       - name: Install pyinstaller with --user flag
         run: |
