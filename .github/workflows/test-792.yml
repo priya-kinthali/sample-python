@@ -1,6 +1,10 @@
 name: Checkout and Setup of Workflow
 
-on: [push, pull_request]
+on:
+  # push:
+  #   branches:
+  #     - poc-792
+  workflow_dispatch:
 
 jobs:
   build:
