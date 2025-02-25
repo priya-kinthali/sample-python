@@ -1,9 +1,9 @@
 name: Python workflow
 
 on:
-  push:
-    branches:
-      - poc-792
+  # push:
+  #   branches:
+  #     - poc-792
   workflow_dispatch:
 
 jobs:
