@@ -1,0 +1,27 @@
+name: Caching projects that use setup.py
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: priya-kinthali/setup-python@test-903
+        # uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.1'
+      - run: pip install -e .
+
+
+
