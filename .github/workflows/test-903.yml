@@ -17,7 +17,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Python
-        uses: priya-kinthali/setup-python@test-903
+        # uses: priya-kinthali/setup-python@test-903
+        uses: mahabaleshwars/setup-python@fix/candidate-not-iterable-error
         # uses: actions/setup-python@v5
         with:
           python-version: '3.13.1'
