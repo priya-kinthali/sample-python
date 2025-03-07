@@ -17,8 +17,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        # uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
-        uses: actions/setup-python@v5
+        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
+        # uses: actions/setup-python@v5
 
         with:
           python-version-file: '.tool-versions' # Read python version from a file pyproject.toml, .python-version
