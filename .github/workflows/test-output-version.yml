@@ -1,9 +1,9 @@
 name: Outputs
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -19,10 +19,12 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
       - name: Set up Python
-        uses: priyagupta108/setup-python@test-pr-973
+        # uses: priyagupta108/setup-python@test-pr-973
+        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         id: cp312
         with:
-          python-version: "3.13.1"
+          # python-version: "3.13.1"
+          python-version-file: '.tool-versions'
           freethreaded: true
           cache: "poetry"
       # - run: echo '${{ steps.cp312.outputs.cache-hit }}' # true if cache-hit occurred on the primary key
