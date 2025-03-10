@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Python
-        uses: priyagupta108/setup-python@test-pr-973
+        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         # uses: actions/setup-python@v5
         # with:
         #   python-version: '3.13.1'
