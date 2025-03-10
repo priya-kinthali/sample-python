@@ -24,7 +24,7 @@ jobs:
           python-version-file: '.tool-versions'
           # python-version: '3.8.11'
           # freethreaded: true
-          # check-latest: true
+          check-latest: true
       - name: Verify Python Version
         run: |
           python -VVV
