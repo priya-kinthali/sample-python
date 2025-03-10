@@ -19,8 +19,10 @@ jobs:
       - name: Set up Python
         uses: priyagupta108/setup-python@test-pr-973
         # uses: actions/setup-python@v5
+        # with:
+        #   python-version: '3.13.1'
         with:
-          python-version: '3.13.1'
+          python-version-file: '.tool-versions'
           freethreaded: true
           cache: 'pip'
           cache-dependency-path: setup.py
