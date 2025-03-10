@@ -17,14 +17,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
+        # uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         # uses: actions/setup-python@v5
+        uses: actions/setup-node@v4
 
         with:
-          python-version-file: '.tool-versions' # Read python version from a file pyproject.toml, .python-version
+          python-version-file: '.tool-versions' # Read python version from a file pyproject.toml, .python-version nodejs 20 #comment1
           # freethreaded: true
-      - name: Verify Python Version
+      # - name: Verify Python Version
+      #   run: |
+      #     python -VVV
+      - name: Verify Node.js Version
         run: |
-          python -VVV
+          node -v
 
 
