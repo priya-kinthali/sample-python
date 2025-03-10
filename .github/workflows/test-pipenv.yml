@@ -30,5 +30,6 @@ jobs:
       - name: Install pipenv
         run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
       # - run: pipenv install --python ${{ matrix.python-version }}
+      - run: pipenv install --no-root
 
 
