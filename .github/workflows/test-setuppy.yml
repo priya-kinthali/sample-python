@@ -1,9 +1,9 @@
 name: Caching projects that use setup.py
 
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
@@ -17,10 +17,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Python
-        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         # uses: actions/setup-python@v5
         # with:
         #   python-version: '3.13.1'
+        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         with:
           python-version-file: '.tool-versions'
           freethreaded: true
