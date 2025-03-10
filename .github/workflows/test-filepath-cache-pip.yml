@@ -1,8 +1,8 @@
 name: Using a list of file paths to cache dependencies
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,15 +12,18 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
-        python-version: ['3.13.1t', '3.13.1', '3.12', '3.11', '3.10']
+        # python-version: ['3.13.1t', '3.13.1', '3.12', '3.11', '3.10']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: priyagupta108/setup-python@test-pr-973
+        # uses: priyagupta108/setup-python@test-pr-973
+        # with:
+        #   python-version: ${{ matrix.python-version }}
+        uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version-file: '.tool-versions'
           cache: 'pip'
           cache-dependency-path: '**/requirements.txt'
       - name: Install dependencies
