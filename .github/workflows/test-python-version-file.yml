@@ -23,7 +23,7 @@ jobs:
 
         with:
           # python-version-file: '.tool-versions' # Read python version from a file pyproject.toml, .python-version nodejs 20 #comment1
-          node-version-file: '.tool-versions' # Read python version from a file pyproject.toml, .python-version nodejs 20 #comment1
+          node-version-file: '.tool-versions' # Read node version from a file  nodejs 22 #comment1
           # freethreaded: true
       # - name: Verify Python Version
       #   run: |
