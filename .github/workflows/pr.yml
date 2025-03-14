@@ -44,20 +44,12 @@ jobs:
       - name: Validate version
         run: |
           $pythonVersion = (python --version)
-          Write-Host "Python version: $pythonVersion"
-          echo "matrixversion is ${{ matrix.python-version }}"
-          $matrixVersion = "${{ matrix.python-version }}"
-          $matrixVersion = $matrixVersion -replace 't', ''
-          if ($pythonVersion -NotMatch $matrixVersion){
-            Write-Host "The current version is $pythonVersion; expected version is $matrixVersion"
+          $expectedVersion = "${{ matrix.python-version }}".TrimEnd('t')
+          if ("$pythonVersion" -NotMatch $expectedVersion){
+            Write-Host "The current version is $pythonVersion; expected version is $expectedVersion"
             exit 1
           }
           $pythonVersion
-          # if ("$pythonVersion" -NotMatch "${{ matrix.python-version -replace 't', '' }}"){
-          #   Write-Host "The current version is $pythonVersion; expected version is ${{ matrix.python-version }}"
-          #   exit 1
-          # }
-          # $pythonVersion
         shell: pwsh
 
 
