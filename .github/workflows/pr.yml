@@ -16,18 +16,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Python
-        # uses: priyagupta108/setup-python@test-pr-973
+      # - name: Set up Python
+      #   # uses: priyagupta108/setup-python@test-pr-973
+      #   uses: actions/setup-python@main
+      #   # uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
+      #   with:
+      #     # python-version-file: '.tool-versions'
+      #     python-version: 3.13.2t
+      #     # freethreaded: true
+      #     # check-latest: true
+      # - name: Verify Python Version
+      #   run: |
+      #     python -VVV
+      - name: Run with setup-python 3.13.2t
+        id: cp313
         uses: actions/setup-python@main
-        # uses: mahabaleshwars/setup-python@feature/tool-versions-file-support
         with:
-          # python-version-file: '.tool-versions'
-          python-version: 3.13.2t
-          # freethreaded: true
-          # check-latest: true
-      - name: Verify Python Version
-        run: |
-          python -VVV
+          python-version: '3.13.2t'
+      - name: Verify 3.13.2t
+        run: python __tests__/verify-python.py 3.13.2t
+      - name: Run python-path sample 3.13.2t
+        run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
 
 
 
