@@ -33,6 +33,7 @@ jobs:
         uses: actions/setup-python@main
         with:
           python-version: '3.13.2t'
+          freethreaded: true
       - name: Verify 3.13.2t
         run: python __tests__/verify-python.py 3.13.2t
       - name: Run python-path sample 3.13.2t
