@@ -30,16 +30,27 @@ jobs:
       # - name: Verify Python Version
       #   run: |
       #     python -VVV
-      - name: Run with setup-python 3.13.2t
-        id: cp313
-        uses: priya-kinthali/setup-python@sample-test
+      - name: Run with setup-python 3.13.1t
+        # id: cp313
+        uses: actions/setup-python@main
         with:
           python-version: '3.13.1t'
           # freethreaded: true
-      - name: Verify 3.12.7
-        run: python __tests__/verify-python.py 3.13.1t
-      - name: Run python-path sample 3.13.2t
-        run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
+      # - name: Verify 3.12.7
+      #   run: python __tests__/verify-python.py 3.13.1t
+      # - name: Run python-path sample 3.13.2t
+      #   run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
+      - name: Validate version
+        run: |
+          $pythonVersion = (python --version)
+          Write-Host "Python version: $pythonVersion"
+          if ("$pythonVersion" -NotMatch "${{ matrix.python-version }}"){
+            Write-Host "The current version is $pythonVersion; expected version is ${{ matrix.python-version }}"
+            exit 1
+          }
+          $pythonVersion
+        shell: pwsh
+
 
 
 
