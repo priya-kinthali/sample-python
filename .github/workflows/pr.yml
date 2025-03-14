@@ -7,25 +7,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+
+  test-with-t:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
+        os: [ubuntu-latest]
+        python-version:
+          - '3.13.2t'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Python
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          # python-version-file: '.tool-versions'
-          python-version: '3.13.2t'
-          # freethreaded: true
-          # check-latest: true
-      - name: Verify Python Version
-        run: |
-          python -VVV
+          python-version: ${{ matrix.python-version }}
 
 
 
