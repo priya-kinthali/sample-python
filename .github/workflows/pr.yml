@@ -30,7 +30,7 @@ jobs:
       #     python -VVV
       - name: Run with setup-python 3.13.2t
         id: cp313
-        uses: actions/setup-python@main
+        uses: priya-kinthali/setup-python@sample-test
         with:
           python-version: '3.13.2t'
           freethreaded: true
