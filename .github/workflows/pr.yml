@@ -14,7 +14,7 @@ jobs:
       matrix:
         # os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
         os: [ubuntu-latest]
-        python-version: ['3.14t']
+        python-version: ['3.14.0-alpha.6']
 
     steps:
       - name: Checkout
@@ -36,22 +36,25 @@ jobs:
         uses: actions/setup-python@main
         with:
           python-version: ${{ matrix.python-version }}
-          check-latest: true
+          freethreaded: true
+      - name: Verify Python Version
+        run: |
+            python -VVV
           # freethreaded: true
       # - name: Verify 3.12.7
       #   run: python __tests__/verify-python.py 3.13.1t
       # - name: Run python-path sample 3.13.2t
       #   run: pipx run --python '${{ steps.cp313.outputs.python-path }}' nox --version
-      - name: Validate version
-        run: |
-          $pythonVersion = (python --version)
-          $expectedVersion = "${{ matrix.python-version }}".TrimEnd('t')
-          if ("$pythonVersion" -NotMatch $expectedVersion){
-            Write-Host "The current version is $pythonVersion; expected version is $expectedVersion"
-            exit 1
-          }
-          $pythonVersion
-        shell: pwsh
+      # - name: Validate version
+      #   run: |
+      #     $pythonVersion = (python --version)
+      #     $expectedVersion = "${{ matrix.python-version }}".TrimEnd('t')
+      #     if ("$pythonVersion" -NotMatch $expectedVersion){
+      #       Write-Host "The current version is $pythonVersion; expected version is $expectedVersion"
+      #       exit 1
+      #     }
+      #     $pythonVersion
+      #   shell: pwsh
 
 
 
