@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         # os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest]
-        os: [ubuntu-20.04,ubuntu-22.04,setup-actions-ubuntu-arm64-2-core,ubuntu-24.04,setup-actions-ubuntu24-arm64-2-core,macos-13,macos-latest,windows-latest]
+        os: [ubuntu-20.04,ubuntu-22.04,ubuntu-24.04-arm,ubuntu-22.04-arm,ubuntu-24.04,macos-13,macos-latest,windows-latest]
         python-version: ['3.14.0-alpha.6']
 
     steps:
