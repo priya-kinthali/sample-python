@@ -1,0 +1,23 @@
+name: Test Python Setup selfhsoted windows 
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  setup-python:
+    runs-on: self-hosted
+    name: Set up Python on Windows
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Verify Python installation
+        run: python --version
