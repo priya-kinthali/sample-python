@@ -19,6 +19,8 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
+        env:
+          GITHUB_PAGES: true
       - name: Verify Python installation
         run: pip install -r requirements.txt
       - name: Verify Python version
