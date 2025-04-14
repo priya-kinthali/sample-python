@@ -24,15 +24,9 @@ jobs:
           python-version: |
             3.9
             3.13
-      - name: Check for Python 3.13 on Windows
-        if: runner.os == 'Windows'
-        shell: bash
+            3.12
+      - name: Verify Python Version
         run: |
-          py -3.13 --version || echo "python3.13 not found on Windows"
-
-      - name: Check for Python 3.13 on non-Windows
-        if: runner.os != 'Windows'
-        run: |
-          command -v python3.13 || echo "python3.13 not found on ${{ matrix.os }}"
+          python --version
       
 
