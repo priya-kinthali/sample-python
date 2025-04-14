@@ -28,7 +28,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: bash
         run: |
-          where python3.13 || echo "python3.13 not found on Windows"
+          py -3.13 --version || echo "python3.13 not found on Windows"
 
       - name: Check for Python 3.13 on non-Windows
         if: runner.os != 'Windows'
