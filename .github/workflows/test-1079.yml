@@ -24,12 +24,13 @@ jobs:
           python-version: |
             3.13
             3.9
-
-      - name: Verify Python installation
+      - name: Verify Python executables
         run: |
-          echo "Checking Python executables on ${{ matrix.os }}"
-          python --version
-          python3 --version || echo "python3 not found"
-          python3.9 --version || echo "python3.9 not found"
-          python3.13 --version || echo "python3.13 not found"
-          ls -la $(dirname $(which python)) || echo "Directory listing failed"  
+          echo "Checking Python executables on $RUNNER_OS"
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            dir C:\hostedtoolcache\windows\Python
+            where python3.13 || echo "python3.13.exe not found"
+          else
+            ls -l /opt/hostedtoolcache/Python
+            which python3.13 || echo "python3.13 not found"
+          fi
