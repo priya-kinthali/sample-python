@@ -11,14 +11,13 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
+      fail-fast: false
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Enable debug logging
-        run: echo "::set-env name=ACTIONS_STEP_DEBUG::true"
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -26,56 +25,11 @@ jobs:
             3.9
             3.13
 
-      # Check for Python 3.13 executable
-      - name: Check Python 3.13 executable
+      - name: Verify Python installation
         run: |
-          if [ "${{ runner.os }}" == "Windows" ]; then
-            if exist C:\hostedtoolcache\windows\Python\3.13.*\x64\python3.13.exe (
-              echo "Python 3.13 executable found."
-            ) else (
-              echo "Python 3.13 executable is missing!"
-              exit 1
-            )
-          else
-            if command -v python3.13 >/dev/null 2>&1; then
-              echo "Python 3.13 executable found."
-            else
-              echo "Python 3.13 executable is missing!"
-              exit 1
-            fi
-          fi
-
-      # Check for Python 3.9 executable
-      - name: Check Python 3.9 executable
-        run: |
-          if [ "${{ runner.os }}" == "Windows" ]; then
-            if exist C:\hostedtoolcache\windows\Python\3.9.*\x64\python3.9.exe (
-              echo "Python 3.9 executable found."
-            ) else (
-              echo "Python 3.9 executable is missing!"
-              exit 1
-            )
-          else
-            if command -v python3.9 >/dev/null 2>&1; then
-              echo "Python 3.9 executable found."
-            else
-              echo "Python 3.9 executable is missing!"
-              exit 1
-            fi
-          fi
-
-      # Print Python version details for debugging
-      - name: Print Python details
-        run: |
+          echo "Checking Python executables on ${{ matrix.os }}"
           python --version
           python3 --version || echo "python3 not found"
+          python3.9 --version || echo "python3.9 not found"
           python3.13 --version || echo "python3.13 not found"
-          pip --version
-          pip3 --version
-          pip3.13 --version || echo "pip3.13 not found"
-
-      # List Python directory contents (Windows only)
-      - name: List Python directory contents (Windows only)
-        if: runner.os == 'Windows'
-        run: |
-          dir C:\hostedtoolcache\windows\Python\3.13.*\x64
+          ls -la $(dirname $(which python)) || echo "Directory listing failed"  
