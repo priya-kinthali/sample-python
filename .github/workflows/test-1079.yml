@@ -22,15 +22,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: |
-            3.13
             3.9
-      - name: Verify Python executables
-        run: |
-          echo "Checking Python executables on $RUNNER_OS"
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            dir C:\hostedtoolcache\windows\Python
-            where python3.13 || echo "python3.13.exe not found"
-          else
-            ls -l /opt/hostedtoolcache/Python
-            which python3.13 || echo "python3.13 not found"
-          fi
+            3.13
+
