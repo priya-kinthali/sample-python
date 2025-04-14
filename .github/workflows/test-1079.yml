@@ -24,4 +24,12 @@ jobs:
           python-version: |
             3.9
             3.13
+      - name: Check for versioned executables
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            where python3.13 || echo "python3.13 not found on Windows"
+          else
+            command -v python3.13 || echo "python3.13 not found on ${{ matrix.os }}"
+          fi
+      
 
