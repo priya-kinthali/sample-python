@@ -31,7 +31,7 @@ jobs:
         shell: cmd
         run: |
           echo "Checking Python DLLs..."
-          dir C:\hostedtoolcache\windows\Python /s /b
+                    Get-ChildItem -Path C:\hostedtoolcache\windows\Python\3.13.2 -Recurse -Include python*.exe
 
       # - name: Check for Python 3.13 on non-Windows
       #   if: runner.os != 'Windows'
