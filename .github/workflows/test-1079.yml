@@ -31,7 +31,7 @@ jobs:
         shell: cmd
         run: |
           echo "Checking Python DLLs..."
-          dir C:\hostedtoolcache\windows\Python /s /b | findstr python*.dll
+          dir C:\hostedtoolcache\windows\Python /s /b
 
       # - name: Check for Python 3.13 on non-Windows
       #   if: runner.os != 'Windows'
