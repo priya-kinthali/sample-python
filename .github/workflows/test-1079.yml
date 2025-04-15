@@ -35,11 +35,19 @@ jobs:
           echo "Installing Python 3.13.1..."
           & $env:USERPROFILE\\python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
           
+          echo "Locating Python installation..."
+          $pythonPath = (where python | Select-String -Pattern "C:\\.*python.exe").Matches.Value
+          if (-not $pythonPath) {
+            Write-Error "Python installation not found."
+            exit 1
+          }
+          
           echo "Checking Python version directly from installation path..."
-          & "C:\Program Files\Python3131\python.exe" --version
+          & $pythonPath --version
           
           echo "Listing all files in the Python installation directory..."
-          Get-ChildItem -Path "C:\Program Files\Python3131" -Recurse -Force
+          $pythonDir = Split-Path -Path $pythonPath
+          Get-ChildItem -Path $pythonDir -Recurse -Force
 
       # - name: Check for Python 3.13 on Windows
       #   if: runner.os == 'Windows'
