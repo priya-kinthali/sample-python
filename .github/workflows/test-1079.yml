@@ -43,14 +43,15 @@ jobs:
       - name: Add Python to PATH
         shell: pwsh
         run: |
-          $pythonPath = "C:\Program Files\Python313"  # Adjust this path if needed
+          $pythonPath = "D:\a\python313"
           $env:Path = "$pythonPath;$env:Path"
           [System.Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Process)
 
       - name: Verify Python Installation
+        shell: pwsh
         run: |
-          python --version
-          pip --version
+          & "D:\a\python313\python.exe" --version
+          & "D:\a\python313\Scripts\pip.exe" --version
 
       # - name: Check for Python 3.13 on Windows
       #   if: runner.os == 'Windows'
