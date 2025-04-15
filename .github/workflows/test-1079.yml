@@ -10,7 +10,7 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest]
         # os: [windows-latest]
 
       fail-fast: false
@@ -37,14 +37,14 @@ jobs:
         shell: bash
         run: |
           echo "Checking Python files on macOS..."
-          find /Users/runner/hostedtoolcache/Python/3.13.2
+          ls -R /Users/runner/hostedtoolcache/Python/3.13.2
 
       - name: Check for Python 3.13 on Linux
         if: runner.os == 'Linux'
         shell: bash
         run: |
           echo "Checking Python files on Linux..."
-          find /opt/hostedtoolcache/Python/3.13.2
+          ls -R /opt/hostedtoolcache/Python/3.13.2
 
       # - name: Check for Python 3.13 on non-Windows
       #   if: runner.os != 'Windows'
