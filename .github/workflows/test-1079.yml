@@ -37,15 +37,14 @@ jobs:
         shell: bash
         run: |
           echo "Checking Python files on macOS..."
-          ls -R /Users/runner/hostedtoolcache/Python/3.13.2
+          find /Users/runner/hostedtoolcache/Python/3.13.2
 
       - name: Check for Python 3.13 on Linux
         if: runner.os == 'Linux'
         shell: bash
         run: |
           echo "Checking Python files on Linux..."
-          ls -R /opt/hostedtoolcache/Python/3.13.2
-
+          find /opt/hostedtoolcache/Python/3.13.2
       # - name: Check for Python 3.13 on non-Windows
       #   if: runner.os != 'Windows'
       #   run: |
