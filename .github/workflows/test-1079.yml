@@ -37,6 +37,9 @@ jobs:
       - name: Verify Download Location
         run: |
           Get-ChildItem -Path . -Filter "python-3.13.1-amd64.exe"
+      - name: Install Python 3.13.1
+        run: |
+          Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
 
       # - name: Verify Python Installation
       #   run: |
