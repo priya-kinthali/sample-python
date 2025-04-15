@@ -36,7 +36,16 @@ jobs:
 
       - name: Install Python 3.13.1
         run: |
+          if (!(Test-Path -Path "python-3.13.1-amd64.exe")) {
+              Write-Error "Python installer not found in the current directory."
+              exit 1
+          }
           Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -NoNewWindow -Wait
+          if ($LASTEXITCODE -ne 0) {
+              Write-Error "Python installation failed with exit code $LASTEXITCODE."
+              exit $LASTEXITCODE
+          }
+          Write-Output "Python 3.13.1 installed successfully."
       - name: Find Python Installation
         run: |
           Get-ChildItem -Path "C:\Program Files" -Recurse -Include python.exe
