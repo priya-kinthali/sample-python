@@ -37,11 +37,14 @@ jobs:
       - name: Install Python 3.13.1
         run: |
           Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -NoNewWindow -Wait
-
-      - name: Verify Python Installation
+      - name: Find Python Installation
         run: |
-          python --version
-          pip --version
+          Get-ChildItem -Path "C:\Program Files" -Recurse -Include python.exe
+
+      # - name: Verify Python Installation
+      #   run: |
+      #     python --version
+      #     pip --version
 
       # - name: Check for Python 3.13 on Windows
       #   if: runner.os == 'Windows'
