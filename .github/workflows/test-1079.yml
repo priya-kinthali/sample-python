@@ -29,15 +29,19 @@ jobs:
           Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 TargetDir=$InstallDir Include_test=0 PrependPath=0" -Wait
           echo "Installed to $InstallDir"
 
-      - name: Add Python 3.13.1 to PATH
+      - name: Check Version from Custom Install
+        run: |
+          & "C:\Python313\python.exe" --version
+          & "C:\Python313\python.exe" -m pip install --upgrade pip
+
+      - name: Optionally Add to PATH
         run: |
           echo "C:\Python313" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
           echo "C:\Python313\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
 
-      - name: Verify Python Version
+      - name: Use Correct Python in Scripts
         run: |
-          python --version
-
+          & "C:\Python313\python.exe" app.py
 
 
 
