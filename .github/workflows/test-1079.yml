@@ -40,10 +40,10 @@ jobs:
               Write-Error "Python installer not found in the current directory."
               exit 1
           }
-          $process = Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -NoNewWindow -Wait -PassThru
-          if ($process.ExitCode -ne 0) {
-              Write-Error "Python installation failed with exit code $($process.ExitCode)."
-              exit $process.ExitCode
+          Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -Verb RunAs -Wait -PassThru | Out-Null
+          if ($LASTEXITCODE -ne 0) {
+              Write-Error "Python installation failed with exit code $LASTEXITCODE."
+              exit $LASTEXITCODE
           }
           Write-Output "Python 3.13.1 installed successfully."
       - name: Find Python Installation
