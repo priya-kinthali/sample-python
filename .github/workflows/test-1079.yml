@@ -10,7 +10,6 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
-        # os: [windows-latest, macos-latest, ubuntu-latest]
         os: [windows-latest]
 
       fail-fast: false
@@ -20,64 +19,29 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Clear any existing tool cache
+      - name: Download Python 3.13.1 Installer
         run: |
-          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-          mkdir -p "${{ runner.tool_cache }}"
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: |
-      #       3.9
-      #       3.13
-      - name: Download Python 3.13.1
-        run: |
-          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe" -OutFile "python-3.13.1-amd64.exe"
+          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe" -OutFile "python-installer.exe"
 
-      - name: Verify Download Location
+      - name: Install Python 3.13.1 (Silent Install)
         run: |
-          Get-ChildItem -Path . -Filter "python-3.13.1-amd64.exe"
-      - name: Install Python 3.13.1
-        run: |
-          Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList "/quiet InstallAllUsers=1 TargetDir=D:\a\python313 PrependPath=1" -Wait
-
-      - name: Verify Python Installation Directory
-        shell: pwsh
-        run: |
-          if (-Not (Test-Path "D:\a\python313\python.exe")) {
-            Write-Error "Python installation not found in D:\a\python313"
-            exit 1
-          }
-          Write-Host "Python installed successfully in D:\a\python313"
+          Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0" -Wait
 
       - name: Verify Python Installation
-        shell: pwsh
         run: |
-          & "D:\a\python313\python.exe" --version
-          & "D:\a\python313\Scripts\pip.exe" --version
+          python --version
+          where python
 
-      # - name: Check for Python 3.13 on Windows
-      #   if: runner.os == 'Windows'
-      #   shell: cmd
-      #   run: |
-      #     echo "Checking Python DLLs..."
-      #     dir C:\hostedtoolcache\windows\Python\3.13.1 /s /b
-      # - name: Check for Python 3.13 on macOS
-      #   if: runner.os == 'macOS'
-      #   shell: bash
-      #   run: |
-      #     echo "Checking Python files on macOS..."
-      #     find /Users/runner/hostedtoolcache/Python/3.13.2
 
-      # - name: Check for Python 3.13 on Linux
-      #   if: runner.os == 'Linux'
-      #   shell: bash
-      #   run: |
-      #     echo "Checking Python files on Linux..."
-      #     find /opt/hostedtoolcache/Python/3.13.2
-      # - name: Check for Python 3.13 on non-Windows
-      #   if: runner.os != 'Windows'
-      #   run: |
-      #     command -v python3.13 || echo "python3.13 not found on ${{ matrix.os }}"
+
+
+
+
+
+
+
+
+
+
       
 
