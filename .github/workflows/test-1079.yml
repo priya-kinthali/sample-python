@@ -40,10 +40,12 @@ jobs:
       - name: Install Python 3.13.1
         run: |
           Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
-      - name: Refresh PATH
+      - name: Add Python to PATH
         shell: pwsh
         run: |
-          $env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
+          $pythonPath = "C:\Program Files\Python313"  # Adjust this path if needed
+          $env:Path = "$pythonPath;$env:Path"
+          [System.Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Process)
 
       - name: Verify Python Installation
         run: |
