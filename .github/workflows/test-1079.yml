@@ -20,31 +20,38 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: |
-            3.9
-            3.13
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: |
+      #       3.9
+      #       3.13
+      - name: Set up Python 3.13.2
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "Manually installing Python 3.13.2 on Windows..."
+          curl -o python-installer.exe https://www.python.org/ftp/python/3.13.2/python-3.13.2-amd64.exe
+          python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
+          python --version
       - name: Check for Python 3.13 on Windows
         if: runner.os == 'Windows'
         shell: cmd
         run: |
           echo "Checking Python DLLs..."
           dir C:\hostedtoolcache\windows\Python\3.13.2 /s /b
-      - name: Check for Python 3.13 on macOS
-        if: runner.os == 'macOS'
-        shell: bash
-        run: |
-          echo "Checking Python files on macOS..."
-          find /Users/runner/hostedtoolcache/Python/3.13.2
+      # - name: Check for Python 3.13 on macOS
+      #   if: runner.os == 'macOS'
+      #   shell: bash
+      #   run: |
+      #     echo "Checking Python files on macOS..."
+      #     find /Users/runner/hostedtoolcache/Python/3.13.2
 
-      - name: Check for Python 3.13 on Linux
-        if: runner.os == 'Linux'
-        shell: bash
-        run: |
-          echo "Checking Python files on Linux..."
-          find /opt/hostedtoolcache/Python/3.13.2
+      # - name: Check for Python 3.13 on Linux
+      #   if: runner.os == 'Linux'
+      #   shell: bash
+      #   run: |
+      #     echo "Checking Python files on Linux..."
+      #     find /opt/hostedtoolcache/Python/3.13.2
       # - name: Check for Python 3.13 on non-Windows
       #   if: runner.os != 'Windows'
       #   run: |
