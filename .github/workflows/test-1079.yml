@@ -26,19 +26,20 @@ jobs:
       #     python-version: |
       #       3.9
       #       3.13
-      - name: Set up Python 3.13.2
+      - name: Set up Python 3.13.1
         if: matrix.os == 'windows-latest'
         run: |
-          echo "Manually installing Python 3.13.2 on Windows..."
-          curl -o $env:USERPROFILE\\python-installer.exe https://www.python.org/ftp/python/3.13.2/python-3.13.2-amd64.exe
+          echo "Manually installing Python 3.13.1 on Windows..."
+          curl -o $env:USERPROFILE\\python-installer.exe https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe
           & $env:USERPROFILE\\python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
+          $env:Path = "C:\\Python3131;C:\\Python3131\\Scripts;" + $env:Path
           python --version
       - name: Check for Python 3.13 on Windows
         if: runner.os == 'Windows'
         shell: cmd
         run: |
           echo "Checking Python DLLs..."
-          dir C:\hostedtoolcache\windows\Python\3.13.2 /s /b
+          dir C:\hostedtoolcache\windows\Python\3.13.1 /s /b
       # - name: Check for Python 3.13 on macOS
       #   if: runner.os == 'macOS'
       #   shell: bash
