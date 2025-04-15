@@ -23,14 +23,20 @@ jobs:
         run: |
           Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe" -OutFile "python-installer.exe"
 
-      - name: Install Python 3.13.1 (Silent Install)
+      - name: Install Python 3.13.1 to Custom Directory
         run: |
-          Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0" -Wait
+          $InstallDir = "C:\Python313"
+          Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 TargetDir=$InstallDir Include_test=0 PrependPath=0" -Wait
+          echo "Installed to $InstallDir"
 
-      - name: Verify Python Installation
+      - name: Add Python 3.13.1 to PATH
+        run: |
+          echo "C:\Python313" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
+          echo "C:\Python313\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+
+      - name: Verify Python Version
         run: |
           python --version
-          where python
 
 
 
