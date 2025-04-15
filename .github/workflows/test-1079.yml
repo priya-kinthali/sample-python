@@ -34,6 +34,10 @@ jobs:
         run: |
           Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -NoNewWindow -Wait
 
+      - name: Update PATH to include Python 3.13.1
+        run: |
+          $pythonPath = "C:\Program Files\Python3131"
+          [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;"+[System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Process)
       - name: Verify Python Installation
         run: |
           python --version
