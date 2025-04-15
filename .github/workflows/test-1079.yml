@@ -37,6 +37,21 @@ jobs:
           
           echo "Locating Python installation..."
           $pythonPath = (where python | Select-String -Pattern "C:\\.*python.exe").Matches.Value
+          
+          if (-not $pythonPath) {
+            echo "Attempting to locate Python in default installation paths..."
+            $defaultPaths = @(
+              "C:\Program Files\Python3131\python.exe",
+              "$env:LOCALAPPDATA\Programs\Python\Python3131\python.exe"
+            )
+            foreach ($path in $defaultPaths) {
+              if (Test-Path $path) {
+                $pythonPath = $path
+                break
+              }
+            }
+          }
+          
           if (-not $pythonPath) {
             Write-Error "Python installation not found."
             exit 1
