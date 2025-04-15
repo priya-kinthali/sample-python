@@ -39,13 +39,16 @@ jobs:
           Get-ChildItem -Path . -Filter "python-3.13.1-amd64.exe"
       - name: Install Python 3.13.1
         run: |
-          Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
-      - name: Add Python to PATH
+          Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList "/quiet InstallAllUsers=1 TargetDir=D:\a\python313 PrependPath=1" -Wait
+
+      - name: Verify Python Installation Directory
         shell: pwsh
         run: |
-          $pythonPath = "D:\a\python313"
-          $env:Path = "$pythonPath;$env:Path"
-          [System.Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::Process)
+          if (-Not (Test-Path "D:\a\python313\python.exe")) {
+            Write-Error "Python installation not found in D:\a\python313"
+            exit 1
+          }
+          Write-Host "Python installed successfully in D:\a\python313"
 
       - name: Verify Python Installation
         shell: pwsh
