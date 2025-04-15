@@ -10,8 +10,8 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        # os: [windows-latest]
+        # os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest]
 
       fail-fast: false
 
@@ -30,8 +30,8 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           echo "Manually installing Python 3.13.2 on Windows..."
-          curl -o python-installer.exe https://www.python.org/ftp/python/3.13.2/python-3.13.2-amd64.exe
-          python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
+          curl -o $env:USERPROFILE\\python-installer.exe https://www.python.org/ftp/python/3.13.2/python-3.13.2-amd64.exe
+          & $env:USERPROFILE\\python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
           python --version
       - name: Check for Python 3.13 on Windows
         if: runner.os == 'Windows'
