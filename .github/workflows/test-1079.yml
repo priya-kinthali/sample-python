@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Clear any existing tool cache
+        run: |
+          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          mkdir -p "${{ runner.tool_cache }}"
       # - name: Set up Python
       #   uses: actions/setup-python@v5
       #   with:
@@ -34,10 +38,6 @@ jobs:
         run: |
           Start-Process -FilePath "python-3.13.1-amd64.exe" -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -NoNewWindow -Wait
 
-      - name: Update PATH to include Python 3.13.1
-        run: |
-          $pythonPath = "C:\Program Files\Python3131"
-          [System.Environment]::SetEnvironmentVariable("Path", "$pythonPath;"+[System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine), [System.EnvironmentVariableTarget]::Process)
       - name: Verify Python Installation
         run: |
           python --version
