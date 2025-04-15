@@ -35,17 +35,12 @@ jobs:
           echo "Installing Python 3.13.1..."
           & $env:USERPROFILE\\python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
           
-          echo "Manually updating PATH to include Python 3.13.1..."
-          $env:Path = "C:\Program Files\Python3131;C:\Program Files\Python3131\Scripts;" + $env:Path
-          
-          echo "Checking Python version..."
-          python --version
-          
-          echo "Checking installation path..."
-          where python
+          echo "Checking Python version directly from installation path..."
+          & "C:\Program Files\Python3131\python.exe" --version
           
           echo "Listing all files in the Python installation directory..."
           Get-ChildItem -Path "C:\Program Files\Python3131" -Recurse -Force
+
       # - name: Check for Python 3.13 on Windows
       #   if: runner.os == 'Windows'
       #   shell: cmd
