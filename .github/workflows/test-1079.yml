@@ -35,8 +35,8 @@ jobs:
           echo "Installing Python 3.13.1..."
           & $env:USERPROFILE\\python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
           
-          echo "Refreshing environment variables..."
-          refreshenv || echo "refreshenv not available, skipping..."
+          echo "Manually updating PATH to include Python 3.13.1..."
+          $env:Path = "C:\Program Files\Python3131;C:\Program Files\Python3131\Scripts;" + $env:Path
           
           echo "Checking Python version..."
           python --version
@@ -45,7 +45,7 @@ jobs:
           where python
           
           echo "Listing all files in the Python installation directory..."
-          dir "C:\Program Files\Python3131" /s /b || echo "Directory not found"
+          Get-ChildItem -Path "C:\Program Files\Python3131" -Recurse -Force
       # - name: Check for Python 3.13 on Windows
       #   if: runner.os == 'Windows'
       #   shell: cmd
