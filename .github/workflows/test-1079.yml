@@ -32,6 +32,19 @@ jobs:
         run: |
           echo "Checking Python DLLs..."
           dir C:\hostedtoolcache\windows\Python\3.13.2 /s /b
+      - name: Check for Python 3.13 on macOS
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          echo "Checking Python files on macOS..."
+          find /Users/runner/hostedtoolcache/Python/3.13.2
+
+      - name: Check for Python 3.13 on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo "Checking Python files on Linux..."
+          find /opt/hostedtoolcache/Python/3.13.2
 
       # - name: Check for Python 3.13 on non-Windows
       #   if: runner.os != 'Windows'
