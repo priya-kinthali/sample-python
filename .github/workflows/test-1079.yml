@@ -10,6 +10,7 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
+        # os: [windows-latest, macos-latest, ubuntu-latest]
         os: [windows-latest]
 
       fail-fast: false
@@ -19,39 +20,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Download Python 3.13.1 Installer
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: |
+            3.8.10
+      - name: Check for Python 3.13 on Windows
+        if: runner.os == 'Windows'
+        shell: cmd
         run: |
-          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe" -OutFile "python-installer.exe"
-
-      - name: Install Python 3.13.1 to Custom Directory
-        run: |
-          $InstallDir = "C:\Python313"
-          Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 TargetDir=$InstallDir Include_test=0 PrependPath=0" -Wait
-          echo "Installed to $InstallDir"
-
-      - name: Check Version from Custom Install
-        run: |
-          & "C:\Python313\python.exe" --version
-          & "C:\Python313\python.exe" -m pip install --upgrade pip
-
-      - name: Optionally Add to PATH
-        run: |
-          echo "C:\Python313" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
-          echo "C:\Python313\Scripts" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
-
-      - name: Use Correct Python in Scripts
-        run: |
-          & "C:\Python313\python.exe" app.py
-
-
-
-
-
-
-
-
-
-
-
-      
-
+          echo "Checking Python DLLs..."
+          dir C:\hostedtoolcache\windows\Python\3.8.10 /s /b
