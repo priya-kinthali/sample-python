@@ -31,12 +31,12 @@ jobs:
       #   run: |
       #     echo "Checking Python DLLs..."
       #     dir C:\hostedtoolcache\windows\Python\3.8.18 /s /b
-      - name: Check for Python 3.0.1 on Windows
+      - name: Check for Python 3.1.4 on Windows
         if: runner.os == 'Windows'
         shell: cmd
         run: |
           echo "Checking Python DLLs..."
-          dir C:\hostedtoolcache\windows\Python\3.0.1 /s /b
+          dir C:\hostedtoolcache\windows\Python\3.1.4 /s /b
       # - name: Check for Python 3.10.17 on Windows
       #   if: runner.os == 'Windows'
       #   shell: cmd
