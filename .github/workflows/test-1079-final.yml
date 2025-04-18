@@ -35,34 +35,34 @@ jobs:
         shell: cmd
         run: |
           echo "Checking Python 3.8.10 .exe files..."
-          dir C:\hostedtoolcache\windows\Python\3.8.10\*.exe /s /b
+          dir C:\hostedtoolcache\windows\Python\3.8.10\python*.exe /s /b
 
       - name: Check for Python 3.9.13 .exe files
         shell: cmd
         run: |
           echo "Checking Python 3.9.13 .exe files..."
-          dir C:\hostedtoolcache\windows\Python\3.9.13\*.exe /s /b
+          dir C:\hostedtoolcache\windows\Python\3.9.13\python*.exe /s /b
 
       - name: Check for Python 3.10.11 .exe files
         shell: cmd
         run: |
           echo "Checking Python 3.10.11 .exe files..."
-          dir C:\hostedtoolcache\windows\Python\3.10.11\*.exe /s /b
+          dir C:\hostedtoolcache\windows\Python\3.10.11\python*.exe /s /b
 
       - name: Check for Python 3.11.9 .exe files
         shell: cmd
         run: |
           echo "Checking Python 3.11.9 .exe files..."
-          dir C:\hostedtoolcache\windows\Python\3.11.9\*.exe /s /b
+          dir C:\hostedtoolcache\windows\Python\3.11.9\python*.exe /s /b
 
       - name: Check for Python 3.12.9 .exe files
         shell: cmd
         run: |
           echo "Checking Python 3.12.9 .exe files..."
-          dir C:\hostedtoolcache\windows\Python\3.12.9\*.exe /s /b
+          dir C:\hostedtoolcache\windows\Python\3.12.9\python*.exe /s /b
 
       - name: Check for Python 3.13.2 .exe files
         shell: cmd
         run: |
           echo "Checking Python 3.13.2 .exe files..."
-          dir C:\hostedtoolcache\windows\Python\3.13.2\*.exe /s /b
+          dir C:\hostedtoolcache\windows\Python\3.13.2\python*.exe /s /b
