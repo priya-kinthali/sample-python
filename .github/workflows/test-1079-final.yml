@@ -1,0 +1,68 @@
+name: Test 1079
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  test-python-executables:
+    strategy:
+      matrix:
+        # os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest]
+
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: |
+            3.8
+            3.13
+            3.9
+            3.10
+            3.11
+            3.12
+            3.13
+      - name: Check for Python 3.8.10 .exe files
+        shell: cmd
+        run: |
+          echo "Checking Python 3.8.10 .exe files..."
+          dir C:\hostedtoolcache\windows\Python\3.8.10\*.exe /s /b
+
+      - name: Check for Python 3.9.13 .exe files
+        shell: cmd
+        run: |
+          echo "Checking Python 3.9.13 .exe files..."
+          dir C:\hostedtoolcache\windows\Python\3.9.13\*.exe /s /b
+
+      - name: Check for Python 3.10.11 .exe files
+        shell: cmd
+        run: |
+          echo "Checking Python 3.10.11 .exe files..."
+          dir C:\hostedtoolcache\windows\Python\3.10.11\*.exe /s /b
+
+      - name: Check for Python 3.11.9 .exe files
+        shell: cmd
+        run: |
+          echo "Checking Python 3.11.9 .exe files..."
+          dir C:\hostedtoolcache\windows\Python\3.11.9\*.exe /s /b
+
+      - name: Check for Python 3.12.9 .exe files
+        shell: cmd
+        run: |
+          echo "Checking Python 3.12.9 .exe files..."
+          dir C:\hostedtoolcache\windows\Python\3.12.9\*.exe /s /b
+
+      - name: Check for Python 3.13.2 .exe files
+        shell: cmd
+        run: |
+          echo "Checking Python 3.13.2 .exe files..."
+          dir C:\hostedtoolcache\windows\Python\3.13.2\*.exe /s /b
