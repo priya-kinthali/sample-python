@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        architecture: [x86, x64]
+        # architecture: [x86, x64]
 
       fail-fast: false
 
@@ -23,13 +23,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.8.10
-          architecture: ${{ matrix.architecture }}
-      - name: Check for Python 3.8.10 .exe files
+          python-version: 3.8.1
+          # architecture: ${{ matrix.architecture }}
+      - name: Check for Python 3.8.1 .exe files
         shell: cmd
         run: |
-          echo "Checking Python 3.8.10 .exe files for architecture ${{ matrix.architecture }}..."
-          dir C:\hostedtoolcache\windows\Python\3.8.10\python-3.8.10*.exe /s /b
+          # echo "Checking Python 3.8.1 .exe files for architecture ${{ matrix.architecture }}..."
+          dir C:\hostedtoolcache\windows\Python\3.8.1\python-3.8.1*.exe /s /b
 
       # - name: Check for Python 3.9.13 .exe files
       #   shell: cmd
