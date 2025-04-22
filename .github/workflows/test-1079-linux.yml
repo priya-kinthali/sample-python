@@ -28,13 +28,13 @@ jobs:
             3.9
             3.10
           # architecture: ${{ matrix.architecture }}
-      # - name: Check for Python 3.8 files (Linux)
-      #   shell: bash
-      #   run: |
-      #     echo "Checking Python 3.8 files on Linux..."
-      #     find /opt/hostedtoolcache/Python/3.8 -name "python3.8.10*" -type f
-      # - name: Check for Python 3.9 files (Linux)
-      #   shell: bash
-      #   run: |
-      #     echo "Checking Python 3.9 files on Linux..."
-      #     find /opt/hostedtoolcache/Python/3.9 -name "python3.9*" -type f
+      - name: Check for Python 3.8.18 files (Linux)
+        shell: bash
+        run: |
+          echo "Checking Python 3.8.18 files on Linux..."
+          find /opt/hostedtoolcache/Python/3.8.18 -type f -exec ls -l {} \;
+      - name: Check for Python 3.9.22 files (Linux)
+        shell: bash
+        run: |
+          echo "Checking Python 3.9.22 files on Linux..."
+          find /opt/hostedtoolcache/Python/3.9.22 -type f -exec ls -l {} \;
