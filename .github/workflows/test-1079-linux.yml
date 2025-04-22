@@ -32,9 +32,9 @@ jobs:
         shell: bash
         run: |
           echo "Checking Python 3.8.18 files on Linux..."
-          find /opt/hostedtoolcache/Python/3.8.18 -type f -exec ls -l {} \;
+          ls -lR /opt/hostedtoolcache/Python/3.8.18
       - name: Check for Python 3.9.22 files (Linux)
         shell: bash
         run: |
           echo "Checking Python 3.9.22 files on Linux..."
-          find /opt/hostedtoolcache/Python/3.9.22 -type f -exec ls -l {} \;
+          ls -lR /opt/hostedtoolcache/Python/3.9.2
