@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
@@ -22,6 +23,7 @@ jobs:
         with:
           python-version: |
             3.13t
+            3.14t-dev
 
       - name: Check available python executables
         shell: bash
@@ -30,7 +32,10 @@ jobs:
           which python
           which python3
           which python3.13t || echo "python3.13t not found"
+          which python3.14t-dev || echo "python3.14t-dev not found"
+          command -v python || echo "python not found"
           python3.13t -VV || echo "python 3.13t not found"
+          python3.14t-dev -VV || echo "python 3.14t-dev not found"
           echo "Python version:"
           python --version
 
@@ -39,7 +44,7 @@ jobs:
         run: |
           python3.13t -VV || echo "python3.13t not callable"
 
-      # - name: Try calling python3.13
-      #   shell: bash
-      #   run: |
-      #     python3.14t -VV || echo "python3.14t not callable"
+      - name: Try calling python3.14t-dev
+        shell: bash
+        run: |
+          python3.14t-dev -VV || echo "python3.14t-dev not callable"
