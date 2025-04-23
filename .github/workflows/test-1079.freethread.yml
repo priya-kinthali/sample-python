@@ -24,6 +24,7 @@ jobs:
             3.13
             3.14
           freethreaded: true
+          check-latest: true
 
       - name: Check available python executables
         shell: bash
