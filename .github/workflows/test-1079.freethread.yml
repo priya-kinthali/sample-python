@@ -1,10 +1,10 @@
 # .github/workflows/test-python-versions.yml
-name: Test Python Minor Versions
+name: Test Python Minor Versions freethread
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -17,12 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.9 and 3.13
+      - name: Setup Python 3.13t and 3.14t
         uses: actions/setup-python@v5
         with:
           python-version: |
-            3.9
-            3.13
+            3.13t
+            3.14t
 
       - name: Check available python executables
         shell: bash
@@ -30,20 +30,19 @@ jobs:
           echo "Checking python executables"
           which python
           which python3
-          which python3.9 || echo "python3.9 not found"
-          which python3.13 || echo "python3.13 not found"
-          command -v python || echo "python not found"
-          command -v python3.9 || echo "python3.9 not found"
-          command -v python3.13 || echo "python3.13 not found"
+          which python3.13t || echo "python3.13t not found"
+          which python3.14t || echo "python3.14t not found"
+          python3.13t -VV || echo "python 3.13t not found"
+          python3.14t -VV || echo "python 3.14t not found"
           echo "Python version:"
           python --version
 
-      - name: Try calling python3.9
+      - name: Try calling python3.13t
         shell: bash
         run: |
-          python3.9 --version || echo "python3.9 not callable"
+          python3.13t -VV || echo "python3.13t not callable"
 
       - name: Try calling python3.13
         shell: bash
         run: |
-          python3.13 --version || echo "python3.13 not callable"
+          python3.14t -VV || echo "python3.14t not callable"
