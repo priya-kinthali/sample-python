@@ -17,14 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.13t and 3.14t
+      - name: Setup Python 3.13t 
         uses: actions/setup-python@v5
         with:
           python-version: |
-            3.13
-            3.14
-          freethreaded: true
-          check-latest: true
+            3.13t
 
       - name: Check available python executables
         shell: bash
@@ -33,9 +30,7 @@ jobs:
           which python
           which python3
           which python3.13t || echo "python3.13t not found"
-          which python3.14t || echo "python3.14t not found"
           python3.13t -VV || echo "python 3.13t not found"
-          python3.14t -VV || echo "python 3.14t not found"
           echo "Python version:"
           python --version
 
@@ -44,7 +39,7 @@ jobs:
         run: |
           python3.13t -VV || echo "python3.13t not callable"
 
-      - name: Try calling python3.13
-        shell: bash
-        run: |
-          python3.14t -VV || echo "python3.14t not callable"
+      # - name: Try calling python3.13
+      #   shell: bash
+      #   run: |
+      #     python3.14t -VV || echo "python3.14t not callable"
