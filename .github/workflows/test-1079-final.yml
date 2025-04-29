@@ -20,10 +20,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Clear existing Python versions
-        shell: pwsh
+      - name: Clear cache
         run: |
-          robocopy C:\ C:\hostedtoolcache\windows\Python /PURGE
+            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-1079
         with:
