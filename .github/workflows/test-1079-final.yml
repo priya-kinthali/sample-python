@@ -23,7 +23,7 @@ jobs:
       - name: Clear existing Python versions
         shell: pwsh
         run: |
-          Remove-Item -Recurse -Force "C:\hostedtoolcache\windows\Python"
+          robocopy C:\ C:\hostedtoolcache\windows\Python /PURGE
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-1079
         with:
