@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Clear existing Python versions
         run: |
-          sudo rm -rf /Users/runner/hostedtoolcache/Python
+          rm -rf /Users/runner/hostedtoolcache/Python
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-1079
         with:
