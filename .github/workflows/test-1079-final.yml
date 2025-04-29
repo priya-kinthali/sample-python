@@ -21,8 +21,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Clear existing Python versions
+        shell: pwsh
         run: |
-          rm -rf /Users/runner/hostedtoolcache/Python
+          Remove-Item -Recurse -Force "C:\hostedtoolcache\windows\Python"
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-1079
         with:
