@@ -27,9 +27,6 @@ jobs:
         uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.8
-            3.9
-            3.10
             3.11
             3.12
             3.13
@@ -40,36 +37,15 @@ jobs:
           echo "Checking python executables"
           which python
           which python3
-          which python3.8 || echo "python3.8 not found"
-          which python3.9 || echo "python3.9 not found"
-          which python3.10 || echo "python3.10 not found"
           which python3.11 || echo "python3.11 not found"
           which python3.12 || echo "python3.12 not found"
           which python3.13 || echo "python3.13 not found"
           command -v python || echo "python not found"
-          command -v python3.8 || echo "python3.8 not found"
-          command -v python3.9 || echo "python3.9 not found"
-          command -v python3.10 || echo "python3.10 not found"
           command -v python3.11 || echo "python3.11 not found"
           command -v python3.12 || echo "python3.12 not found"
           command -v python3.13 || echo "python3.13 not found"
           echo "Python version:"
           python --version
-      - name: Try calling python3.8
-        shell: bash
-        run: |
-          python3.8 --version || echo "python3.8 not callable"
-          python3.8 hello.py || echo "Failed to run hello.py with python3.8"
-      - name: Try calling python3.9
-        shell: bash
-        run: |
-          python3.9 --version || echo "python3.9 not callable"
-          python3.9 hello.py || echo "Failed to run hello.py with python3.9"
-      - name: Try calling python3.10
-        shell: bash
-        run: |
-          python3.10 --version || echo "python3.9 not callable"
-          python3.10 hello.py || echo "Failed to run hello.py with python3.10"
       - name: Try calling python3.11
         shell: bash
         run: |
