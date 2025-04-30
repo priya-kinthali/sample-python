@@ -10,8 +10,8 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
-        os: [windows-11-arm]
-        # architecture: [x86, x64]
+        os: [windows-latest]
+        architecture: [x86, x64]
 
       fail-fast: false
 
@@ -34,7 +34,7 @@ jobs:
             3.11
             3.12
             3.13
-          # architecture: ${{ matrix.architecture }}
+          architecture: ${{ matrix.architecture }}
       - name: Check available python executables
         shell: bash
         run: |
@@ -66,31 +66,31 @@ jobs:
         shell: bash
         run: |
           python3.8 --version || echo "python3.8 not callable"
-          python3.8 app.py || echo "Failed to run app.py with python3.8"
+          python3.8 hello.py || echo "Failed to run hello.py with python3.8"
       - name: Try calling python3.9
         shell: bash
         run: |
           python3.9 --version || echo "python3.9 not callable"
-          python3.9 app.py || echo "Failed to run app.py with python3.9"
+          python3.9 hello.py || echo "Failed to run hello.py with python3.9"
       - name: Try calling python3.10
         shell: bash
         run: |
           python3.10 --version || echo "python3.9 not callable"
-          python3.10 app.py || echo "Failed to run app.py with python3.10"
+          python3.10 hello.py || echo "Failed to run hello.py with python3.10"
       - name: Try calling python3.11
         shell: bash
         run: |
           python3.11 --version || echo "python3.11 not callable"
-          python3.11 app.py || echo "Failed to run app.py with python3.11"
+          python3.11 hello.py || echo "Failed to run hello.py with python3.11"
       - name: Try calling python3.12
         shell: bash
         run: |
           python3.12 --version || echo "python3.12 not callable"
-          python3.12 app.py || echo "Failed to run app.py with python3.12"
+          python3.12 hello.py || echo "Failed to run hello.py with python3.12"
       - name: Try calling python3.13
         shell: bash
         run: |
           python3.13 --version || echo "python3.13 not callable"
-          python3.13 app.py || echo "Failed to run app.py with python3.13"
+          python3.13 hello.py || echo "Failed to run hello.py with python3.13"
 
     
