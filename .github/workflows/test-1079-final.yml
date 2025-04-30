@@ -5,13 +5,12 @@ on:
     branches:
       - test-973
   workflow_dispatch:
-
 jobs:
   test-python-executables:
     strategy:
       matrix:
-        os: [windows-11-arm]
-        architecture: [x86, x64]
+        os: [windows-latest]
+        architecture: [x64, x86]
 
       fail-fast: false
 
@@ -26,7 +25,6 @@ jobs:
             mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
         uses: priya-kinthali/setup-python@test-1079
-        # uses: actions/setup-python@v5
         with:
           python-version: |
             3.8
@@ -57,12 +55,6 @@ jobs:
           command -v python3.13 || echo "python3.13 not found"
           echo "Python version:"
           python --version
-
-      - name: Check for Python 3.8.10 .exe files
-        shell: cmd
-        run: |
-          echo "Checking Python 3.8.10 .exe files for architecture ${{ matrix.architecture }}..."
-          dir C:\hostedtoolcache\windows\Python\3.8.10\*.exe /s /b
       - name: Try calling python3.8
         shell: bash
         run: |
@@ -93,5 +85,4 @@ jobs:
         run: |
           python3.13 --version || echo "python3.13 not callable"
           python3.13 hello.py || echo "Failed to run hello.py with python3.13"
-
     
