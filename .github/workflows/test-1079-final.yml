@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-11-arm]
-        architecture: [x64]
+        architecture: [x86]
 
       fail-fast: false
 
