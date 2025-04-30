@@ -19,12 +19,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Clear cache
-        run: |
-            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-            mkdir -p "${{ runner.tool_cache }}"
+      # - name: Clear cache
+      #   run: |
+      #       mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #       mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
-        uses: priya-kinthali/setup-python@test-1079
+        # uses: priya-kinthali/setup-python@test-1079
+        uses: actions/setup-python@v5
         with:
           python-version: |
             3.11
