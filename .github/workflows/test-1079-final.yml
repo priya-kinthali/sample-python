@@ -10,8 +10,8 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
-        os: [windows-latest]
-        architecture: [x86, x64]
+        os: [windows-11-arm]
+        # architecture: [x86, x64]
 
       fail-fast: false
 
@@ -20,13 +20,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      # - name: Clear cache
-      #   run: |
-      #       mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-      #       mkdir -p "${{ runner.tool_cache }}"
+      - name: Clear cache
+        run: |
+            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
-        # uses: priya-kinthali/setup-python@test-1079
-        uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@test-1079
+        # uses: actions/setup-python@v5
         with:
           python-version: |
             3.8
@@ -35,7 +35,7 @@ jobs:
             3.11
             3.12
             3.13
-          architecture: ${{ matrix.architecture }}
+          # architecture: ${{ matrix.architecture }}
       - name: Check available python executables
         shell: bash
         run: |
