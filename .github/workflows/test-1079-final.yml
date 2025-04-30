@@ -10,8 +10,8 @@ jobs:
   test-python-executables:
     strategy:
       matrix:
-        os: [windows-latest]
-        architecture: [x86, x64]
+        os: [windows-11-arm]
+        # architecture: [x86, x64]
 
       fail-fast: false
 
@@ -34,7 +34,7 @@ jobs:
             3.11
             3.12
             3.13
-          architecture: ${{ matrix.architecture }}
+          # architecture: ${{ matrix.architecture }}
       - name: Check available python executables
         shell: bash
         run: |
