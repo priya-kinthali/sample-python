@@ -1,8 +1,8 @@
 name: Test pipenv
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
@@ -32,6 +32,6 @@ jobs:
       - run: pipenv install 
       - name: Verify Python Version
         run: |
-            command -v python3.13
+            python3.13 --version
 
 
