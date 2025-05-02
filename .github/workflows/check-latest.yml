@@ -31,8 +31,7 @@ jobs:
           # check-latest: true
       - name: Verify Python Version
         run: |
-          # python3.13 --version
-          python3.13 -VVV
+          python3.13t -VV
 
 
 
