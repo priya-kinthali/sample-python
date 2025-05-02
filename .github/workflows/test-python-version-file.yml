@@ -28,7 +28,7 @@ jobs:
           # freethreaded: true
       - name: Verify Python Version
         run: |
-          python --version
+          which python3.13
 
 
 
