@@ -32,7 +32,7 @@ jobs:
       - name: Verify Python Version
         run: |
           # python3.13 --version
-          python -VVV
+          python3.13 -VVV
 
 
 
