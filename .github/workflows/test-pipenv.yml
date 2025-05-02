@@ -1,8 +1,8 @@
 name: Test pipenv
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
