@@ -21,6 +21,8 @@ jobs:
         run: |
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
+      - name: Install poetry
+        run: pipx install poetry
       - name: Set up Python
         # uses: actions/setup-python@v5
         uses: priya-kinthali/setup-python@test-1079
