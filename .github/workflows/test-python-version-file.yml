@@ -24,7 +24,7 @@ jobs:
         # uses: actions/setup-python@v5
         uses: priya-kinthali/setup-python@test-1079
         with:
-          python-version-file: '.python-version' # Read python version from a file pyproject.toml, .python-version or .tool-versions
+          python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml, .python-version or .tool-versions
           # freethreaded: true
       - name: Verify Python Version
         run: |
