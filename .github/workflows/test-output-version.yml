@@ -17,21 +17,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Clear cache
-        run: |
-            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-            mkdir -p "${{ runner.tool_cache }}"
+      - name: Install poetry
+        run: pipx install poetry
       - name: Set up Python
         # uses: actions/setup-python@v5
         uses: priya-kinthali/setup-python@test-1079
         id: cp312
         with:
-          python-version: "3.9.0 - 3.12.0"
+          python-version: "3.12.9"
 
       # - run: echo '${{ steps.cp312.outputs.cache-hit }}' # true if cache-hit occurred on the primary key
-      - run: echo '${{ steps.cp312.outputs.python-version }}'
       # - run: echo '${{ steps.cp312.outputs.python-version }}'
-      # - run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
+      # - run: echo '${{ steps.cp312.outputs.python-version }}'
+      - run: pipx run --python '${{ steps.cp312.outputs.python-path }}' nox --version
       - name: Verify Python Version
         run: |
           python --version
