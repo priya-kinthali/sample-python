@@ -35,5 +35,8 @@ jobs:
                   echo "Python 3.13 path: $PY313_PATH"
                   $PY39_PATH --version
                   $PY313_PATH --version
+                env:
+                  PY39_PATH: ${{ env.PY39_PATH }}
+                  PY313_PATH: ${{ env.PY313_PATH }}
 
      
