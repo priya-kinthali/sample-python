@@ -2,9 +2,9 @@
 name: Test Python patch Versions cached 
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,13 +12,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-13]
+        os: [windows-latest]
       fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.13t 
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: |
@@ -34,14 +34,12 @@ jobs:
           echo "Checking python executables"
           which python
           which python3
-          which python3.13.2t || echo "python3.13.2t not found"
           which python3.13.3 || echo "python3.13.3 not found"
           which python3.12.10 || echo "python3.12.10 not found"
           which python3.11.9 || echo "python3.11.9 not found"
           which python3.10.11 || echo "python3.10.11 not found"
           which python3.9.13 || echo "python3.9.13 not found"
           command -v python || echo "python not found"
-          python3.13.2t -VV || echo "python 3.13.2t not found"
           command -v python3.13.3 || echo "python3.13.3 not found"
           command -v python3.12.10 || echo "python3.12.10 not found"
           command -v python3.11.9 || echo "python3.11.9 not found"
@@ -49,11 +47,6 @@ jobs:
           command -v python3.9.13 || echo "python3.9.13 not found"
           echo "Python version:"
           python --version
-
-      - name: Try calling python3.13.2t
-        shell: bash
-        run: |
-          python3.13.2t -VV || echo "python3.13.2t not callable"
 
       - name: Try calling python3.13.3
         shell: bash
