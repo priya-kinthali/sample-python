@@ -29,6 +29,7 @@ jobs:
                 run: echo "PY313_PATH=$(which python)" >> $GITHUB_ENV
 
               - name: Use both Python versions
+                shell: bash
                 run: |
                   echo "Python 3.9 path: $PY39_PATH"
                   echo "Python 3.13 path: $PY313_PATH"
