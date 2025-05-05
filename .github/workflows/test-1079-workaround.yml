@@ -30,6 +30,8 @@ jobs:
           "@
           Set-Content -Path $aliasPath -Value $batchContent
           echo "$aliasDir" >> $env:GITHUB_PATH
+          # Reload PATH for the current session
+          $env:PATH += ";$aliasDir"
       - name: Check available python executables
         shell: pwsh
         run: |
