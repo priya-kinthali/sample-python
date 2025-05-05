@@ -6,37 +6,36 @@ on:
       - test-973
   workflow_dispatch:
 jobs:
-          test:
-            runs-on: windows-latest
-            steps:
-              - name: Checkout code
-                uses: actions/checkout@v4
+  test-python-versions:
+    runs-on: ubuntu-latest
 
-              - name: Set up Python 3.9
-                uses: actions/setup-python@v5
-                with:
-                  python-version: 3.9
-              - name: Get Python 3.9 path
-                id: py39
-                run: echo "PY39_PATH=$(which python)" >> $GITHUB_ENV
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python 3.9
+        id: setup-python-3-9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+      - name: Capture Python 3.9 path
+        run: echo "Python 3.9 path ${{ steps.setup-python-3-9.outputs.python-path }}"
+      - name: Set up Python 3.13
+        id: setup-python-3-13
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.13
+      - name: Capture Python 3.13 path
+        run: echo "Python 3.13 path ${{ steps.setup-python-3-13.outputs.python-path }}"
 
-              - name: Set up Python 3.13
-                uses: actions/setup-python@v5
-                with:
-                  python-version: 3.13
-              - name: Get Python 3.13 path
-                id: py313
-                run: echo "PY313_PATH=$(which python)" >> $GITHUB_ENV
+      # Step 4: Use both versions in your CI workflow
+      - name: Run tests with Python 3.9
+        run: |
+          ${{ steps.setup-python-3-9.outputs.python-path }}/bin/python --version
+          ${{ steps.setup-python-3-9.outputs.python-path }}/bin/python hello.py
 
-              - name: Use both Python versions
-                shell: bash
-                run: |
-                  echo "Python 3.9 path: $PY39_PATH"
-                  echo "Python 3.13 path: $PY313_PATH"
-                  $PY39_PATH --version
-                  $PY313_PATH --version
-                env:
-                  PY39_PATH: ${{ env.PY39_PATH }}
-                  PY313_PATH: ${{ env.PY313_PATH }}
+      - name: Run tests with Python 3.13
+        run: |
+          ${{ steps.setup-python-3-13.outputs.python-path }}/bin/python --version
+          ${{ steps.setup-python-3-13.outputs.python-path }}/bin/python hello.py
 
      
