@@ -1,0 +1,46 @@
+# .github/workflows/test-python-versions.yml
+name: Test Python patch Versions cached 
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  test-multiple-python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python 3.13t 
+        uses: actions/setup-python@v5
+        with:
+          python-version: |
+            3.13.3
+
+      - name: Check available python executables
+        shell: bash
+        run: |
+          echo "Checking python executables"
+          which python
+          which python3
+          which python3.13.3 || echo "python3.13.3 not found"
+          command -v python || echo "python not found"
+          command -v python3.13.3 || echo "python3.13.3 not found"
+          echo "Python version:"
+          python --version
+
+      - name: Try calling python3.13.3
+        shell: bash
+        run: |
+          python3.13.3 --version || echo "python3.13.3 not callable"
+          python3.13.3 hello.py || echo "Failed to run hello.py with python3.13.3"
+
+
+
