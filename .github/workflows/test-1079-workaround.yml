@@ -1,48 +1,38 @@
 name: Test 1079 with fix
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 jobs:
-  test-multiple-python:
-    runs-on: windows-latest
+          test:
+            runs-on: windows-latest
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v4
 
-    steps:
-      - uses: actions/checkout@v4
+              - name: Set up Python 3.9
+                uses: actions/setup-python@v5
+                with:
+                  python-version: 3.9
+              - name: Get Python 3.9 path
+                id: py39
+                run: echo "PY39_PATH=$(which python)" >> $GITHUB_ENV
 
-      - name: Setup Python 3.13.3
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.13.3
+              - name: Set up Python 3.13
+                uses: actions/setup-python@v5
+                with:
+                  python-version: 3.13
+              - name: Get Python 3.13 path
+                id: py313
+                run: echo "PY313_PATH=$(which python)" >> $GITHUB_ENV
 
-      - name: Create python3.13 alias for Windows
-        shell: pwsh
-        run: |
-          $pythonPath = "${env:pythonLocation}\\python.exe"
-          $aliasDir = "$env:USERPROFILE\\bin"
-          New-Item -ItemType Directory -Force -Path $aliasDir
-          $aliasPath = "$aliasDir\\python3.13.bat"
-          $batchContent = @"
-          @echo off
-          "$pythonPath" %*
-          "@
-          Set-Content -Path $aliasPath -Value $batchContent
-          echo "$aliasDir" >> $env:GITHUB_PATH
-          # Reload PATH for the current session
-          $env:PATH += ";$aliasDir"
-      - name: Check available python executables
-        shell: pwsh
-        run: |
-          echo "Checking python executables"
-          which python
-          which python3
-          which python3.13 || echo "python3.13 not found"
-          python --version
-          python3 --version
-      - name: Try calling python3.13
-        shell: pwsh
-        run: |
-          python3.13 --version || echo "python3.13 not callable"
-          python3.13 hello.py || echo "Failed to run hello.py with python3.13"
+              - name: Use both Python versions
+                run: |
+                  echo "Python 3.9 path: $PY39_PATH"
+                  echo "Python 3.13 path: $PY313_PATH"
+                  $PY39_PATH --version
+                  $PY313_PATH --version
+
+     
