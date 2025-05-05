@@ -30,12 +30,12 @@ jobs:
       # Step 4: Use both versions in your CI workflow
       - name: Run tests with Python 3.9
         run: |
-          ${{ steps.setup-python-3-9.outputs.python-path }}/bin/python --version
-          ${{ steps.setup-python-3-9.outputs.python-path }}/bin/python hello.py
+          ${{ steps.setup-python-3-9.outputs.python-path }} --version
+          ${{ steps.setup-python-3-9.outputs.python-path }} hello.py
 
       - name: Run tests with Python 3.13
         run: |
-          ${{ steps.setup-python-3-13.outputs.python-path }}/bin/python --version
-          ${{ steps.setup-python-3-13.outputs.python-path }}/bin/python hello.py
+          ${{ steps.setup-python-3-13.outputs.python-path }} --version
+          ${{ steps.setup-python-3-13.outputs.python-path }} hello.py
 
      
