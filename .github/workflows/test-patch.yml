@@ -26,7 +26,9 @@ jobs:
       - name: Create python3.13.3 alias
         shell: bash
         run: |
-          ln -s /opt/hostedtoolcache/Python/3.13.3/x64/bin/python /usr/bin/python3.13.3
+          mkdir -p $HOME/bin
+          ln -s /opt/hostedtoolcache/Python/3.13.3/x64/bin/python $HOME/bin/python3.13.3
+          echo "$HOME/bin" >> $GITHUB_PATH
       
       - name: Check available python executables
         shell: bash
