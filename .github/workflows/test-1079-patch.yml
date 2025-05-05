@@ -22,17 +22,16 @@ jobs:
         with:
           python-version: |
             3.11.8
-            3.11.7
-            3.10.17
-            3.9.22
+            3.10.11
+            3.9.13
       - name: Check available python executables
         shell: bash
         run: |
           echo "Checking python executables"
           which python
           which python
-          which python3.9.22 || echo "python3.9.22 not found"
-          which python3.11 || echo "python3.11 not found"
+          which python3.10.11 || echo "python3.10.11 not found"
+          which python3.9 || echo "python3.9 not found"
           command -v python3.11 || echo "python3.11 not found"
           echo "Python version:"
           python --version
