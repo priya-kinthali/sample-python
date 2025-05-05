@@ -21,9 +21,11 @@ jobs:
         shell: pwsh
         run: |
           $pythonPath = "${env:pythonLocation}\python.exe"
-          $aliasPath = "$env:USERPROFILE\python3.13.bat"
-          Set-Content -Path $aliasPath -Value "@echo off`n%pythonPath% %*"
-          echo "$env:USERPROFILE" >> $env:GITHUB_PATH
+          $aliasDir = "$env:USERPROFILE\bin"
+          New-Item -ItemType Directory -Force -Path $aliasDir
+          $aliasPath = "$aliasDir\python3.13.bat"
+          Set-Content -Path $aliasPath -Value "@echo off`n\"$pythonPath\" %*"
+          echo "$aliasDir" >> $env:GITHUB_PATH
 
       - name: Check available python executables
         shell: pwsh
@@ -31,7 +33,7 @@ jobs:
           echo "Checking python executables"
           where python
           where python3
-          which python3.13 || echo "python3.13 not found"
+          where python3.13 || echo "python3.13 not found"
           python --version
           python3 --version
 
