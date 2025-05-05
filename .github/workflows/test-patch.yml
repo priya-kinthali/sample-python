@@ -23,7 +23,11 @@ jobs:
         with:
           python-version: |
             3.13.3
-
+      - name: Create python3.13.3 alias
+        shell: bash
+        run: |
+          ln -s /opt/hostedtoolcache/Python/3.13.3/x64/bin/python /usr/bin/python3.13.3
+      
       - name: Check available python executables
         shell: bash
         run: |
@@ -35,6 +39,7 @@ jobs:
           command -v python3.13.3 || echo "python3.13.3 not found"
           echo "Python version:"
           python --version
+          python3 --version
 
       - name: Try calling python3.13.3
         shell: bash
