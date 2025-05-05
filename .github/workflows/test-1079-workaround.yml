@@ -20,10 +20,10 @@ jobs:
       - name: Create python3.13 alias for Windows
         shell: pwsh
         run: |
-          $pythonPath = "${env:pythonLocation}\python.exe"
-          $aliasDir = "$env:USERPROFILE\bin"
+          $pythonPath = "${env:pythonLocation}\\python.exe"
+          $aliasDir = "$env:USERPROFILE\\bin"
           New-Item -ItemType Directory -Force -Path $aliasDir
-          $aliasPath = "$aliasDir\python3.13.bat"
+          $aliasPath = "$aliasDir\\python3.13.bat"
           Set-Content -Path $aliasPath -Value "@echo off`n\"$pythonPath\" %*"
           echo "$aliasDir" >> $env:GITHUB_PATH
 
