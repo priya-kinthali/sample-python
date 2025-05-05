@@ -47,6 +47,23 @@ jobs:
           command -v python3.9.13 || echo "python3.9.13 not found"
           echo "Python version:"
           python --version
+          python3 --version
+          which python3.11 || echo "python3.11 not found"
+      - name: Try calling python
+        shell: bash
+        run: |
+          python --version || echo "pytho not callable"
+          python hello.py || echo "Failed to run hello.py with python"
+      - name: Try calling python3
+        shell: bash
+        run: |
+          python3 --version || echo "pytho not callable"
+          python3 hello.py || echo "Failed to run hello.py with python"
+      - name: Try calling python3.11
+        shell: bash
+        run: |
+          python3.11 --version || echo "pytho not callable"
+          python3.11 hello.py || echo "Failed to run hello.py with python3.11"
 
       - name: Try calling python3.13.3
         shell: bash
