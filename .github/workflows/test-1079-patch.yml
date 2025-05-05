@@ -27,7 +27,6 @@ jobs:
             3.11.9
             3.10.11
             3.9.13
-            3.8.10
 
       - name: Check available python executables
         shell: bash
@@ -41,7 +40,6 @@ jobs:
           which python3.11.9 || echo "python3.11.9 not found"
           which python3.10.11 || echo "python3.10.11 not found"
           which python3.9.13 || echo "python3.9.13 not found"
-          which python3.8.10 || echo "python3.8.10 not found"
           command -v python || echo "python not found"
           python3.13.2t -VV || echo "python 3.13.2t not found"
           command -v python3.13.3 || echo "python3.13.3 not found"
@@ -49,7 +47,6 @@ jobs:
           command -v python3.11.9 || echo "python3.11.9 not found"
           command -v python3.10.11 || echo "python3.10.11 not found"
           command -v python3.9.13 || echo "python3.9.13 not found"
-          command -v python3.8.10 || echo "python3.8.10 not found"
           echo "Python version:"
           python --version
 
@@ -83,9 +80,5 @@ jobs:
         run: |
           python3.9.13 --version || echo "python3.9.13 not callable"
           python3.9.13 hello.py || echo "Failed to run hello.py with python3.9.13"
-      - name: Try calling python3.8.10
-        shell: bash
-        run: |
-          python3.8.10 --version || echo "python3.8.10 not callable"
-          python3.8.10 hello.py || echo "Failed to run hello.py with python3.8.10"
+
 
