@@ -1,10 +1,10 @@
 # .github/workflows/test-python-versions.yml
-name: Test Python patch Versions cached freethread
+name: Test Python patch Versions cached 
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [windows-latest, ubuntu-latest, macos-13]
       fail-fast: false
 
     steps:
@@ -22,12 +22,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: |
-            3.13.2t
             3.13.3
             3.12.10
-            3.11.12
-            3.10.17
-            3.9.22
+            3.11.9
+            3.10.11
+            3.9.13
+            3.8.10
 
       - name: Check available python executables
         shell: bash
@@ -38,16 +38,18 @@ jobs:
           which python3.13.2t || echo "python3.13.2t not found"
           which python3.13.3 || echo "python3.13.3 not found"
           which python3.12.10 || echo "python3.12.10 not found"
-          which python3.11.12 || echo "python3.11.12 not found"
-          which python3.10.17 || echo "python3.10.17 not found"
-          which python3.9.22 || echo "python3.9.22 not found"
+          which python3.11.9 || echo "python3.11.9 not found"
+          which python3.10.11 || echo "python3.10.11 not found"
+          which python3.9.13 || echo "python3.9.13 not found"
+          which python3.8.10 || echo "python3.8.10 not found"
           command -v python || echo "python not found"
           python3.13.2t -VV || echo "python 3.13.2t not found"
           command -v python3.13.3 || echo "python3.13.3 not found"
           command -v python3.12.10 || echo "python3.12.10 not found"
-          command -v python3.11.12 || echo "python3.11.12 not found"
-          command -v python3.10.17 || echo "python3.10.17 not found"
-          command -v python3.9.22 || echo "python3.9.22 not found"
+          command -v python3.11.9 || echo "python3.11.9 not found"
+          command -v python3.10.11 || echo "python3.10.11 not found"
+          command -v python3.9.13 || echo "python3.9.13 not found"
+          command -v python3.8.10 || echo "python3.8.10 not found"
           echo "Python version:"
           python --version
 
@@ -60,20 +62,30 @@ jobs:
         shell: bash
         run: |
           python3.13.3 --version || echo "python3.13.3 not callable"
+          python3.13.3 hello.py || echo "Failed to run hello.py with python3.13.3"
       - name: Try calling python3.12.10
         shell: bash
         run: |
           python3.12.10 --version || echo "python3.12.10 not callable"
-      - name: Try calling python3.11.12
+          python3.12.10 hello.py || echo "Failed to run hello.py with python3.12.10"
+      - name: Try calling python3.11.9
         shell: bash
         run: |
-          python3.11.12 --version || echo "python3.11.12 not callable"
-      - name: Try calling python3.10.17
+          python3.11.9 --version || echo "python3.11.9 not callable"
+          python3.11.9 hello.py || echo "Failed to run hello.py with python3.11.9"
+      - name: Try calling python3.10.11
         shell: bash
         run: |
-          python3.10.17 --version || echo "python3.10.17 not callable"
-      - name: Try calling python3.9.22
+          python3.10.11 --version || echo "python3.10.11 not callable"
+          python3.10.11 hello.py || echo "Failed to run hello.py with python3.10.11"
+      - name: Try calling python3.9.13
         shell: bash
         run: |
-          python3.9.22 --version || echo "python3.9.22 not callable"
+          python3.9.13 --version || echo "python3.9.13 not callable"
+          python3.9.13 hello.py || echo "Failed to run hello.py with python3.9.13"
+      - name: Try calling python3.8.10
+        shell: bash
+        run: |
+          python3.8.10 --version || echo "python3.8.10 not callable"
+          python3.8.10 hello.py || echo "Failed to run hello.py with python3.8.10"
 
