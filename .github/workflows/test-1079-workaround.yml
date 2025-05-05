@@ -33,9 +33,9 @@ jobs:
           foreach ($version in $versions) {
               $aliasPath = "$aliasDir\\python$version.bat"
               $batchContent = @"
-              @echo off
-              "$pythonPath" %*
-              "@
+          @echo off
+          "$pythonPath" %*
+          "@
               Set-Content -Path $aliasPath -Value $batchContent
           }
           echo "$aliasDir" >> $env:GITHUB_PATH
