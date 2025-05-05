@@ -22,9 +22,8 @@ jobs:
         uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.13.3
             3.12.10
-            3.11.8
+            3.13.2
             3.10.11
             3.9.13
 
@@ -34,21 +33,19 @@ jobs:
           echo "Checking python executables"
           which python
           which python3
-          which python3.13.3 || echo "python3.13.3 not found"
           which python3.12.10 || echo "python3.12.10 not found"
-          which python3.11.8 || echo "python3.11.8 not found"
+          which python3.13.2 || echo "python3.13.2 not found"
           which python3.10.11 || echo "python3.10.11 not found"
           which python3.9.13 || echo "python3.9.13 not found"
           command -v python || echo "python not found"
-          command -v python3.13.3 || echo "python3.13.3 not found"
           command -v python3.12.10 || echo "python3.12.10 not found"
-          command -v python3.11.8 || echo "python3.11.8 not found"
+          command -v python3.13.2 || echo "python3.13.2 not found"
           command -v python3.10.11 || echo "python3.10.11 not found"
           command -v python3.9.13 || echo "python3.9.13 not found"
           echo "Python version:"
           python --version
           python3 --version
-          which python3.11 || echo "python3.11 not found"
+          which python3.13 || echo "python3.13 not found"
       - name: Try calling python
         shell: bash
         run: |
@@ -59,11 +56,11 @@ jobs:
         run: |
           python3 --version || echo "python not callable"
           python3 hello.py || echo "Failed to run hello.py with python"
-      - name: Try calling python3.11
+      - name: Try calling python3.13
         shell: bash
         run: |
-          python3.11 --version || echo "pytho not callable"
-          python3.11 hello.py || echo "Failed to run hello.py with python3.11"
+          python3.13 --version || echo "pytho not callable"
+          python3.13 hello.py || echo "Failed to run hello.py with python3.13"
 
       - name: Try calling python3.13.3
         shell: bash
@@ -75,11 +72,11 @@ jobs:
         run: |
           python3.12.10 --version || echo "python3.12.10 not callable"
           python3.12.10 hello.py || echo "Failed to run hello.py with python3.12.10"
-      - name: Try calling python3.11.8
+      - name: Try calling python3.13.2
         shell: bash
         run: |
-          python3.11.8 --version || echo "python3.11.8 not callable"
-          python3.11.8 hello.py || echo "Failed to run hello.py with python3.11.8"
+          python3.13.2 --version || echo "python3.13.2 not callable"
+          python3.13.2 hello.py || echo "Failed to run hello.py with python3.13.2"
       - name: Try calling python3.10.11
         shell: bash
         run: |
