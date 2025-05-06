@@ -1,17 +1,17 @@
 name: Test Python Tk
 on:
-  # push:
-  #   branches:
-  #     - test-649
+  push:
+    branches:
+      - test-649
   workflow_dispatch:
 
 jobs:
   tests-poetry:
     strategy:
       matrix:
-        os: [macos-13, macos-latest-large, macos-15-large]
+        os: [windows-latest, macos-13, ubuntu-latest] 
         # python-version: ["3.8.18", "3.9.21", "3.10.16"]
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", '3.11', '3.12', '3.13']
 
       fail-fast: false
     name: ${{ matrix.python-version }} - ${{ matrix.os }}
@@ -19,8 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        # uses: priya-kinthali/setup-python@test-tcltk
+        # uses: actions/setup-python@v5
+        uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: ${{ matrix.python-version }}
       - name: Verify Python Tk Version
@@ -37,4 +37,4 @@ jobs:
       - name: Run tk script (closes itself after 5 seconds)
         if: runner.os != 'Linux'
         run: python tk_min.py
-        #test
+
