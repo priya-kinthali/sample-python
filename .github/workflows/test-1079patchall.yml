@@ -2,9 +2,9 @@
 name: Test Python patch Versions cached 
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,23 +12,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [windows-latest]
       fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.13t 
-        uses: actions/setup-python@v5
+      - name: Setup Python 3.8.7
+        uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.13.3
-      - name: Create python3.13.3 alias
-        shell: bash
-        run: |
-          mkdir -p $HOME/bin
-          ln -s /opt/hostedtoolcache/Python/3.13.3/x64/bin/python $HOME/bin/python3.13.3
-          echo "$HOME/bin" >> $GITHUB_PATH
+            3.8.7
       
       - name: Check available python executables
         shell: bash
@@ -36,18 +30,17 @@ jobs:
           echo "Checking python executables"
           which python
           which python3
-          which python3.13.3 || echo "python3.13.3 not found"
-          command -v python || echo "python not found"
-          command -v python3.13.3 || echo "python3.13.3 not found"
+          which python3.8 || echo "python3.8 not found"
+          command -v python3.8 || echo "python3.8 not found"
           echo "Python version:"
           python --version
           python3 --version
 
-      - name: Try calling python3.13.3
+      - name: Try calling python3.8
         shell: bash
         run: |
-          python3.13.3 --version || echo "python3.13.3 not callable"
-          python3.13.3 hello.py || echo "Failed to run hello.py with python3.13.3"
+          python3.8 --version || echo "python3.8 not callable"
+          python3.8 hello.py || echo "Failed to run hello.py with python3.8"
 
 
 
