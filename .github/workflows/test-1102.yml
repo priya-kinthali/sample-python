@@ -1,0 +1,24 @@
+name: Python Setup with astral-sh/setup-uv
+
+on:
+  push:
+    branches:
+      - test-973
+  pull_request:
+
+jobs:
+  setup-python:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python 
+        uses: astral-sh/setup-uv@v6
+
+      - name: Verify Python version
+        run: python --version
+
+      - name: Run hello.py
+        run: python hello.py
