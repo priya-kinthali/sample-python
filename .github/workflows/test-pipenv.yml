@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Clear cache
-        run: |
-            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-            mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
         # uses: actions/setup-python@v5
         uses: priya-kinthali/setup-python@test-1079
