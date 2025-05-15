@@ -32,4 +32,6 @@ jobs:
         run: |
           echo "Python version: $(python --version)"
           echo "Checking Tcl directory contents..."
-          dir C:\hostedtoolcache\windows\Python\${{ matrix.python-version }}\${{ matrix.architecture }}\tcl\tcl8.6
+          $PYTHON_VERSION=$(python -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}')")
+          dir C:\hostedtoolcache\windows\Python\$PYTHON_VERSION\x64\tcl\tcl8.6
+        shell: pwsh
