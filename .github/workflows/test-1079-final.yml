@@ -1,6 +1,9 @@
 name: Test 1079 with fix
 
 on:
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 jobs:
   test-python-executables:
@@ -8,7 +11,6 @@ jobs:
       matrix:
         os: [windows-latest]
         architecture: [x64, x86]
-        python-version: [3.11, 3.12, 3.10]
 
       fail-fast: false
 
@@ -17,15 +19,70 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      # - name: Clear cache
+      #   run: |
+      #       mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #       mkdir -p "${{ runner.tool_cache }}"
       - name: Set up Python
-        uses: actions/setup-python@v4
+        # uses: priya-kinthali/setup-python@test-1079
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: |
+            3.8
+            3.9
+            3.10
+            3.11
+            3.12
+            3.13
           architecture: ${{ matrix.architecture }}
-
-      - name: Verify Tcl directory contents
+      - name: Check available python executables
+        shell: bash
         run: |
-          echo "Python version: $(python --version)"
-          echo "Checking Tcl directory contents..."
-          dir C:\hostedtoolcache\windows\Python\${{ matrix.python-version }}\${{ matrix.architecture }}\tcl\tcl8.6
+          echo "Checking python executables"
+          which python
+          which python3
+          which python3.8 || echo "python3.8 not found"
+          which python3.9 || echo "python3.9 not found"
+          which python3.10 || echo "python3.10 not found"
+          which python3.11 || echo "python3.11 not found"
+          which python3.12 || echo "python3.12 not found"
+          which python3.13 || echo "python3.13 not found"
+          command -v python || echo "python not found"
+          command -v python3.8 || echo "python3.8 not found"
+          command -v python3.9 || echo "python3.9 not found"
+          command -v python3.10 || echo "python3.10 not found"
+          command -v python3.11 || echo "python3.11 not found"
+          command -v python3.12 || echo "python3.12 not found"
+          command -v python3.13 || echo "python3.13 not found"
+          echo "Python version:"
+          python --version
+      - name: Try calling python3.8
+        shell: bash
+        run: |
+          python3.8 --version || echo "python3.8 not callable"
+          python3.8 hello.py || echo "Failed to run hello.py with python3.8"
+      - name: Try calling python3.9
+        shell: bash
+        run: |
+          python3.9 --version || echo "python3.9 not callable"
+          python3.9 hello.py || echo "Failed to run hello.py with python3.9"
+      - name: Try calling python3.10
+        shell: bash
+        run: |
+          python3.10 --version || echo "python3.9 not callable"
+          python3.10 hello.py || echo "Failed to run hello.py with python3.10"
+      - name: Try calling python3.11
+        shell: bash
+        run: |
+          python3.11 --version || echo "python3.11 not callable"
+          python3.11 hello.py || echo "Failed to run hello.py with python3.11"
+      - name: Try calling python3.12
+        shell: bash
+        run: |
+          python3.12 --version || echo "python3.12 not callable"
+          python3.12 hello.py || echo "Failed to run hello.py with python3.12"
+      - name: Try calling python3.13
+        shell: bash
+        run: |
+          python3.13 --version || echo "python3.13 not callable"
+          python3.13 hello.py || echo "Failed to run hello.py with python3.13"

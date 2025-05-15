@@ -7,18 +7,29 @@ on:
   pull_request:
 
 jobs:
-  setup-python:
-    runs-on: windows-latest
+  test-python-executables:
+    strategy:
+      matrix:
+        os: [windows-latest]
+        architecture: [x64, x86]
+        python-version: [3.11, 3.12, 3.10]
+
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python 
-        uses: astral-sh/setup-uv@v6
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: ${{ matrix.architecture }}
 
-      - name: Verify Python version
-        run: python --version
-
-      - name: Run hello.py
-        run: python hello.py
+      - name: Verify Tcl directory contents
+        run: |
+          echo "Python version: $(python --version)"
+          echo "Checking Tcl directory contents..."
+          dir C:\hostedtoolcache\windows\Python\${{ matrix.python-version }}\${{ matrix.architecture }}\tcl\tcl8.6
