@@ -1,9 +1,9 @@
 name: Python Setup with astral-sh/setup-uv
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   pull_request:
 
 jobs:
