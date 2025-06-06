@@ -6,30 +6,54 @@ on:
   workflow_dispatch:
 
 jobs:
-  install_and_check:
-    runs-on: windows-11-arm
+  # install_and_check:
+  #   runs-on: windows-11-arm
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ['3.11', '3.12', '3.13.1t']
+  #       architecture: ['arm64']
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Set up Python 3.10
+  #       uses: aparnajyothi-y/setup-python@update-install-path
+  #       # uses: actions/setup-python@v5
+
+  #       with:
+  #         python-version: ${{ matrix.python-version }}
+  #         architecture: ${{ matrix.architecture }}
+      
+  #     - name: Install pyinstaller with --user flag
+  #       run: |
+  #         pip install pyinstaller --user
+        
+  #     - name: Verify installation
+  #       run: |
+  #         pyinstaller --version
+  #         echo $Env:PATH
+  test-v5:
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.11', '3.12', '3.13.1t']
-        architecture: ['arm64']
+        os: [windows-latest, windows-11-arm]
+        python-version: ['3.14.0-beta.1']
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
-        uses: aparnajyothi-y/setup-python@update-install-path
-        # uses: actions/setup-python@v5
-
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          architecture: ${{ matrix.architecture }}
-      
-      - name: Install pyinstaller with --user flag
-        run: |
-          pip install pyinstaller --user
-        
-      - name: Verify installation
-        run: |
-          pyinstaller --version
-          echo $Env:PATH
+          # freethreaded: true
+          architecture: 'x86_64'
+          # update-environment: false
+
+      - name: Verify pip version
+        run: pip --version
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
