@@ -7,28 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-cache:
+  setup:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm]
-        python-version: ['3.13.2', '3.12', '3.13t']
-
+        os: [windows-latest,ubuntu-latest, macos-latest, macos-13]
+        python-version: [ '3.13.1t' ]
+  
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: priyagupta108/setup-python@pip-version-input
-        with:
-          python-version: ${{ matrix.python-version }}
-          pip-version: 24.1
-          cache: 'pip'
-
-      - name: Verify pip version
-        run: pip --version
-
-      - run: pip install -r requirements.txt 
-
-   
+    - name: Set up Python
+      uses: priyagupta108/setup-python@pip-version-input
+      with:
+        python-version : '${{ matrix.python-version }}'
+        pip-version: '24'
+        
+    - name: Check pip version
+      run: pip --version
+    - run: pip install requests
