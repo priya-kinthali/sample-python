@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest,ubuntu-latest, macos-latest, macos-13]
-        python-version: [ '3.8' ]
+        python-version: [ '3.13.1' ]
   
     steps:
     - name: Checkout code
@@ -27,4 +27,6 @@ jobs:
         
     - name: Check pip version
       run: pip --version
+    - run: pip install requests
+
    
