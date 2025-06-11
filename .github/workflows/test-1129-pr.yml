@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest,ubuntu-latest, macos-latest, macos-13]
-        python-version: [ '3.13.1' ]
+        python-version: [ '3.8' ]
   
     steps:
     - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
       uses: priyagupta108/setup-python@pip-version-input
       with:
         python-version : '${{ matrix.python-version }}'
-        pip-version: '23.1.1'
+        pip-version: '24'
         
     - name: Check pip version
       run: pip --version
