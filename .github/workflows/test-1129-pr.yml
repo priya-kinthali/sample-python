@@ -24,8 +24,9 @@ jobs:
       # uses : actions/setup-python@v5
       with:
         python-version : '${{ matrix.python-version }}'
-        pip-version: ' 23 '
-        allow-prereleases: true
+        pip-version: |
+          24
+          23
         
     - name: Check pip version
       run: pip --version
