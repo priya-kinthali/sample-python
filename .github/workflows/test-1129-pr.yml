@@ -21,10 +21,11 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: priyagupta108/setup-python@pip-version-input
+      # uses: priyagupta108/setup-python@pip-version-input
+      uses : actions/setup-python@v5
       with:
         python-version : '${{ matrix.python-version }}'
-        pip-version: ${{ matrix.pip-version }}
+        # pip-version: ${{ matrix.pip-version }}
         
     - name: Check pip version
       run: pip --version
