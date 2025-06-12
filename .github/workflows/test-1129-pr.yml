@@ -14,7 +14,7 @@ jobs:
       matrix:
         os: [windows-latest,ubuntu-latest, macos-latest, macos-13]
         python-version: [ '3.13.2', '3.13.1t' ]
-        pip-version: ['24', '23.2.1', '22.3.1']
+        pip-version: ['23.2.1']
   
     steps:
     - name: Checkout code
@@ -28,4 +28,9 @@ jobs:
         
     - name: Check pip version
       run: pip --version
-    - run: pip install requests
+    # - run: pip install requests
+    - name: Install requests in venv
+      shell: bash
+      run: |
+        source venv/bin/activate
+        pip install requests
