@@ -29,6 +29,8 @@ jobs:
     - name: Check pip version
       run: pip --version
     # - run: pip install requests
+    - name: Create virtual environment
+      run: python -m venv venv
     - name: Install requests in venv
       shell: bash
       run: |
