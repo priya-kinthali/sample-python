@@ -24,9 +24,7 @@ jobs:
       # uses : actions/setup-python@v5
       with:
         python-version : '${{ matrix.python-version }}'
-        pip-version: |
-          '24.1'
-          '25.0.1'
+        pip-version: 'null'
         
     - name: Check pip version
       run: pip --version
