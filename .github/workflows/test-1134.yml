@@ -8,13 +8,13 @@ on:
 
 jobs:
   test-python38:
-    runs-on: self-hosted
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Print macOS and Architecture Info
         run: |
-          echo "CPU Architecture: $(uname -m)"
+          echo "Runner Architecture: $(uname -m)"
           echo "CPU Info: $(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo 'Not available on Apple Silicon (arm64)')"
           echo "macOS Version:"
           sw_vers
