@@ -8,7 +8,7 @@ on:
 
 jobs:
   test-python38:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
