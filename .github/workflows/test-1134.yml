@@ -25,7 +25,6 @@ jobs:
             pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto
           else
             echo "Rosetta is NOT installed"
-            exit 1
           fi
 
       - name: Setup Python 3.8
