@@ -1,0 +1,42 @@
+name: Test Python 3.8 Install without Rosetta
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  test-python38:
+    runs-on: macos-13
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Print macOS Version
+        run: |
+          echo "macOS Version:"
+          uname -a
+
+      - name: Check if running on Apple Silicon
+        run: |
+          arch
+
+      - name: Check if Rosetta 2 is installed
+        id: check_rosetta
+        run: |
+          if /usr/bin/pgrep oahd >/dev/null 2>&1; then
+            echo "Rosetta 2 is installed."
+          else
+            echo "Rosetta 2 is NOT installed."
+          fi
+
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Check Python version
+        run: python3 --version
+
+      - name: Check Python architecture
+        run: python3 -c "import platform; print(platform.machine())"
