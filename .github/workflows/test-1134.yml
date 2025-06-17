@@ -8,7 +8,7 @@ on:
 
 jobs:
   test-python38:
-    runs-on: self-hosted
+    runs-on: macos-15
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,6 +18,8 @@ jobs:
           echo "CPU Info: $(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo 'Not available on Apple Silicon (arm64)')"
           echo "macOS Version:"
           sw_vers
+      - name: Uninstall Rosetta 2
+        run: sudo /usr/sbin/softwareupdate --remove-rosetta
       - name: Check if Rosetta is installed
         run: |
           if pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
