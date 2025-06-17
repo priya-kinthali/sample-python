@@ -18,13 +18,14 @@ jobs:
           echo "CPU Info: $(sysctl -n machdep.cpu.brand_string 2>/dev/null || echo 'Not available on Apple Silicon (arm64)')"
           echo "macOS Version:"
           sw_vers
-      - name: Check if Rosetta 2 is installed
-        id: check_rosetta
+      - name: Check if Rosetta is installed
         run: |
-          if /usr/bin/pgrep oahd >/dev/null 2>&1; then
-            echo "Rosetta 2 is installed."
+          if pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto >/dev/null 2>&1; then
+            echo "Rosetta is installed"
+            pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto
           else
-            echo "Rosetta 2 is NOT installed."
+            echo "Rosetta is NOT installed"
+            exit 1
           fi
 
       - name: Setup Python 3.8
