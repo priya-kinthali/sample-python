@@ -11,4 +11,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up python
-        uses: priya-kinthali/sample-python-new@test-973
+        uses: priya-kinthali/sample-python@test-973
