@@ -27,10 +27,10 @@ jobs:
             echo "Rosetta is NOT installed"
           fi
 
-      - name: Setup Python 3.8
+      - name: Setup Python 3.9
         uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.9'
           # architecture: 'arm64'
 
       - name: Check Python version
