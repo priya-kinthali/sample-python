@@ -36,5 +36,9 @@ jobs:
       - name: Check Python version
         run: python3 --version
 
-      - name: Check Python architecture
-        run: python3 -c "import platform; print(platform.machine())"
+      - name: Check if Python binary is Universal2
+        run: |
+          lipo -archs $(which python3)
+      # - name: Check architecture of extracted files
+      #   run: |
+      #     file /Users/runner/hostedtoolcache/Python/3.8.10/arm64/bin/python3
