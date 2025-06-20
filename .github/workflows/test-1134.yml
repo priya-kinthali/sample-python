@@ -27,23 +27,22 @@ jobs:
             echo "Rosetta is NOT installed"
           fi
 
-      - name: Setup Python 3.9
+      - name: Setup Python 3.8
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.8'
           # architecture: 'arm64'
 
       - name: Check Python version
         run: python3 --version
 
-      - name: Check if Python binary is Universal2
+      - name: Check Python 3.8 Binary Architecture
         run: |
-          lipo -archs $(which python3)
-
-      - name: Check all Python extension modules (.so) for architecture
-        run: |
-          PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
-          for so in $(find "/Library/Frameworks/Python.framework/Versions/$PYTHON_VERSION" -name "*.so"); do
-            echo -n "$so: "
-            lipo -archs "$so" || echo "missing or not a binary"
-          done
+          ls -l /Library/Frameworks/Python.framework/Versions/
+          ARCH_INFO=$(file /Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8)
+          echo "$ARCH_INFO"
+          if [[ "$ARCH_INFO" == *"arm64"* ]]; then
+            echo "✅ Python 3.8 is ARM64 or universal2"
+          else
+            echo "❌ Python 3.8 is x86_64 only — Rosetta required"
+          fi
