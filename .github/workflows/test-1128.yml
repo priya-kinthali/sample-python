@@ -1,0 +1,14 @@
+name: Composite Action Example
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up python
+        uses: priya-kinthali/sample-python-new@test-973
