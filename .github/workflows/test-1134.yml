@@ -39,6 +39,27 @@ jobs:
       - name: Check if Python binary is Universal2
         run: |
           lipo -archs $(which python3)
-      # - name: Check architecture of extracted files
-      #   run: |
-      #     file /Users/runner/hostedtoolcache/Python/3.8.10/arm64/bin/python3
+
+      - name: List and check linked libraries of python3
+        run: |
+          PYTHON_BIN=$(which python3)
+          echo "Linked libraries:"
+          otool -L "$PYTHON_BIN"
+          echo ""
+          echo "Architecture of each linked library:"
+          for lib in $(otool -L "$PYTHON_BIN" | awk 'NR>1 {print $1}'); do
+            if [ -f "$lib" ]; then
+              echo -n "$lib: "
+              lipo -archs "$lib"
+            fi
+          done
+
+      - name: Check architecture of built-in Python extension modules (.so)
+        run: |
+          PYTHON_BIN=$(which python3)
+          PYTHON_SITE=$(python3 -c "import sysconfig; print(sysconfig.get_config_var('LIBPL'))")
+          echo "Extension modules in: $PYTHON_SITE"
+          find "$PYTHON_SITE" -name "*.so" | while read sofile; do
+            echo -n "$sofile: "
+            lipo -archs "$sofile"
+          done
