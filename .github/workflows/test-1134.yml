@@ -36,13 +36,15 @@ jobs:
       - name: Check Python version
         run: python3 --version
 
-      - name: Check Python 3.8 Binary Architecture
+      - name: Dump architecture-related env vars
         run: |
-          ls -l /Library/Frameworks/Python.framework/Versions/
-          ARCH_INFO=$(file /Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8)
-          echo "$ARCH_INFO"
-          if [[ "$ARCH_INFO" == *"arm64"* ]]; then
-            echo "✅ Python 3.8 is ARM64 or universal2"
-          else
-            echo "❌ Python 3.8 is x86_64 only — Rosetta required"
-          fi
+          echo "ARCHFLAGS=$ARCHFLAGS"
+          echo "SDKROOT=$SDKROOT"
+          echo "MACOSX_DEPLOYMENT_TARGET=$MACOSX_DEPLOYMENT_TARGET"
+          echo "CFLAGS=$CFLAGS"
+          echo "LDFLAGS=$LDFLAGS"
+          echo "CC=$CC"
+          echo "CXX=$CXX"
+          echo "PYTHONPATH=$PYTHONPATH"
+          echo "Python sys.platform: $(python3 -c 'import sys; print(sys.platform)')"
+          echo "Python machine arch: $(python3 -c 'import platform; print(platform.machine())')"
