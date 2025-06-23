@@ -8,7 +8,7 @@ on:
 
 jobs:
   test-python38:
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,21 +30,10 @@ jobs:
       - name: Setup Python 3.8
         uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
-          # architecture: 'arm64'
+          python-version: '3.10.2'
+          architecture: 'arm64'
 
       - name: Check Python version
         run: python3 --version
 
-      - name: Dump architecture-related env vars
-        run: |
-          echo "ARCHFLAGS=$ARCHFLAGS"
-          echo "SDKROOT=$SDKROOT"
-          echo "MACOSX_DEPLOYMENT_TARGET=$MACOSX_DEPLOYMENT_TARGET"
-          echo "CFLAGS=$CFLAGS"
-          echo "LDFLAGS=$LDFLAGS"
-          echo "CC=$CC"
-          echo "CXX=$CXX"
-          echo "PYTHONPATH=$PYTHONPATH"
-          echo "Python sys.platform: $(python3 -c 'import sys; print(sys.platform)')"
-          echo "Python machine arch: $(python3 -c 'import platform; print(platform.machine())')"
+
