@@ -1,39 +1,37 @@
 name: Path update for >=3.10
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
   install_and_check:
-    runs-on: windows-11-arm
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.12', '3.13.1t']
-        architecture: ['arm64']
+        architecture: ['x86', 'x64']
+        os: ['ubuntu-latest', 'windows-latest', 'macos-13']
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
-        uses: aparnajyothi-y/setup-python@update-install-path--user
-        # uses: actions/setup-python@v5
+      - name: Set up Python
+        # uses: aparnajyothi-y/setup-python@update-install-path--user
+        uses: actions/setup-python@v5
 
         with:
           python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.architecture }}
       
-      # - name: Install pyinstaller with --user flag
-      #   run: |
-      #     pip install pyinstaller --user
-        
-      # - name: Verify installation
-      #   run: |
-      #     pyinstaller --version
-      #     echo $Env:PATH
-      - name: Echo directories with 'Scripts' in PATH
-        shell: pwsh
+      - name: Install pyinstaller with --user flag
         run: |
-          $env:PATH -split ';' | Where-Object { $_ -match 'Scripts' } | ForEach-Object { Write-Host $_ }
+          pip install pyinstaller --user
+        
+      - name: Verify installation
+        run: |
+          pyinstaller --version
+          echo $Env:PATH
+
