@@ -19,8 +19,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
         id: python
-        uses: actions/setup-python@v5
-        # uses: cdce8p/setup-python@pypy-version-output
+        # uses: actions/setup-python@v5
+        uses: cdce8p/setup-python@pypy-version-output
         with:
           python-version: ${{ matrix.python-version }}
           check-latest: true
