@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12", "pypy3.10", "pypy-3.11", 'pypy3.10-v7.3.17']
+      fail-fast: true
     runs-on: ubuntu-latest
     steps:
       - name: Check out code from GitHub
