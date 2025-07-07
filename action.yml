@@ -23,5 +23,5 @@ runs:
         # overwrite: true      
         cache-dependency-path: pyproject.toml
         
-    - run: poetry install
+    - run: poetry install --no-root
       shell: bash
