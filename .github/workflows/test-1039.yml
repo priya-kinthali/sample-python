@@ -1,8 +1,8 @@
 name: Path update for >=3.10
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
