@@ -9,9 +9,9 @@ runs:
   steps:
     - name: Checkout code
       uses: actions/checkout@v4  
-    # - name: Install poetry
-    #   run: pipx install poetry
-    #   shell: bash
+    - name: Install poetry
+      run: pipx install poetry
+      shell: bash
   
     - name: Set up python
       # uses: aparnajyothi-y/setup-python@fix-overwirting
@@ -19,9 +19,9 @@ runs:
       with:
         # python-version : ${{ inputs.python-version }}
         python-version:  '3.11'
-        cache: 'pip'
+        cache: poetry
         # overwrite: true      
-        cache-dependency-path: requirements.txt
+        cache-dependency-path: pyproject.toml
         
-    - run: pip install -r requirements.txt
+    - run: poetry install
       shell: bash
