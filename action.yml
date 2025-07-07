@@ -14,8 +14,8 @@ runs:
       shell: bash
   
     - name: Set up python
-      uses: aparnajyothi-y/setup-python@fix-overwriting
-      # uses: actions/setup-python@v5
+      # uses: aparnajyothi-y/setup-python@fix-overwriting
+      uses: actions/setup-python@v5
       with:
         # python-version : ${{ inputs.python-version }}
         python-version:  '3.13'
