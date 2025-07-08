@@ -16,7 +16,7 @@ runs:
       run: mkdir -p ./tmp
       shell: bash
     - name: Create external requirements.txt
-      run: echo "pytest==7.0.0" > ./tmp/ext-reqs.txt
+      run: echo "pytest==7.0.0" > ./tmp/requirements.txt
       shell: bash
   
     - name: Set up python
@@ -27,7 +27,7 @@ runs:
         python-version:  '3.13'
         cache: pip
         overwrite: false      
-        cache-dependency-path: ./tmp/ext-reqs.txt
+        cache-dependency-path: ./tmp/requirements.txt
         
-    - run: pip install -r ./tmp/ext-reqs.txt
+    - run: pip install -r ./tmp/requirements.txt
       shell: bash
