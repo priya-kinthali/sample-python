@@ -12,6 +12,9 @@ runs:
     - name: Install poetry
       run: pipx install poetry
       shell: bash
+    - name: Create tmp directory
+      run: mkdir -p ./tmp
+      shell: bash
     - name: Create external requirements.txt
       run: echo "pytest==7.0.0" > ./tmp/ext-reqs.txt
       shell: bash
@@ -26,5 +29,5 @@ runs:
         overwrite: true      
         cache-dependency-path: ./tmp/ext-reqs.txt
         
-    - run: pip install -r requirements.txt
+    - run: pip install -r ./tmp/ext-reqs.txt
       shell: bash
