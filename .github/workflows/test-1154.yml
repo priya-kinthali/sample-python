@@ -1,0 +1,35 @@
+name: check latest
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04-ppc64le,ubuntu-24.04-ppc64le-p10, ubuntu-24.04-s390x]
+        # os: [windows-2025, windows-latest, windows-2019, windows-11-arm]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        # uses: lmvysakh/setup-python@enhance-python-version-readability
+        with:
+          python-version-file: '.python-version' 
+          # python-version: '>=3.9 <3.14'
+          # freethreaded: true
+          # check-latest: true
+      - name: Verify Python Version
+        run: |
+          python --version
+
+
+
+
