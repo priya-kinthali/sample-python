@@ -33,7 +33,7 @@ jobs:
           echo "value of pythonLocation: $pythonLocation"
           if [ "$RUNNER_OS" = "Windows" ]; then
             where python.exe || echo "python.exe not found"
-            $pythonLocation\python.exe --version
+            $pythonLocation\\python.exe --version
           else
             which python || echo "python not found"
             $pythonLocation/bin/python --version
