@@ -35,5 +35,9 @@ jobs:
           python --version
           echo "Python executable location (from sys.executable):"
           python -c "import sys; print(sys.executable)"
-          where python.exe || echo "python.exe not found"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            where python.exe || echo "python.exe not found"
+          else
+            which python || echo "python not found"
+          fi
           
