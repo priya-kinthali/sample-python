@@ -1,0 +1,39 @@
+name: Test pythonLocation on All Runners and Implementations
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  test-python-location:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        implementation: [ '3.12', 'pypy3.10', 'graalpy-3.10.2' ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.implementation }}
+
+      - name: Print pythonLocation and Executable Info
+        shell: bash
+        run: |
+          echo "OS: $RUNNER_OS"
+          echo "Implementation: ${{ matrix.implementation }}"
+          echo "pythonLocation: $pythonLocation"
+          echo "Which python from PATH: $(which python || where python)"
+          echo "Python version (from PATH):"
+          python --version
+          echo "Python executable location (from sys.executable):"
+          python -c "import sys; print(sys.executable)"
+          echo "Files in pythonLocation:"
+          ls -l $pythonLocation || dir $pythonLocation
+          echo "Files in $pythonLocation/bin (if exists):"
+          ls -l $pythonLocation/bin || echo "No bin directory" || dir $pythonLocation\\bin || echo "No bin directory (Windows)"
