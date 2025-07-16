@@ -1,4 +1,4 @@
-name: Test pythonLocation on All Runners and Implementations
+name: Test pythonLocation on All Runners and python-versions
 
 on:
   push:
@@ -11,8 +11,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        implementation: [ '3.12', 'pypy3.10-v7.3.17', 'graalpy-24.2.2' ]
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-13]
+        python-version: [ '3.12', 'pypy3.10-v7.3.17', 'graalpy-24.2.2' ]
+        exclude:
+          - python-version: graalpy
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -20,20 +23,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.implementation }}
+          python-version: ${{ matrix.python-version }}
 
       - name: Print pythonLocation and Executable Info
         shell: bash
         run: |
           echo "OS: $RUNNER_OS"
-          echo "Implementation: ${{ matrix.implementation }}"
-          echo "pythonLocation: $pythonLocation"
+          echo "value of pythonLocation: $pythonLocation"
           echo "Which python from PATH: $(which python || where python)"
-          echo "Python version (from PATH):"
           python --version
           echo "Python executable location (from sys.executable):"
           python -c "import sys; print(sys.executable)"
-          echo "Files in pythonLocation:"
-          ls -l $pythonLocation || dir $pythonLocation
-          echo "Files in $pythonLocation/bin (if exists):"
-          ls -l $pythonLocation/bin || echo "No bin directory" || dir $pythonLocation\\bin || echo "No bin directory (Windows)"
+          
