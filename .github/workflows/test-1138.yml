@@ -8,6 +8,7 @@ on:
 
 jobs:
   test-python-location:
+    name: "Test ${{ matrix.python-version }}"
     strategy:
       fail-fast: false
       matrix:
