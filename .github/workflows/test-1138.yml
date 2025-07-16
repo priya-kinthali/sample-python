@@ -32,10 +32,9 @@ jobs:
           python --version
           echo "value of pythonLocation: $pythonLocation"
           if [ "$RUNNER_OS" = "Windows" ]; then
-            echo "Checking Python location on Windows:" && where python.exe || echo "python.exe not found"
-            echo "Getting Python version from pythonLocation:" && $pythonLocation\python.exe --version
+            echo -n "Checking Python location on Windows:" && where python.exe || echo "python.exe not found"
+            echo -n "Getting Python version from pythonLocation:" && $pythonLocation\\python.exe --version
           else
-            echo "Checking Python location on Linux/Mac:" && which python || echo "python not found"
-            echo "Getting Python version from pythonLocation:" && $pythonLocation/bin/python --version
+            echo -n "Checking Python location on Linux/Mac:" && which python || echo "python not found"
+            echo -n "Getting Python version from pythonLocation:" && $pythonLocation/bin/python --version
           fi
-
