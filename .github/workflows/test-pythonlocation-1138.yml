@@ -36,5 +36,6 @@ jobs:
             echo -n "Python version using pythonLocation/python.exe is " && $pythonLocation/python.exe --version
           else
             echo -n "Checking Python location on Linux or Mac: " && which python || echo "python not found"
+            ls -l $pythonLocation/python
             echo -n "Python version using pythonLocation/python is " && $pythonLocation/python --version
           fi
