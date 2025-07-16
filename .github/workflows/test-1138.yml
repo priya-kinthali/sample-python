@@ -31,6 +31,12 @@ jobs:
           echo "OS: $RUNNER_OS"
           python --version
           echo "value of pythonLocation: $pythonLocation"
-          echo "Which python from PATH: $(which python || where python.exe)"
-#echo "Python executable location (from sys.executable):"
-#python -c "import sys; print(sys.executable)"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            where python.exe || echo "python.exe not found"
+            $pythonLocation\python.exe --version
+          else
+            which python || echo "python not found"
+            $pythonLocation/bin/python --version
+          fi
+
+#echo "Which python from PATH: $(which python || where python.exe)"
