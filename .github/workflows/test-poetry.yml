@@ -20,15 +20,17 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
       - name: Set up Python
-        # uses: actions/setup-python@v5
+        uses: actions/setup-python@v5
         # uses: lmvysakh/setup-python@enhance-python-version-readability
-        uses: priya-kinthali/setup-python@sample-361
+        # uses: priya-kinthali/setup-python@sample-361
         with:
           python-version: '3.13'
           cache: 'poetry'
           cache-dependency-path: sub-project/pyproject.toml
 
-      - run: poetry install
+      - name: Install poetry
+        working-directory: sub-project
+        run: poetry install
       # - run: poetry install --no-root
 
 
