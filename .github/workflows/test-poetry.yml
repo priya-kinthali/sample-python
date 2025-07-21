@@ -1,9 +1,9 @@
 name: Test Using the python-version-file input
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -20,12 +20,18 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
       - name: Set up Python
-        # uses: actions/setup-python@v5
-        uses: lmvysakh/setup-python@enhance-python-version-readability
+        uses: actions/setup-python@v5
+        # uses: lmvysakh/setup-python@enhance-python-version-readability
+        # uses: priya-kinthali/setup-python@sample-361
         with:
-          python-version-file: '.python-version' 
+          python-version: '3.13'
           cache: 'poetry'
-      - run: poetry install --no-root
+          cache-dependency-path: sub-project/pyproject.toml
+
+      - run: poetry install
+      # - run: poetry install --no-root
+      - run: poetry install 
+
       - name: Verify Python Version
         run: |
             python --version
