@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: '3.13'
           cache: 'poetry'
-          cache-dependency-path: sub-project/pyproject.toml
+          cache-dependency-path: pyproject.toml
 
       - name: Install poetry
         # working-directory: sub-project
