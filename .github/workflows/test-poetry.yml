@@ -30,7 +30,7 @@ jobs:
 
       - name: Install poetry
         working-directory: sub-project
-        run: poetry install
+        run: poetry install --no-root
       # - run: poetry install --no-root
 
 
