@@ -29,7 +29,7 @@ jobs:
           cache-dependency-path: sub-project/pyproject.toml
 
       - name: Install poetry
-        working-directory: sub-project
+        # working-directory: sub-project
         run: poetry install
       # - run: poetry install --no-root
 
