@@ -1,0 +1,31 @@
+name: Test Multiple Python Versions (3.13t -> 3.13)
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify Python Version
+        run: |
+          python -VVV
+          which python
+      - name: Run script
+        run: python script.py
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
