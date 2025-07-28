@@ -26,7 +26,8 @@ jobs:
           # pip-install: -r requirements-dev.txt
       - name: Generate requirements file
         run: python -m pip freeze > requirements-test.txt
-
+      - name: Contents of generated file
+        run: cat requirements-test.txt
       - name: Install dependencies in another environment
         run: python -m pip install -r requirements-test.txt
       # - name: Verify Python Version
