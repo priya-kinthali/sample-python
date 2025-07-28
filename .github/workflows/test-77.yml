@@ -17,15 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate requirements file
+        run: python -m pip freeze > requirements-test.txt
       - name: Set up python
-        # uses: gowridurgad/setup-python@pip-install
-        uses: actions/setup-python@v5
+        uses: gowridurgad/setup-python@pip-install
+        # uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
-          # pip-install: -r requirements-dev.txt
-      - name: Generate requirements file
-        run: python -m pip freeze > requirements-test.txt
+          pip-install: -r requirements-test.txt
       - name: Contents of generated file
         run: cat requirements-test.txt
       - name: Install dependencies in another environment
