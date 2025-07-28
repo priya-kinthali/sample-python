@@ -18,9 +18,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify python
+        run: |
+          python -VVV
+          which python
       - name: Clear cache
         run: |
-          rm -rf /Users/runner/hostedtoolcache/Python
+            rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
+
+      - name: Verify python
+        run: |
+          python -VVV
+          which python
       - name: Generate requirements file
         run: python -m pip freeze > requirements-test.txt
       - name: Set up python
