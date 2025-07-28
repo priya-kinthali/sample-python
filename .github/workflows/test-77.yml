@@ -18,7 +18,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Generate requirements file
-        run: python -m pip freeze > requirements-test.txt
+      #   run: python -m pip freeze > requirements-test.txt
+        run: PIP_ALL=1 pip freeze > requirements.txt
       - name: Set up python
         uses: gowridurgad/setup-python@pip-install
         # uses: actions/setup-python@v5
