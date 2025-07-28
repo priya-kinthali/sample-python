@@ -20,8 +20,7 @@ jobs:
 
       - name: Clear cache
         run: |
-            rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-            mkdir -p "${{ runner.tool_cache }}"
+          rm -rf /Users/runner/hostedtoolcache/Python
       - name: Generate requirements file
         run: python -m pip freeze > requirements-test.txt
       - name: Set up python
