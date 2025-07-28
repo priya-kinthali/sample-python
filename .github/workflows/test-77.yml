@@ -23,13 +23,17 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
-          cache-dependency-path: requirements-dev.txt
           # pip-install: -r requirements-dev.txt
-      - name: Verify Python Version
-        run: |
-          python -VVV
-          which python
-      - name: Run script
-        run: python hello.py
-      - name: Install dependencies
-        run: pip install -r requirements-dev.txt
+      - name: Generate requirements file
+        run: python -m pip freeze > requirements-test.txt
+
+      - name: Install dependencies in another environment
+        run: python -m pip install -r requirements-test.txt
+      # - name: Verify Python Version
+      #   run: |
+      #     python -VVV
+      #     which python
+      # - name: Run script
+      #   run: python hello.py
+      # - name: Install dependencies
+      #   run: pip install -r requirements-dev.txt
