@@ -27,7 +27,7 @@ jobs:
           python-version: '3.13.1'
           cache: pip
           # pip-install: -r requirements-test.txt
-      - name: Install Dependencies
+      - name: Generate requirements file
         run: |
           python -m pip freeze > requirements-test.txt
       - name: Contents of generated file
