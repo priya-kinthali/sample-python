@@ -20,8 +20,6 @@ jobs:
       - name: Clear cache
         run: |
           sudo rm -rf /Library/Frameworks/Python.framework || true
-      - name: Generate requirements file
-        run: python -m pip freeze > requirements-test.txt
       - name: Set up python
         # uses: gowridurgad/setup-python@pip-install
         uses: actions/setup-python@v5
