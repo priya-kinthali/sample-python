@@ -26,6 +26,6 @@ jobs:
           python -VVV
           which python
       - name: Run script
-        run: python script.py
+        run: python hello.py
       - name: Install dependencies
         run: pip install -r requirements-dev.txt
