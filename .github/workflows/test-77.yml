@@ -17,21 +17,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Verify python
-        run: |
-          python -VVV
-          which python
       - name: Clear cache
         run: |
-          # rm -rf ~/.local/lib/python* ~/.local/bin
-          # rm -rf /usr/local/lib/python* /usr/local/bin/python*
           sudo rm -rf /Library/Frameworks/Python.framework || true
-
-      - name: Verify python
-        run: |
-          python -VVV
-          which python
       - name: Generate requirements file
         run: python -m pip freeze > requirements-test.txt
       - name: Set up python
