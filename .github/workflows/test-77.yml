@@ -12,14 +12,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, windows-latest, macos-13, macos-14]
-        os: [macos-13, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Clear cache
-        run: |
-          sudo rm -rf /Library/Frameworks/Python.framework || true
       - name: Set up python
         # uses: gowridurgad/setup-python@pip-install
         uses: actions/setup-python@v5
@@ -27,8 +23,10 @@ jobs:
           python-version: '3.13.1'
           cache: pip
           # pip-install: -r requirements-test.txt
-      - name: Generate requirements file
-        run: python -m pip freeze > requirements-test.txt
+      - name: Install Dependencies
+        run: |
+          python -m pip install requests numpy
+          python -m pip freeze > requirements-test.txt
       - name: Contents of generated file
         run: cat requirements-test.txt
       - name: Install dependencies in another environment
