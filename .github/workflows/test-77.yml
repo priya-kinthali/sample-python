@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Clear cache
+        run: |
+          sudo rm -rf /Library/Frameworks/Python.framework || true
       - name: Set up python
         # uses: gowridurgad/setup-python@pip-install
         uses: actions/setup-python@v5
