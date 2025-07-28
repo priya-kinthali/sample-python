@@ -24,8 +24,10 @@ jobs:
           which python
       - name: Clear cache
         run: |
-            rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-            mkdir -p "${{ runner.tool_cache }}"
+          rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          rm -rf ~/.local/lib/python* ~/.local/bin
+          rm -rf /usr/local/lib/python* /usr/local/bin/python*
+          rm -rf /Library/Frameworks/Python.framework || true
 
       - name: Verify python
         run: |
