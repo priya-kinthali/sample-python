@@ -16,27 +16,36 @@ jobs:
         os: [macos-13, macos-14]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Clear cache
-        run: |
-          sudo rm -rf /Library/Frameworks/Python.framework || true
+        uses: actions/checkout@v5
+      # - name: Clear cache
+      #   run: |
+      #     sudo rm -rf /Library/Frameworks/Python.framework || true
+      # - name: Set up python
+      #   # uses: gowridurgad/setup-python@pip-install
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.13.1'
+      #     cache: pip
+      #     # pip-install: -r requirements-test.txt
       - name: Set up python
-        # uses: gowridurgad/setup-python@pip-install
-        uses: actions/setup-python@v5
+        uses: gowridurgad/setup-python@pip-install
         with:
-          python-version: '3.13.1'
+          python-version: '3.11'
           cache: pip
-          # pip-install: -r requirements-test.txt
-      - name: Generate requirements file
-        run: |
-          python -m pip freeze > requirements-test.txt
-      - name: Contents of generated file
-        run: cat requirements-test.txt
-      - name: Create a virtual environment
-        run: |
-          python -m venv fresh-venv
-          source fresh-venv/bin/activate
-          python -m pip install -r requirements-test.txt
+          cache-dependency-path: requirements.txt
+          pip-install: |
+                   -r requirements.txt
+                   -r requirements-dev.txt
+      # - name: Generate requirements file
+      #   run: |
+      #     python -m pip freeze > requirements-test.txt
+      # - name: Contents of generated file
+      #   run: cat requirements-test.txt
+      # - name: Create a virtual environment
+      #   run: |
+      #     python -m venv fresh-venv
+      #     source fresh-venv/bin/activate
+      #     python -m pip install -r requirements-test.txt
       # - name: Install dependencies in another environment
       #   run: python -m pip install -r requirements-test.txt
       # - name: Verify Python Version
