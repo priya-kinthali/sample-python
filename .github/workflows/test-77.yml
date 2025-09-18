@@ -37,6 +37,7 @@ jobs:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: requirements.txt
+          pip-version: '25.0.1'
           pip-install: --pre pandas
       # - name: Generate requirements file
       #   run: |
