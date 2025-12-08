@@ -22,11 +22,12 @@ jobs:
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
       - name: Setup Python 3.14 and 3.14t
-        uses: actions/setup-python@v6
+        # uses: actions/setup-python@v6
+        uses: priya-kinthali/setup-python@create-symlink-windows
         with:
           python-version: |
-            3.14
-            3.14t
+            3.13
+            3.13t
       - name: Verify Python installation
         shell: bash
         run: |
