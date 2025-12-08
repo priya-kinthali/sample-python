@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, macos-15-intel, windows-latest, windows-11-arm]
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v6
@@ -24,9 +25,15 @@ jobs:
             rm -rf ~/.cache/pip ~/.local/share/python
           elif [[ "$RUNNER_OS" == "macOS" ]]; then
             rm -rf ~/Library/Caches/pip ~/.local/share/python
-          elif [[ "$RUNNER_OS" == "Windows" ]]; then
-            rm -r -fo "$LOCALAPPDATA\pip\Cache" "$APPDATA\Python"
           fi
+
+      - name: Clear Python cache on Windows runner
+        shell: pwsh
+        if: runner.os == 'Windows'
+        run: |
+          Write-Host "Clearing Python cache..."
+          Remove-Item -Recurse -Force "$env:LOCALAPPDATA\pip\Cache" -ErrorAction SilentlyContinue
+          Remove-Item -Recurse -Force "$env:APPDATA\Python" -ErrorAction SilentlyContinue
       - name: Setup Python 3.14 and 3.14t
         uses: actions/setup-python@v6
         with:
