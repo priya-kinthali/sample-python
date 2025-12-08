@@ -41,7 +41,7 @@ jobs:
           python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
           echo ""
           echo "=== Checking all installed Python versions ==="
-          for py in python3.13 python3.13t; do
+          for py in python3.13 python3.14; do
             echo ""
             echo "Testing $py:"
             if command -v $py &> /dev/null; then
