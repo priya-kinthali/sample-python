@@ -26,8 +26,8 @@ jobs:
         uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.14
             3.14t
+            3.14
       - name: Verify Python installation
         shell: bash
         run: |
@@ -41,7 +41,7 @@ jobs:
           python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
           echo ""
           echo "=== Checking all installed Python versions ==="
-          for py in python3.14 python3.14t; do
+          for py in python3.14t python3.14; do
             echo ""
             echo "Testing $py:"
             if command -v $py &> /dev/null; then
