@@ -1,0 +1,35 @@
+name: Setting up both python 3.14 and 3.14t on windows arm
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  test-multiple-python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest, windows-11-arm]
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python 3.14 and 3.14t
+        uses: actions/setup-python@v6
+        with:
+          python-version: |
+            3.14
+            3.14t
+      - name: Verify Python installation
+        shell: bash
+        run: |
+          echo "Python version:"
+          python --version
+          echo ""
+          echo "Python executable location:"
+          which python
+          echo ""
+          echo "Python sys info:"
+          python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
