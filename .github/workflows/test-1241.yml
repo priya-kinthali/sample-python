@@ -17,23 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Clear Python cache on runner
-        shell: bash
+      - name: Clear cache
         run: |
-          echo "Clearing Python cache..."
-          if [[ "$RUNNER_OS" == "Linux" ]]; then
-            rm -rf ~/.cache/pip ~/.local/share/python
-          elif [[ "$RUNNER_OS" == "macOS" ]]; then
-            rm -rf ~/Library/Caches/pip ~/.local/share/python
-          fi
-
-      - name: Clear Python cache on Windows runner
-        shell: pwsh
-        if: runner.os == 'Windows'
-        run: |
-          Write-Host "Clearing Python cache..."
-          Remove-Item -Recurse -Force "$env:LOCALAPPDATA\pip\Cache" -ErrorAction SilentlyContinue
-          Remove-Item -Recurse -Force "$env:APPDATA\Python" -ErrorAction SilentlyContinue
+            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
       - name: Setup Python 3.14 and 3.14t
         uses: actions/setup-python@v6
         with:
