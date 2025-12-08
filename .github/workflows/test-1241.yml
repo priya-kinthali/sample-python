@@ -30,7 +30,7 @@ jobs:
       - name: Verify Python installation
         shell: bash
         run: |
-          echo "Python version:"
+          echo "Default Python version:"
           python --version
           echo ""
           echo "Python executable location:"
@@ -38,3 +38,16 @@ jobs:
           echo ""
           echo "Python sys info:"
           python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
+          echo ""
+          echo "=== Checking all installed Python versions ==="
+          for py in python3.14 python3.14t; do
+            echo ""
+            echo "Testing $py:"
+            if command -v $py &> /dev/null; then
+              $py --version
+              $py -c "import sys; print(f'  Executable: {sys.executable}')"
+              $py -c "import sys; print(f'  Free-threading: {sys._is_gil_enabled() if hasattr(sys, \"_is_gil_enabled\") else \"N/A\"}')"
+            else
+              echo "  $py not found!"
+            fi
+          done
