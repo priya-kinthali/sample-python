@@ -26,7 +26,7 @@ jobs:
         uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.13
+            3.14
             3.14t
       - name: Verify Python installation
         shell: bash
