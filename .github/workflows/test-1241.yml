@@ -1,4 +1,4 @@
-name: Setting up both python 3.14t and 3.14 on windows arm eith purge
+name: Setting up both python 3.14 and 3.14t on windows arm eith purge
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # os: [ubuntu-latest, macos-latest, macos-15-intel, windows-latest, windows-11-arm]
-        os: [windows-11-arm]
+        os: [windows-latest, windows-11-arm, self-hosted]
       fail-fast: false
 
     steps:
@@ -22,13 +22,13 @@ jobs:
         run: |
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
-      - name: Setup Python 3.14t and 3.14
+      - name: Setup Python 3.14 and 3.14t
         # uses: actions/setup-python@v6
         uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.14t
             3.14
+            3.14t
       - name: Verify Python installation
         shell: bash
         run: |
@@ -42,7 +42,7 @@ jobs:
           python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
           echo ""
           echo "=== Checking all installed Python versions ==="
-          for py in python3.14t python3.14; do
+          for py in python3.14 python3.14t; do
             echo ""
             echo "Testing $py:"
             if command -v $py &> /dev/null; then
