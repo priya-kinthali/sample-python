@@ -1,4 +1,4 @@
-name: Setting up both python 3.14t and 3.14 on windows arm
+name: Setting up both python 3.14t and 3.14 on windows arm eith purge
 
 on:
   push:
