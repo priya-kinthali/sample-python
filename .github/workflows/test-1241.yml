@@ -22,13 +22,13 @@ jobs:
         run: |
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
-      - name: Setup Python 3.13 and 3.13t
+      - name: Setup Python 3.13.5 and 3.13.5t
         # uses: actions/setup-python@v6
         uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
-            3.13
-            3.13t
+            3.13.5
+            3.13.5t
       - name: Verify Python installation
         shell: bash
         run: |
@@ -42,7 +42,7 @@ jobs:
           python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
           echo ""
           echo "=== Checking all installed Python versions ==="
-          for py in python3.13 python3.13t; do
+          for py in python3.13.5 python3.13.5t; do
             echo ""
             echo "Testing $py:"
             if command -v $py &> /dev/null; then
