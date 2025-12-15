@@ -1,4 +1,4 @@
-name: Setting up both python 3.14 and 3.14t on windows arm
+name: Setting up both python 3.14.2 and 3.14.2t on windows arm
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
           python -c "import sys; print(f'Executable: {sys.executable}'); print(f'Version: {sys.version}')"
           echo ""
           echo "=== Checking all installed Python versions ==="
-          for py in python3.14.3 python3.14.2t; do
+          for py in python3.14.2 python3.14.2t; do
             echo ""
             echo "Testing $py:"
             if command -v $py &> /dev/null; then
