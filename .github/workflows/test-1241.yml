@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # os: [ubuntu-latest, macos-latest, macos-15-intel, windows-latest, windows-11-arm]
-        os: [windows-11-arm, windows-latest]
+        os: [windows-latest]
       fail-fast: false
 
     steps:
@@ -23,12 +23,13 @@ jobs:
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
       - name: Setup Python 3.14.2 and 3.14.2t
-        # uses: actions/setup-python@v6
-        uses: priya-kinthali/setup-python@test-1079
+        uses: actions/setup-python@v6
+        # uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
             3.14.2
             3.14.2t
+          architecture: x86
       - name: Verify Python installation
         shell: bash
         run: |
