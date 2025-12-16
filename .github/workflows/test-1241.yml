@@ -23,8 +23,8 @@ jobs:
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
       - name: Setup Python 3.14.2 and 3.14.2t
-        uses: actions/setup-python@v6
-        # uses: priya-kinthali/setup-python@test-1079
+        # uses: actions/setup-python@v6
+        uses: priya-kinthali/setup-python@test-1079
         with:
           python-version: |
             3.14.2
