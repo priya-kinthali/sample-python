@@ -14,7 +14,12 @@ jobs:
       matrix:
         # os: [windows-latest, windows-11-arm, ubuntu-latest, macos-15-intel, macos-latest]
         os: [windows-11-arm]
-        python-version: ['3.14.1t']
+        python-version: [
+          '3.11.0t', '3.11.1t', '3.11.2t', '3.11.3t', '3.11.4t', '3.11.5t', '3.11.6t', '3.11.7t', '3.11.8t', '3.11.9t',
+          '3.12.0t', '3.12.1t', '3.12.2t', '3.12.3t', '3.12.4t', '3.12.5t', '3.12.6t', '3.12.7t', '3.12.8t', '3.12.9t', '3.12.10t',
+          '3.13.0t', '3.13.1t', '3.13.2t', '3.13.3t', '3.13.4t', '3.13.5t', '3.13.6t', '3.13.7t', '3.13.8t', '3.13.9t', '3.13.10t', '3.13.11t',
+          '3.14.0t', '3.14.1t', '3.14.2t'
+        ]
        
     steps:
     - name: Checkout repository
