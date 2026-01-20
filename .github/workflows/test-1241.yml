@@ -1,9 +1,9 @@
 name: Setting up both python 3.14.2 and 3.14.2t on windows arm
 
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
