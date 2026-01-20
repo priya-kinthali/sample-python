@@ -27,6 +27,7 @@ jobs:
       # uses: priya-kinthali/setup-python@test-1079
       with:
           python-version: ${{ matrix.python-version }}
+          freethreaded: true
     - name: Check Python version
       run: python3 --version
 
