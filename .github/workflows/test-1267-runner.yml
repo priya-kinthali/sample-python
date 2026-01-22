@@ -19,16 +19,10 @@ jobs:
           echo "Arch         : $env:RUNNER_ARCH"
           echo "ImageVersion : $env:ImageVersion"
           systeminfo | Select-String "OS Version"
-      - name: Inspect preinstalled Python (before setup-python)
-        shell: pwsh
+      - name: List all Python versions and architectures in tool cache
         run: |
-          echo "=== Python on PATH ==="
-          where python || echo "python not on PATH"
-          python --version || echo "python not runnable"
-          echo "`n=== Hosted toolcache ==="
-          Get-ChildItem "C:\hostedtoolcache\windows\Python" -ErrorAction SilentlyContinue
-          echo "`n=== Program Files ==="
-          Get-ChildItem "C:\Program Files\Python*" -ErrorAction SilentlyContinue
+          Get-ChildItem -Path "C:\hostedtoolcache\windows\Python" -Recurse -Directory | Select-Object FullName
+        shell: pwsh
       - name: Setup Python 3.14 (GIL build)
         uses: actions/setup-python@v6
         with:
