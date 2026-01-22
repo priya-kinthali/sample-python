@@ -1,9 +1,9 @@
 name: Diagnose Python 3.14 / 3.14t on Windows ARM
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -50,11 +50,9 @@ jobs:
           python --version || echo "python not runnable"
           echo "`n=== Toolcache after 3.14t attempt ==="
           Get-ChildItem "C:\hostedtoolcache\windows\Python" -ErrorAction SilentlyContinue
-      - name: Test NuGet free-threaded Python (control test)
+      - name: Install NuGet free-threaded Python and show path
         shell: pwsh
         run: |
-          echo "=== Installing Python 3.14t via NuGet ==="
           nuget install pythonarm64-freethreaded -Version 3.14.2 -OutputDirectory nuget-python
-          $py = Resolve-Path "nuget-python\pythonarm64-freethreaded.3.14.2\tools\python.exe"
-          & $py --version
-          & $py -c "import sys, encodings; print('NuGet executable:', sys.executable); print('encodings OK')"
+          $pyPath = Resolve-Path "nuget-python\pythonarm64-freethreaded.3.14.2\tools\python.exe"
+          echo "Installed python.exe path: $pyPath"
