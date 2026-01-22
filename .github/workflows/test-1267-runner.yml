@@ -1,9 +1,9 @@
 name: Diagnose Python 3.14 / 3.14t on Windows ARM
 
 on:
-  push:
-    branches:
-      - test-973
+  # push:
+  #   branches:
+  #     - test-973
   workflow_dispatch:
 
 jobs:
