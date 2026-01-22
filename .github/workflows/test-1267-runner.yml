@@ -21,7 +21,7 @@ jobs:
           systeminfo | Select-String "OS Version"
       - name: List all pre-installed Python versions in tool cache
         run: |
-          Get-ChildItem -Path "C:\hostedtoolcache\windows\Python" -Directory | Select-Object -ExpandProperty Name
+          Get-ChildItem -Path "C:\hostedtoolcache\windows\Python" -Directory | Select-Object -ExpandProperty FullName
         shell: pwsh
       - name: Setup Python 3.14 (GIL build)
         uses: actions/setup-python@v6
