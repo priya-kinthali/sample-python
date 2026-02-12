@@ -1,4 +1,4 @@
-name: Test Python Versions
+name: Test ubuntu arm runner
         
 on:
   push:
@@ -26,6 +26,18 @@ jobs:
     #   run: |
     #         mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
     #         mkdir -p "${{ runner.tool_cache }}"
+    - name: Show runner tool cache location
+      run: echo "Tool cache ${{ runner.tool_cache }}"
+
+    - name: List cached Python versions
+      run: ls -l ${{ runner.tool_cache }}/Python
+
+    - name: Show active python3 location
+      run: |
+        which python3
+        ls -l $(which python3)
+    - name: Check Python version
+      run: python3 --version
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v6
       # uses: priya-kinthali/setup-python@test-1079
