@@ -1,0 +1,35 @@
+name: Diagnose Python 3.14 / 3.14t on Windows ARM
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-22.04-arm
+
+    steps:
+      - name: Runner + Image metadata
+        shell: pwsh
+        run: |
+          echo "=== Runner metadata ==="
+          echo "OS           : $env:RUNNER_OS"
+          echo "Arch         : $env:RUNNER_ARCH"
+          echo "ImageVersion : $env:ImageVersion"
+          echo "=== OS Version ==="
+          uname -a
+          echo "=== Distribution Info ==="
+          lsb_release -a
+      - name: Check python version
+        run: python --version
+      - name: List installed Python file paths
+        run: |
+          echo "=== /usr/bin/python* ==="
+          ls /usr/bin/python*
+          echo "=== /usr/local/bin/python* ==="
+          ls /usr/local/bin/python*
+        shell: bash
+
+    
