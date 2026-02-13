@@ -13,9 +13,12 @@ jobs:
       fail-fast: false
       matrix:
         # os: [windows-latest, windows-11-arm, ubuntu-latest, macos-15-intel, macos-latest]
-        os: [ubuntu-22.04-arm]
+        os: [ubuntu-22.04-arm, ubuntu-24.04-arm]
+        # python-version: [
+        #   '3.10', '3.11', '3.12', '3.13', '3.14', '3.15'
+        # ]
         python-version: [
-          '3.10', '3.11', '3.12', '3.13', '3.14', '3.15'
+           '3.14'
         ]
        
     steps:
@@ -26,19 +29,47 @@ jobs:
     #   run: |
     #         mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
     #         mkdir -p "${{ runner.tool_cache }}"
-    - name: Show runner tool cache location
-      run: echo "Tool cache ${{ runner.tool_cache }}"
-    - name: Show active python3 location
-      run: |
-        which python3
-        ls -l $(which python3)
-    - name: Check Python version
-      run: python3 --version
+    # - name: Show runner tool cache location
+    #   run: echo "Tool cache ${{ runner.tool_cache }}"
+    # - name: Show active python3 location
+    #   run: |
+    #     which python3
+    #     ls -l $(which python3)
+    # - name: Check Python version
+    #   run: python3 --version
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v6
       # uses: priya-kinthali/setup-python@test-1079
       with:
           python-version: ${{ matrix.python-version }}
+    - name: Show Ubuntu + bz2 versions
+      run: |
+        set -euxo pipefail
+
+        echo "== OS release =="
+        cat /etc/os-release
+        echo
+
+        echo "== Kernel =="
+        uname -a
+        echo
+
+        echo "== dpkg versions (bzip2 / libbz2) =="
+        dpkg -l | awk 'NR==1 || NR==2 || $2 ~ /^(bzip2|libbz2-1\.0)$/ {print}'
+        echo
+
+        echo "== apt policy (shows candidate + installed) =="
+        apt-cache policy bzip2 libbz2-1.0 || true
+    - name: Show _bz2 linkage
+      run: |
+        set -euxo pipefail
+        python -c "import _bz2, sys, os; print('python:', sys.version); print('_bz2:', os.path.abspath(_bz2.__file__))"
+        ldd "$(python -c 'import _bz2, os; print(os.path.abspath(_bz2.__file__))')" | grep -i bz2 || true
+    - name: Show architecture
+      run: |
+        uname -m
+        dpkg --print-architecture
+
     - name: Check Python version
       run: python3 --version
 
