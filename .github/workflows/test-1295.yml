@@ -17,6 +17,16 @@ jobs:
         run: |
           whoami
           id -u
+      - name: Check ownership
+        run: ls -ld /github/home
+      # - name: Give all permissions to the current user
+      #   run: sudo chmod -R 777 /github/home
+
+      - name: Change ownership of /github/home
+        run: sudo chown -R $(whoami) /github/home
+
+      - name: Check ownership
+        run: ls -ld /github/home
       - name: Set up Python
         # uses: actions/setup-python@v6
         # uses: lmvysakh/setup-python@rootuser_warning_fix
