@@ -38,7 +38,7 @@ jobs:
         uses: lmvysakh/setup-python@rootuser_warning_fix
         # uses: priyagupta108/setup-python@pip-root-user-warning
         with:
-          python-version: '3.13.7'
+          python-version: '3.9.18'
 
       - name: Show pip version
         run: python -m pip --version
