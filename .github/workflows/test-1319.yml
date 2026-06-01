@@ -7,22 +7,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-ubuntu-2404:
-    name: 3.8 on ubuntu-24.04 (setup-python v5.4.0)
-    runs-on: ubuntu-24.04
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, windows-11-arm, ubuntu-latest, ubuntu-22.04-arm, macos-15-intel, macos-latest]
+        
+        python-version: ['3.14']
     steps:
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
-        with:
-          python-version: '3.0.1'
-      - run: python --version
+    - name: Checkout repository
+      uses: actions/checkout@v6
+    - name: Clear cache
+      run: |
+            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v6
+      # uses: priya-kinthali/setup-python@test-1079
+      with:
+          python-version: ${{ matrix.python-version }}
+    - name: Check Python version
+      run: python3 --version
 
-  test-ubuntu-2204:
-    name: 3.0.1 on windows-2022 (setup-python v5.4.0)
-    runs-on: windows-2022
-    steps:
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
-        with:
-          python-version: '3.0.1'
-      - run: python --version
+
 
   
