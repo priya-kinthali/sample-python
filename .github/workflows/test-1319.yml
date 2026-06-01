@@ -13,16 +13,16 @@ jobs:
     steps:
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
-          python-version: '3.8'
+          python-version: '3.0.1'
       - run: python --version
 
   test-ubuntu-2204:
-    name: 3.7 on ubuntu-22.04 (setup-python v5.4.0)
-    runs-on: ubuntu-22.04
+    name: 3.0.1 on windows-2022 (setup-python v5.4.0)
+    runs-on: windows-2022
     steps:
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
-          python-version: '3.7'
+          python-version: '3.0.1'
       - run: python --version
 
   
