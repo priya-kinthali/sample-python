@@ -23,8 +23,8 @@ jobs:
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v6
-      # uses: priya-kinthali/setup-python@test-1079
+      # uses: actions/setup-python@v6
+      uses: priya-kinthali/setup-python@test-1319
       with:
           python-version: ${{ matrix.python-version }}
     - name: Check Python version
