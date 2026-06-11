@@ -64,8 +64,8 @@ jobs:
         run: sudo chown -R $(whoami) /github/home
       - name: Clear cache
         run: |
-              mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-              mkdir -p "${{ runner.tool_cache }}"
+            rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
