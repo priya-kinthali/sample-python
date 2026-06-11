@@ -54,6 +54,12 @@ jobs:
 
       - uses: actions/checkout@v6
 
+      - name: Ensure Sudo is Installed
+        run: |
+          if ! command -v sudo &> /dev/null; then
+            echo "sudo could not be found. Installing..."
+            apt-get update && apt-get install -y sudo
+          fi
       - name: Fix pip cache permissions
         run: sudo chown -R $(whoami) /github/home
       - uses: actions/setup-python@v6
