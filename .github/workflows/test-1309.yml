@@ -33,7 +33,8 @@ jobs:
           rm -rf /__t/Python
           echo "After:"
           ls /__t/Python/ || echo "cleared"
-      - uses: actions/setup-python@v6
+      # - uses: actions/setup-python@v6
+      - uses: priyagupta108/setup-python@RHEL
         with:
           python-version: '3.15.0-beta.2'
 
@@ -90,7 +91,8 @@ jobs:
           rm -rf /__w/_tool/Python
           echo "Verify cleared:"
           ls -la /__w/_tool/
-      - uses: actions/setup-python@v6
+      # - uses: actions/setup-python@v6
+      - uses: priyagupta108/setup-python@RHEL
         with:
           python-version: '3.15.0-beta.2'
 
