@@ -35,7 +35,7 @@ jobs:
           ls /__t/Python/ || echo "cleared"
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Verify Python
         run: |
@@ -92,7 +92,7 @@ jobs:
           ls -la /__w/_tool/
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Verify Python
         run: |
