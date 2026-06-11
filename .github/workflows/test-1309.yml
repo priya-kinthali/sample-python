@@ -45,19 +45,31 @@ jobs:
 
   test-26-on-host-and-24-in-container:
     runs-on: [self-hosted]
-    container: ubuntu:24.04
+    # container: ubuntu:24.04
+    container:
+      image: ubuntu:24.04
+      volumes:
+        - /etc/os-release:/host-os-release:ro
+
     steps:
-      - name: Show host / container info
+      - name: Check host OS from inside container
         run: |
-          echo "=== /etc/os-release ==="
-          cat /etc/os-release || true
-          echo "=== uname -a ==="
-          uname -a
-          echo "=== whoami ==="
-          whoami
-          echo "=== RUNNER_OS / RUNNER_ARCH ==="
-          echo "RUNNER_OS=$RUNNER_OS"
-          echo "RUNNER_ARCH=$RUNNER_ARCH"
+          echo "=== Container OS ==="
+          cat /etc/os-release
+          echo ""
+          echo "=== Host OS ==="
+          cat /host-os-release
+      # - name: Show host / container info
+      #   run: |
+      #     echo "=== /etc/os-release ==="
+      #     cat /etc/os-release || true
+      #     echo "=== uname -a ==="
+      #     uname -a
+      #     echo "=== whoami ==="
+      #     whoami
+      #     echo "=== RUNNER_OS / RUNNER_ARCH ==="
+      #     echo "RUNNER_OS=$RUNNER_OS"
+      #     echo "RUNNER_ARCH=$RUNNER_ARCH"
 
       - uses: actions/checkout@v6
 
