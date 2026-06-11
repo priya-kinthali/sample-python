@@ -62,10 +62,18 @@ jobs:
           fi
       - name: Fix pip cache permissions
         run: sudo chown -R $(whoami) /github/home
-      - name: Clear cache
+      # - name: Clear cache
+      #   run: |
+      #       rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #       mkdir -p "${{ runner.tool_cache }}"
+      - name: Clear tool cache AND verify
         run: |
-            rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-            mkdir -p "${{ runner.tool_cache }}"
+          rm -rf "/home/azureuser/actions-runner/_work/_tool" "/home/azureuser/actions-runner/_work/_tool.old"
+          mkdir -p "/home/azureuser/actions-runner/_work/_tool"
+          echo "Tool cache contents after clear:"
+          ls -la /home/azureuser/actions-runner/_work/_tool/
+          echo "Checking /__w/_tool inside container:"
+          ls -la /__w/_tool/ || echo "empty"
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
