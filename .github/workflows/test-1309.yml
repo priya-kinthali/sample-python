@@ -26,17 +26,17 @@ jobs:
 
       - uses: actions/checkout@v6
 
-      - name: Clear pre-mounted tool cache
-        run: |
-          echo "Before:"
-          ls /__t/Python/ || echo "no Python dir"
-          rm -rf /__t/Python
-          echo "After:"
-          ls /__t/Python/ || echo "cleared"
+      # - name: Clear pre-mounted tool cache
+      #   run: |
+      #     echo "Before:"
+      #     ls /__t/Python/ || echo "no Python dir"
+      #     rm -rf /__t/Python
+      #     echo "After:"
+      #     ls /__t/Python/ || echo "cleared"
       # - uses: actions/setup-python@v6
       - uses: priyagupta108/setup-python@RHEL
         with:
-          python-version: '3.15.0-beta.2'
+          python-version: '3.14'
 
       - name: Verify Python
         run: |
@@ -94,7 +94,7 @@ jobs:
       # - uses: actions/setup-python@v6
       - uses: priyagupta108/setup-python@RHEL
         with:
-          python-version: '3.15.0-beta.2'
+          python-version: '3.14'
 
       - name: Verify Python
         run: |
