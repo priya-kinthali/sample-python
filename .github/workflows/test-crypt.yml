@@ -27,6 +27,13 @@ jobs:
       #     mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
       #     mkdir -p "${{ runner.tool_cache }}"
 
+      - name: Clear pre-mounted tool cache
+        run: |
+          echo "Before:"
+          ls /__t/Python/ || echo "no Python dir"
+          rm -rf /__t/Python
+          echo "After:"
+          ls /__t/Python/ || echo "cleared"
       - name: Remove system libcrypt
         run: |
           rm -f /lib/x86_64-linux-gnu/libcrypt.so.1 /lib/x86_64-linux-gnu/libcrypt.so
