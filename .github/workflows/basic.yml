@@ -1,0 +1,24 @@
+name: check latest
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Clear cache
+        run: |
+          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          mkdir -p "${{ runner.tool_cache }}"
+      - name: Set up python
+        uses: priya-kinthali/setup-python@test-version
+        with:
+          python-version: '3.13.7'
