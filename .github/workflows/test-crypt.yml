@@ -19,10 +19,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      # - name: Clear cache
-      #   run: |
-      #     mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-      #     mkdir -p "${{ runner.tool_cache }}"
+      - name: Clear cache
+        run: |
+          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          mkdir -p "${{ runner.tool_cache }}"
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: priya-kinthali/setup-python@test-version
