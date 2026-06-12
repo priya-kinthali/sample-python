@@ -36,16 +36,16 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      # - name: Inspect crypt files in the installed Python
-      #   run: |
-      #     PYLIB="$pythonLocation/lib/python${{ matrix.python-version }}"
-      #     echo "--- crypt.py ---"
-      #     ls -la "${PYLIB%.*}"/crypt.py 2>&1 || echo "crypt.py NOT found"
-      #     echo "--- _crypt*.so ---"
-      #     find "$pythonLocation" -name "_crypt*.so" 2>&1 || echo "_crypt.so NOT found"
-      #     echo "--- module location ---"
-      #     python3 -c "import crypt; print(crypt.__file__)"
-      #     python3 -c "import _crypt; print(_crypt.__file__)"
+      - name: Inspect crypt files in the installed Python
+        run: |
+          PYLIB="$pythonLocation/lib/python${{ matrix.python-version }}"
+          echo "--- crypt.py ---"
+          ls -la "${PYLIB%.*}"/crypt.py 2>&1 || echo "crypt.py NOT found"
+          echo "--- _crypt*.so ---"
+          find "$pythonLocation" -name "_crypt*.so" 2>&1 || echo "_crypt.so NOT found"
+          echo "--- module location ---"
+          python3 -c "import crypt; print(crypt.__file__)"
+          python3 -c "import _crypt; print(_crypt.__file__)"
       - name: Check Python version
         run: python3 --version
 
