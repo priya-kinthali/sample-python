@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    container:
+      image: ubuntu:22.04
+      options: --user root
     strategy:
       fail-fast: false
       matrix:
@@ -26,8 +29,8 @@ jobs:
 
       - name: Remove system libcrypt
         run: |
-          sudo -n rm -f /lib/x86_64-linux-gnu/libcrypt.so.1 /lib/x86_64-linux-gnu/libcrypt.so
-          sudo -n ldconfig
+          rm -f /lib/x86_64-linux-gnu/libcrypt.so.1 /lib/x86_64-linux-gnu/libcrypt.so
+          ldconfig
           ldconfig -p | grep "libcrypt.so" || echo "OK: libcrypt removed"
       - name: Set up Python ${{ matrix.python-version }}
         uses: priya-kinthali/setup-python@test-version
