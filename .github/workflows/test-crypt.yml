@@ -26,11 +26,9 @@ jobs:
 
       - name: Remove system libcrypt
         run: |
-          # Check if running as root already
-          echo "Running as: $(whoami)"
-          find /usr/lib /usr/lib64 /lib /lib64 -name "libcrypt.so*" -delete 2>/dev/null || true
-          ldconfig 2>/dev/null || true
-          ldconfig -p | grep libcrypt || echo "OK: libcrypt removed from system"
+          sudo -n rm -f /lib/x86_64-linux-gnu/libcrypt.so.1 /lib/x86_64-linux-gnu/libcrypt.so
+          sudo -n ldconfig
+          ldconfig -p | grep "libcrypt.so" || echo "OK: libcrypt removed"
       - name: Set up Python ${{ matrix.python-version }}
         uses: priya-kinthali/setup-python@test-version
         with:
