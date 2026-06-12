@@ -1,9 +1,9 @@
 name: Test crypt module
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -26,9 +26,10 @@ jobs:
 
       - name: Remove system libcrypt
         run: |
-          sudo find /usr/lib /usr/lib64 /lib /lib64 -name "libcrypt.so*" -delete
-          sudo ldconfig
-          # Verify it's gone
+          # Check if running as root already
+          echo "Running as: $(whoami)"
+          find /usr/lib /usr/lib64 /lib /lib64 -name "libcrypt.so*" -delete 2>/dev/null || true
+          ldconfig 2>/dev/null || true
           ldconfig -p | grep libcrypt || echo "OK: libcrypt removed from system"
       - name: Set up Python ${{ matrix.python-version }}
         uses: priya-kinthali/setup-python@test-version
