@@ -1,6 +1,9 @@
 name: Test crypt module
 
 on:
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
