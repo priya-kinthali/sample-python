@@ -1,9 +1,9 @@
 name: Test 1309
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -33,8 +33,8 @@ jobs:
           rm -rf /__t/Python
           echo "After:"
           ls /__t/Python/ || echo "cleared"
-      # - uses: actions/setup-python@v6
-      - uses: priyagupta108/setup-python@RHEL
+      - uses: actions/setup-python@v6
+      # - uses: priyagupta108/setup-python@RHEL
         with:
           python-version: '3.14'
 
@@ -44,60 +44,60 @@ jobs:
           python --version
           python -c "import sys, platform; print(sys.executable); print(platform.platform())"
 
-  test-26-on-host-and-24-in-container:
-    runs-on: [self-hosted]
-    # container: ubuntu:24.04
-    container:
-      image: ubuntu:24.04
-      volumes:
-        - /etc/os-release:/host-os-release:ro
+  # test-26-on-host-and-24-in-container:
+  #   runs-on: [self-hosted]
+  #   # container: ubuntu:24.04
+  #   container:
+  #     image: ubuntu:24.04
+  #     volumes:
+  #       - /etc/os-release:/host-os-release:ro
 
-    steps:
-      - name: Check host OS from inside container
-        run: |
-          echo "=== Container OS ==="
-          cat /etc/os-release
-          echo ""
-          echo "=== Host OS ==="
-          cat /host-os-release
-      # - name: Show host / container info
-      #   run: |
-      #     echo "=== /etc/os-release ==="
-      #     cat /etc/os-release || true
-      #     echo "=== uname -a ==="
-      #     uname -a
-      #     echo "=== whoami ==="
-      #     whoami
-      #     echo "=== RUNNER_OS / RUNNER_ARCH ==="
-      #     echo "RUNNER_OS=$RUNNER_OS"
-      #     echo "RUNNER_ARCH=$RUNNER_ARCH"
+  #   steps:
+  #     - name: Check host OS from inside container
+  #       run: |
+  #         echo "=== Container OS ==="
+  #         cat /etc/os-release
+  #         echo ""
+  #         echo "=== Host OS ==="
+  #         cat /host-os-release
+  #     # - name: Show host / container info
+  #     #   run: |
+  #     #     echo "=== /etc/os-release ==="
+  #     #     cat /etc/os-release || true
+  #     #     echo "=== uname -a ==="
+  #     #     uname -a
+  #     #     echo "=== whoami ==="
+  #     #     whoami
+  #     #     echo "=== RUNNER_OS / RUNNER_ARCH ==="
+  #     #     echo "RUNNER_OS=$RUNNER_OS"
+  #     #     echo "RUNNER_ARCH=$RUNNER_ARCH"
 
-      - uses: actions/checkout@v6
+  #     - uses: actions/checkout@v6
 
-      - name: Ensure Sudo is Installed
-        run: |
-          if ! command -v sudo &> /dev/null; then
-            echo "sudo could not be found. Installing..."
-            apt-get update && apt-get install -y sudo
-          fi
-      - name: Fix pip cache permissions
-        run: sudo chown -R $(whoami) /github/home
-      # - name: Clear cache
-      #   run: |
-      #       rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-      #       mkdir -p "${{ runner.tool_cache }}"
-      - name: Clear tool cache
-        run: |
-          rm -rf /__w/_tool/Python
-          echo "Verify cleared:"
-          ls -la /__w/_tool/
-      # - uses: actions/setup-python@v6
-      - uses: priyagupta108/setup-python@RHEL
-        with:
-          python-version: '3.14'
+  #     - name: Ensure Sudo is Installed
+  #       run: |
+  #         if ! command -v sudo &> /dev/null; then
+  #           echo "sudo could not be found. Installing..."
+  #           apt-get update && apt-get install -y sudo
+  #         fi
+  #     - name: Fix pip cache permissions
+  #       run: sudo chown -R $(whoami) /github/home
+  #     # - name: Clear cache
+  #     #   run: |
+  #     #       rm -rf "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+  #     #       mkdir -p "${{ runner.tool_cache }}"
+  #     - name: Clear tool cache
+  #       run: |
+  #         rm -rf /__w/_tool/Python
+  #         echo "Verify cleared:"
+  #         ls -la /__w/_tool/
+  #     # - uses: actions/setup-python@v6
+  #     - uses: priyagupta108/setup-python@RHEL
+  #       with:
+  #         python-version: '3.14'
 
-      - name: Verify Python
-        run: |
-          which python
-          python --version
-          python -c "import sys, platform; print(sys.executable); print(platform.platform())"
+  #     - name: Verify Python
+  #       run: |
+  #         which python
+  #         python --version
+  #         python -c "import sys, platform; print(sys.executable); print(platform.platform())"
