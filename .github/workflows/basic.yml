@@ -1,9 +1,9 @@
 name: check latest
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -21,4 +21,6 @@ jobs:
       - name: Set up python
         uses: priya-kinthali/setup-python@test-version
         with:
-          python-version: '3.13.7'
+          python-version: |
+            '3.14-dev'
+            '3.15-dev'
