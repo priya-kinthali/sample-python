@@ -23,3 +23,5 @@ jobs:
         # uses: lmvysakh/setup-python@1317_fix_annotation
         with:
           python-version: '3.9.1'
+      - name: check version
+        run: python --version
