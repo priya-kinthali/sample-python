@@ -2,9 +2,9 @@
 name: Test Python Minor Versions freethread
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,23 +12,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest, windows-11-arm, macos-15-intel, ubuntu-22.04-arm]
       fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python 3.13t 
+      - name: Setup Python 3.13t and 3.14t
         uses: actions/setup-python@v5
         with:
           python-version: |
             3.13t
-            3.13
-            3.12
-            3.11
-            3.10
-            3.9
-            3.8
+            3.14t
 
       - name: Check available python executables
         shell: bash
@@ -37,20 +32,10 @@ jobs:
           which python
           which python3
           which python3.13t || echo "python3.13t not found"
-          which python3.13 || echo "python3.13 not found"
-          which python3.12 || echo "python3.12 not found"
-          which python3.11 || echo "python3.11 not found"
-          which python3.10 || echo "python3.10 not found"
-          which python3.9 || echo "python3.9 not found"
-          which python3.8 || echo "python3.8 not found"
+          which python3.14t || echo "python3.14t not found"
           command -v python || echo "python not found"
           python3.13t -VV || echo "python 3.13t not found"
-          command -v python3.13 || echo "python3.13 not found"
-          command -v python3.12 || echo "python3.12 not found"
-          command -v python3.11 || echo "python3.11 not found"
-          command -v python3.10 || echo "python3.10 not found"
-          command -v python3.9 || echo "python3.9 not found"
-          command -v python3.8 || echo "python3.8 not found"
+          python3.14t -VV || echo "python 3.14t not found"
           echo "Python version:"
           python --version
 
@@ -59,27 +44,7 @@ jobs:
         run: |
           python3.13t -VV || echo "python3.13t not callable"
 
-      - name: Try calling python3.13
+      - name: Try calling python3.14t
         shell: bash
         run: |
-          python3.13 --version || echo "python3.13 not callable"
-      - name: Try calling python3.12
-        shell: bash
-        run: |
-          python3.12 --version || echo "python3.12 not callable"
-      - name: Try calling python3.11
-        shell: bash
-        run: |
-          python3.11 --version || echo "python3.11 not callable"
-      - name: Try calling python3.10
-        shell: bash
-        run: |
-          python3.10 --version || echo "python3.10 not callable"
-      - name: Try calling python3.9
-        shell: bash
-        run: |
-          python3.9 --version || echo "python3.9 not callable"
-      - name: Try calling python3.8
-        shell: bash
-        run: |
-          python3.8 --version || echo "python3.8 not callable"
+          python3.14t -VV || echo "python3.14t not callable"
