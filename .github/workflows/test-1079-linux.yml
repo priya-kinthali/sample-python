@@ -2,9 +2,9 @@
 name: Test Python Minor Versions
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -17,6 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Clear cache
+        run: |
+            mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+            mkdir -p "${{ runner.tool_cache }}"
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
