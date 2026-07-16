@@ -22,7 +22,8 @@ jobs:
             mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
             mkdir -p "${{ runner.tool_cache }}"
       - name: Setup Python
-        uses: actions/setup-python@v6
+        # uses: actions/setup-python@v6
+        uses: priya-kinthali/setup-python@test-1079-new
         with:
           python-version: |
             3.13
