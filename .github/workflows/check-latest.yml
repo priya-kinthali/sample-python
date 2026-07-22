@@ -27,7 +27,7 @@ jobs:
           # python-version-file: '.python-version' 
           python-version: '3.14'
           # freethreaded: true
-          # check-latest: true
+          check-latest: true
       - name: Verify Python Version
         run: |
           python --version
