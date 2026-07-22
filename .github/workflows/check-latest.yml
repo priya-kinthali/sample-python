@@ -1,9 +1,9 @@
 name: check latest
 
 on:
-  # push:
-  #   branches:
-  #     - test-973
+  push:
+    branches:
+      - test-973
   workflow_dispatch:
 
 jobs:
@@ -12,18 +12,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest, windows-11-arm]
+        # os: [ubuntu-latest,ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2019, macos-13, macos-latest, windows-11-arm]
         # os: [windows-2025, windows-latest, windows-2019, windows-11-arm]
+        os: [ubuntu-24.04]
+
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        # uses: actions/setup-python@v5
-        uses: lmvysakh/setup-python@enhance-python-version-readability
+        uses: actions/setup-python@v6
+        # uses: lmvysakh/setup-python@enhance-python-version-readability
         with:
-          python-version-file: '.python-version' 
-          # python-version: '>=3.9 <3.14'
+          # python-version-file: '.python-version' 
+          python-version: '3.14'
           # freethreaded: true
           # check-latest: true
       - name: Verify Python Version
