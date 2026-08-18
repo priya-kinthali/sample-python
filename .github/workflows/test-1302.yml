@@ -21,10 +21,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
-          python-version: '3.12'
+          python-version: '3.12.1'
           mirror: https://raw.githubusercontent.com/actions/python-versions/main
       - run: python -c "import sys; assert sys.version_info[:2]==(3,12), sys.version; print('OK', sys.version)"
 
@@ -38,10 +38,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
-          python-version: '3.11'
+          python-version: '3.11.1'
           mirror: https://raw.githubusercontent.com/actions/python-versions/refs/heads/main
       - run: python -c "import sys; assert sys.version_info[:2]==(3,11), sys.version; print('OK', sys.version)"
 
@@ -51,10 +51,10 @@ jobs:
     name: 'Real mirror (trailing slashes)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
-          python-version: '3.12'
+          python-version: '3.12.1'
           mirror: https://raw.githubusercontent.com/actions/python-versions/main///
       - run: python -c "import sys; assert sys.version_info[:2]==(3,12); print('OK', sys.version)"
 
@@ -65,12 +65,12 @@ jobs:
     name: 'Real mirror (slash branch -> warn)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: run
         continue-on-error: true
         uses: riseproject-dev/setup-python@main
         with:
-          python-version: '3.12'
+          python-version: '3.12.1'
           mirror: https://raw.githubusercontent.com/actions/python-versions/feature/does-not-exist
       - run: echo "EXPECT a 'Branch names containing / are not supported' warning above. A 404 for the fake branch is fine."
 
@@ -84,12 +84,12 @@ jobs:
     name: 'Invalid mirror URL -> fail'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: run
         continue-on-error: true
         uses: riseproject-dev/setup-python@main
         with:
-          python-version: '3.12'
+          python-version: '3.12.1'
           mirror: 'not a url'
       - name: Assert failure
         run: |
@@ -111,7 +111,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
           python-version: 'pypy3.11-7.3.18'
@@ -123,7 +123,7 @@ jobs:
     name: 'GraalPy: mirror ignored + warns'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
           python-version: 'graalpy-24.1.2'
@@ -135,7 +135,7 @@ jobs:
     name: 'PyPy: no mirror -> should NOT warn (bug #1 guard)'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
           python-version: 'pypy3.11-7.3.18'
@@ -153,9 +153,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: riseproject-dev/setup-python@main
         with:
-          python-version: '3.13'
+          python-version: '3.13.1'
       - run: python -c "import sys; assert sys.version_info[:2]==(3,13); print('OK', sys.version)"
 
