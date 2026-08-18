@@ -1,0 +1,161 @@
+name: Validate mirror/mirror-token e2e
+
+on:
+  push:
+    branches:
+      - test-973
+  workflow_dispatch:
+
+jobs:
+  # =========================================================================
+  # GROUP 1 — REAL GITHUB MIRROR (valid, happy paths)
+  # =========================================================================
+
+  # 1a. {owner}/{repo}/{branch} form -> fetched via the GitHub REST API.
+  #     EXPECT: install succeeds; log shows "Getting manifest from actions/python-versions@main".
+  real-mirror-api-path:
+    name: 'Real mirror (API path) ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: '3.12'
+          mirror: https://raw.githubusercontent.com/actions/python-versions/main
+      - run: python -c "import sys; assert sys.version_info[:2]==(3,12), sys.version; print('OK', sys.version)"
+
+  # 1b. refs/heads/main form -> does NOT match {owner}/{repo}/{branch} -> direct-URL fetch.
+  #     EXPECT: install succeeds via raw URL GET (not the API).
+  real-mirror-direct-url-path:
+    name: 'Real mirror (direct URL path) ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: '3.11'
+          mirror: https://raw.githubusercontent.com/actions/python-versions/refs/heads/main
+      - run: python -c "import sys; assert sys.version_info[:2]==(3,11), sys.version; print('OK', sys.version)"
+
+  # 1c. Trailing slashes on the mirror -> stripped before use.
+  #     EXPECT: install succeeds exactly as 1a.
+  real-mirror-trailing-slashes:
+    name: 'Real mirror (trailing slashes)'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: '3.12'
+          mirror: https://raw.githubusercontent.com/actions/python-versions/main///
+      - run: python -c "import sys; assert sys.version_info[:2]==(3,12); print('OK', sys.version)"
+
+  # 1d. Slash branch -> regex fails on a raw.githubusercontent.com host.
+  #     EXPECT: a WARNING about slash branches. (Uses a non-existent branch, so a
+  #     manifest 404 afterwards is acceptable — the point is the warn path.)
+  real-mirror-slash-branch-warns:
+    name: 'Real mirror (slash branch -> warn)'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: run
+        continue-on-error: true
+        uses: riseproject-dev/setup-python@main
+        with:
+          python-version: '3.12'
+          mirror: https://raw.githubusercontent.com/actions/python-versions/feature/does-not-exist
+      - run: echo "EXPECT a 'Branch names containing / are not supported' warning above. A 404 for the fake branch is fine."
+
+  # =========================================================================
+  # GROUP 2 — INVALID MIRROR (error path)
+  # =========================================================================
+
+  # 2a. Malformed URL -> getMirror() throws "Invalid 'mirror' URL".
+  #     EXPECT: step FAILS with that message.
+  invalid-mirror-fails:
+    name: 'Invalid mirror URL -> fail'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: run
+        continue-on-error: true
+        uses: riseproject-dev/setup-python@main
+        with:
+          python-version: '3.12'
+          mirror: 'not a url'
+      - name: Assert failure
+        run: |
+          if [ "${{ steps.run.outcome }}" != "failure" ]; then
+            echo "EXPECTED failure for invalid mirror, got '${{ steps.run.outcome }}'"; exit 1
+          fi
+          echo "OK: invalid mirror correctly failed the step"
+
+  # =========================================================================
+  # GROUP 4 — PyPy / GraalPy: mirror is IGNORED
+  # =========================================================================
+
+  # 4a. PyPy with a custom mirror -> mirror ignored, warning emitted, PyPy installs upstream.
+  pypy-mirror-ignored-warns:
+    name: 'PyPy: mirror ignored + warns ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: 'pypy3.11-7.3.18'
+          mirror: https://mirror.example/py
+      - run: pypy3 -c "import sys; print('PyPy OK', sys.implementation.name)"
+
+  # 4b. GraalPy with a custom mirror -> ignored, warning emitted, GraalPy installs from releases API.
+  graalpy-mirror-ignored-warns:
+    name: 'GraalPy: mirror ignored + warns'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: 'graalpy-24.1.2'
+          mirror: https://mirror.example/py
+      - run: graalpy -c "print('GraalPy OK')"
+
+  # 4c. Regression guard for bug #1: PyPy with NO mirror input should NOT warn.
+  pypy-no-mirror-should-not-warn:
+    name: 'PyPy: no mirror -> should NOT warn (bug #1 guard)'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: 'pypy3.11-7.3.18'
+      - run: echo "MANUAL CHECK log above should contain NO 'mirror input only applies to CPython' warning. It currently does (bug #1) until fixed."
+
+  # =========================================================================
+  # GROUP 5 — Regression: default behavior unchanged
+  # =========================================================================
+
+  default-behavior-unchanged:
+    name: 'Default (no mirror inputs) ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: riseproject-dev/setup-python@main
+        with:
+          python-version: '3.13'
+      - run: python -c "import sys; assert sys.version_info[:2]==(3,13); print('OK', sys.version)"
+
