@@ -38,7 +38,8 @@ runs:
   steps:
     - name: Set up Node from action-local .nvmrc (ABSOLUTE PATH)
       # To reproduce the BUG, use the official action:
-      uses: actions/setup-node@v7
+      # uses: actions/setup-node@v7
+      uses: v-mahabaleshwars/setup-node@feature/852-absolute-path
       # To test the FIX, swap the line above for:
       # uses: v-mahabaleshwars/setup-node@feature/852-absolute-path
       with:
