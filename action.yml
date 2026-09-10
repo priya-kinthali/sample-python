@@ -43,4 +43,3 @@ runs:
       # uses: v-mahabaleshwars/setup-node@feature/852-absolute-path
       with:
         node-version-file: ${{ github.action_path }}/.nvmrc
-      shell: bash
